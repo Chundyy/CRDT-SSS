@@ -1,5 +1,5 @@
 """
-Simplified Two-Phase Set (2P-Set) CRDT implementation.
+Two-Phase Set (2P-Set) CRDT implementation with integration for the CRDT cluster.
 """
 
 from ..base_crdt import BaseCRDT
@@ -88,22 +88,31 @@ class TwoPhaseSet(BaseCRDT):
         active = self.added - self.removed
         return f"2P-Set: {len(active)} active, {len(self.removed)} removed, {len(self.added)} total added"
 
-    def transfer_file(self, file_name, destination_folder):
-        """Transfer a file to the destination folder."""
+    def sync_file_to_peers(self, file_name, peers):
+        """Synchronize a file to all peers."""
         try:
             source_path = self.sync_folder / file_name
-            destination_path = Path(destination_folder) / file_name
 
             if not source_path.exists():
                 self.logger.error(f"File {file_name} does not exist in the sync folder.")
                 return False
 
-            destination_path.parent.mkdir(parents=True, exist_ok=True)
-            with source_path.open('rb') as src, destination_path.open('wb') as dest:
-                dest.write(src.read())
+            for peer in peers:
+                destination_folder = Path(peer['sync_folder'])
+                destination_path = destination_folder / file_name
 
-            self.logger.info(f"Transferred file {file_name} to {destination_folder}.")
+                destination_folder.mkdir(parents=True, exist_ok=True)
+                with source_path.open('rb') as src, destination_path.open('wb') as dest:
+                    dest.write(src.read())
+
+                self.logger.info(f"Synchronized file {file_name} to peer {peer['node_id']} at {peer['sync_folder']}.")
+
             return True
         except Exception as e:
-            self.logger.error(f"Error transferring file {file_name}: {e}")
+            self.logger.error(f"Error synchronizing file {file_name} to peers: {e}")
             return False
+
+    def add_and_sync(self, element, peers):
+        """Add an element to the set and synchronize the file to peers."""
+        if self.add(element):
+            self.sync_file_to_peers(element, peers)
