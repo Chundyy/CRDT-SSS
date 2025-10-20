@@ -3,6 +3,7 @@ Simplified Two-Phase Set (2P-Set) CRDT implementation.
 """
 
 from ..base_crdt import BaseCRDT
+from pathlib import Path
 
 class TwoPhaseSet(BaseCRDT):
     def __init__(self, node_id, sync_folder):
@@ -86,3 +87,23 @@ class TwoPhaseSet(BaseCRDT):
         """Get human-readable state summary."""
         active = self.added - self.removed
         return f"2P-Set: {len(active)} active, {len(self.removed)} removed, {len(self.added)} total added"
+
+    def transfer_file(self, file_name, destination_folder):
+        """Transfer a file to the destination folder."""
+        try:
+            source_path = self.sync_folder / file_name
+            destination_path = Path(destination_folder) / file_name
+
+            if not source_path.exists():
+                self.logger.error(f"File {file_name} does not exist in the sync folder.")
+                return False
+
+            destination_path.parent.mkdir(parents=True, exist_ok=True)
+            with source_path.open('rb') as src, destination_path.open('wb') as dest:
+                dest.write(src.read())
+
+            self.logger.info(f"Transferred file {file_name} to {destination_folder}.")
+            return True
+        except Exception as e:
+            self.logger.error(f"Error transferring file {file_name}: {e}")
+            return False
