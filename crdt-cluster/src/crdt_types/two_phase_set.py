@@ -103,21 +103,20 @@ class TwoPhaseSet(BaseCRDT):
         self.logger.info(f"Remote added: {len(other_added)}")
         self.logger.info(f"Remote removed: {len(other_removed)}")
 
-        if other_added - self.added:
-            new_adds = other_added - self.added
-            self.added |= other_added
-            self.logger.info(f"📥 Merged new additions: {list(new_adds)}")
+        # Ensure elements in 'removed' are not re-added
+        valid_additions = other_added - self.removed
+        if valid_additions:
+            self.added |= valid_additions
+            self.logger.info(f"\U0001f4e5 Merged new additions: {list(valid_additions)}")
             merged = True
 
+        # Merge 'removed' set
         if other_removed - self.removed:
             new_removes = other_removed - self.removed
-            self.removed |= other_removed
-            self.logger.info(f"📤 Merged new removals: {list(new_removes)}")
+            self.removed |= new_removes
+            self.logger.info(f"\U0001f5d1 Merged new removals: {list(new_removes)}")
             merged = True
 
-        if merged:
-            active_count = len(self.added - self.removed)
-            self.logger.info(f"✅ Merge complete: {active_count} active elements")
 
         return merged
 
