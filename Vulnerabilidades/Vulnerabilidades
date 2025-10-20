@@ -1,0 +1,52 @@
+Semantic Bugs in Merge Function:
+        Incorrect merge logic leading to data corruption
+        Failure to handle edge cases properly
+
+    Identifier Reuse/Collapsing:
+        Reusing the same identifier causes semantic merging issues
+        Example: two operations with same ID appear as one
+
+    State Growth via Key Collisions/Duplication:
+        Duplicate keys cause exponential state growth
+        Example: repeated insertions of same key-value pair
+
+    Clock Dependency Issues:
+        Clock desynchronization causing incorrect ordering
+        Example: two updates with same timestamp appearing out of order
+
+    Malicious State Injection/Equivocation:
+        Injecting invalid or conflicting states
+        Example: claiming to have higher clock value than actually present
+
+    Metadata Escalation/Bloat:
+        Accumulation of unnecessary metadata causing resource exhaustion
+        Example: storing too many historical versions
+
+    Replay/Rewind/Ordering Attacks:
+        Replaying old updates to disrupt consistency
+        Rewinding clock to force older state
+        Ordering attacks to manipulate conflict resolution
+
+    Privacy/Data Exposure:
+        Leaking sensitive information through state sharing
+        Example: revealing private data in public updates
+
+    Gossip/Transport Layer Weaknesses:
+        Vulnerabilities in the gossip protocol implementation
+        Transport layer attacks affecting message delivery
+
+    Byzantine Fault Tolerance Issues:
+        Specialized attacks targeting Byzantine CRDTs
+        Example: manipulating failure detectors
+
+    Denial of Service (DoS):
+        Flooding with updates to overwhelm processing
+        Resource exhaustion attacks
+
+    Eclipse Attacks:
+        Isolating nodes to prevent proper synchronization
+        Preventing nodes from receiving updates
+
+    Data Poisoning:
+        Injecting corrupted or malicious data
+        Example: injecting NaN values in numerical CRDTs
