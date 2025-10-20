@@ -110,11 +110,12 @@ class TwoPhaseSet(BaseCRDT):
             self.logger.info(f"\U0001f4e5 Merged new additions: {list(valid_additions)}")
             merged = True
 
-        # Merge 'removed' set, but exclude files that exist in both 'added' sets
-        valid_removals = other_removed - self.added
-        if valid_removals:
-            self.removed |= valid_removals
-            self.logger.info(f"\U0001f5d1 Merged new removals: {list(valid_removals)}")
+        # Merge 'removed' set, ensuring remote removals are respected
+        new_removals = other_removed - self.removed
+        if new_removals:
+            self.removed |= new_removals
+            self.added -= new_removals  # Remove from 'added' if marked as 'removed'
+            self.logger.info(f"\U0001f5d1 Merged new removals: {list(new_removals)}")
             merged = True
 
         return merged
