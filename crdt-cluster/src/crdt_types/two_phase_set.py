@@ -1,22 +1,23 @@
 #!/usr/bin/env python3
 """
-Minimal 2P-Set (Two-Phase Set) CRDT Implementation
+PROPER Minimal 2P-Set (Two-Phase Set) CRDT Implementation
 """
 
 from ..base_crdt import BaseCRDT
 
+
 class TwoPhaseSet(BaseCRDT):
     """
-    Minimal Two-Phase Set CRDT - Only core 2P-Set functionality
+    Proper Two-Phase Set CRDT - True to the mathematical definition
     """
-    
+
     def __init__(self, node_id, sync_folder):
         super().__init__(node_id, sync_folder)
-        self.added = set()    # All elements ever added
-        self.removed = set()  # All elements ever removed
+        self.added = set()  # All elements ever added (grow-only)
+        self.removed = set()  # All elements ever removed (grow-only)
 
     def add(self, element):
-        """Add element to added set (always allowed in 2P-Set)"""
+        """Add element to added set - ALWAYS allowed"""
         self.added.add(element)
         self.logger.info(f"Added: {element}")
         return True
@@ -34,16 +35,14 @@ class TwoPhaseSet(BaseCRDT):
         """Check if element is in active set"""
         return element in self.added and element not in self.removed
 
-    def get_elements(self):
+    def get_active_elements(self):
         """Get all active elements"""
         return self.added - self.removed
 
     def merge(self, other_state):
-        """Merge with another 2P-Set state"""
-        # Both sets are grow-only - simple union operations
+        """Merge with another 2P-Set state - simple set union"""
         self.added |= set(other_state.get('added', []))
         self.removed |= set(other_state.get('removed', []))
-        
         self.logger.info(f"Merged: {len(self.added)} added, {len(self.removed)} removed")
 
     def to_dict(self):
@@ -60,13 +59,13 @@ class TwoPhaseSet(BaseCRDT):
 
     def get_state_summary(self):
         """Get state summary"""
-        active = len(self.added - self.removed)
-        return f"2P-Set: {active} active, {len(self.removed)} removed"
+        active = self.added - self.removed
+        return f"2P-Set: {len(active)} active, {len(self.removed)} removed"
 
     def update_local_state(self):
         """
-        Required by BaseCRDT - minimal implementation
+        Required by BaseCRDT - but does NOT sync with filesystem
+        That would violate 2P-Set semantics
         """
-        self.logger.info("update_local_state called - no file sync in minimal version")
-        # Empty implementation since we're keeping it minimal
-        # You can add basic file sync here if needed
+        self.logger.debug("update_local_state - No filesystem sync in proper 2P-Set")
+        # Empty - 2P-Set should not auto-detect files
