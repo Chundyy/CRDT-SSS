@@ -31,9 +31,20 @@ class TwoPhaseSet(BaseCRDT):
 
     def merge(self, other_state):
         """Merge another Two-Phase Set state into this one."""
-        self.added |= set(other_state.get('added', []))
-        self.removed |= set(other_state.get('removed', []))
-        self.added -= self.removed  # Ensure consistency by removing elements marked as removed
+        remote_added = set(other_state.get('added', []))
+        remote_removed = set(other_state.get('removed', []))
+
+        # Merge added elements
+        new_additions = remote_added - self.removed
+        self.added |= new_additions
+        self.logger.info(f"Merged new additions: {new_additions}")
+
+        # Merge removed elements
+        new_removals = remote_removed - self.removed
+        self.removed |= new_removals
+        self.added -= new_removals  # Ensure consistency by removing elements marked as removed
+        self.logger.info(f"Merged new removals: {new_removals}")
+
         self.logger.info("Merged state with remote")
 
     def to_dict(self):
@@ -53,14 +64,19 @@ class TwoPhaseSet(BaseCRDT):
         """Update CRDT state with current folder contents."""
         try:
             current_files = {file.name for file in self.sync_folder.iterdir() if file.is_file()}
+            self.logger.info(f"Current files in sync folder: {current_files}")
+
+            # Identify new files to add
             new_files = current_files - self.added
-            removed_files = self.added - current_files
-
             for file in new_files:
-                self.add(file)
+                if file not in self.removed:  # Only add if not explicitly removed
+                    self.add(file)
 
-            for file in removed_files:
-                self.remove(file)
+            # Identify files to remove
+            missing_files = self.added - current_files
+            for file in missing_files:
+                if file not in self.removed:  # Avoid marking as removed if already removed
+                    self.logger.info(f"File missing but not marking as removed: {file}")
 
             self.logger.info("Local state updated based on folder contents")
         except Exception as e:
