@@ -1,28 +1,24 @@
 """
-Two-Phase Set (2P-Set) CRDT implementation with integration for the CRDT cluster.
+Two-Phase Set (2P-Set) CRDT implementation for distributed systems.
 """
 
 from ..base_crdt import BaseCRDT
-from pathlib import Path
+
 
 class TwoPhaseSet(BaseCRDT):
     def __init__(self, node_id, sync_folder):
-        """Initialize the Two-Phase Set with empty added and removed sets."""
         super().__init__(node_id, sync_folder)
         self.added = set()
         self.removed = set()
 
     def add(self, element):
-        """Add an element to the set if it is not already removed."""
-        if element not in self.removed:
-            self.added.add(element)
-            self.logger.info(f"Added element: {element}")
-            return True
-        self.logger.warning(f"Cannot add {element} - it's in removed set")
-        return False
+        """Add an element to the added set (ALWAYS allowed in 2P-Set)."""
+        self.added.add(element)  # No condition check!
+        self.logger.info(f"Added element: {element}")
+        return True
 
     def remove(self, element):
-        """Remove an element from the set if it exists in the added set."""
+        """Remove an element - only allowed if it's in the added set."""
         if element in self.added:
             self.removed.add(element)
             self.logger.info(f"Removed element: {element}")
@@ -31,88 +27,30 @@ class TwoPhaseSet(BaseCRDT):
         return False
 
     def merge(self, other_state):
-        """Merge another Two-Phase Set state into this one."""
+        """Merge another 2P-Set state - both sets are grow-only."""
         remote_added = set(other_state.get('added', []))
         remote_removed = set(other_state.get('removed', []))
 
-        # Merge added elements
-        new_additions = remote_added - self.removed
-        self.added |= new_additions
-        self.logger.info(f"Merged new additions: {new_additions}")
+        # Simply union both sets (both are monotonic)
+        self.added |= remote_added
+        self.removed |= remote_removed
 
-        # Merge removed elements
-        new_removals = remote_removed - self.removed
-        self.removed |= new_removals
-        self.added -= new_removals  # Ensure consistency by removing elements marked as removed
-        self.logger.info(f"Merged new removals: {new_removals}")
+        self.logger.info(f"Merged: +{len(remote_added)} added, +{len(remote_removed)} removed")
 
-        self.logger.info("Merged state with remote")
+    def lookup(self, element):
+        """Check if element is in the active set."""
+        return element in self.added and element not in self.removed
+
+    def get_active_elements(self):
+        """Get all currently active elements."""
+        return self.added - self.removed
 
     def to_dict(self):
-        """Convert the Two-Phase Set state to a dictionary."""
         return {
             'added': list(self.added),
             'removed': list(self.removed)
         }
 
     def from_dict(self, state):
-        """Load the Two-Phase Set state from a dictionary."""
         self.added = set(state.get('added', []))
         self.removed = set(state.get('removed', []))
-        self.logger.info("Loaded state from dictionary")
-
-    def update_local_state(self):
-        """Update CRDT state with current folder contents."""
-        try:
-            current_files = {file.name for file in self.sync_folder.iterdir() if file.is_file()}
-            self.logger.info(f"Current files in sync folder: {current_files}")
-
-            # Identify new files to add
-            new_files = current_files - self.added
-            for file in new_files:
-                if file not in self.removed:  # Only add if not explicitly removed
-                    self.add(file)
-
-            # Identify files to remove
-            missing_files = self.added - current_files
-            for file in missing_files:
-                if file not in self.removed:  # Avoid marking as removed if already removed
-                    self.logger.info(f"File missing but not marking as removed: {file}")
-
-            self.logger.info("Local state updated based on folder contents")
-        except Exception as e:
-            self.logger.error(f"Error updating local state: {e}")
-
-    def get_state_summary(self):
-        """Get human-readable state summary."""
-        active = self.added - self.removed
-        return f"2P-Set: {len(active)} active, {len(self.removed)} removed, {len(self.added)} total added"
-
-    def sync_file_to_peers(self, file_name, peers):
-        """Synchronize a file to all peers."""
-        try:
-            source_path = self.sync_folder / file_name
-
-            if not source_path.exists():
-                self.logger.error(f"File {file_name} does not exist in the sync folder.")
-                return False
-
-            for peer in peers:
-                destination_folder = Path(peer['sync_folder'])
-                destination_path = destination_folder / file_name
-
-                destination_folder.mkdir(parents=True, exist_ok=True)
-                with source_path.open('rb') as src, destination_path.open('wb') as dest:
-                    dest.write(src.read())
-
-                self.logger.info(f"Synchronized file {file_name} to peer {peer['node_id']} at {peer['sync_folder']}.")
-
-            return True
-        except Exception as e:
-            self.logger.error(f"Error synchronizing file {file_name} to peers: {e}")
-            return False
-
-    def add_and_sync(self, element, peers):
-        """Add an element to the set and synchronize the file to peers."""
-        if self.add(element):
-            self.sync_file_to_peers(element, peers)
