@@ -39,7 +39,7 @@ class LWWFileSync(BaseCRDT):
         for file in scan_path.glob('**/*'):
             if file.is_file():
                 rel_path = str(file.relative_to(scan_path))
-                ts = datetime.utcfromtimestamp(file.stat().st_mtime).replace(tzinfo=timezone.utc).isoformat().replace('+00:00', 'Z')
+                ts = datetime.fromtimestamp(file.stat().st_mtime, timezone.utc).isoformat().replace('+00:00', 'Z')
                 prev_ts = self.file_timestamps.get(rel_path)
                 if prev_ts is None or ts > prev_ts:
                     self.file_timestamps[rel_path] = ts

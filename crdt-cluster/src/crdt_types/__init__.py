@@ -26,7 +26,7 @@ CRDT_REGISTRY = {
     'g_set': GSet,
     'two_phase_set': TwoPhaseSet,
     'or_set': ORSet,
-    'lww': lww
+    'lww': LWWFileSync
 }
 
 def get_crdt_class(crdt_type):
