@@ -104,3 +104,23 @@ class LWWFileSync(BaseCRDT):
                     content = f.read()
                 state[rel_path] = (ts, content)
         return state
+
+    def to_dict(self):
+        """
+        Convert the current state to a dictionary for serialization.
+        """
+        return {
+            'file_timestamps': self.file_timestamps
+        }
+
+    def from_dict(self, data):
+        """
+        Load the state from a dictionary.
+        """
+        self.file_timestamps = data.get('file_timestamps', {})
+
+    def get_state_summary(self):
+        """
+        Get a human-readable summary of the current state.
+        """
+        return f"Tracked files: {len(self.file_timestamps)}"
