@@ -21,7 +21,7 @@ class LWWFileSync(BaseCRDT):
         self.file_timestamps = {}  # rel_path -> iso timestamp
 
     def _now_iso(self):
-        return datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
+        return datetime.fromtimestamp(datetime.now().timestamp(), timezone.utc).isoformat().replace('+00:00', 'Z')
 
     def get_sync_path(self):
         sync_path = Path(self.sync_folder)
