@@ -7,6 +7,7 @@ from .pn_counter import PNCounter
 from .g_set import GSet
 from .two_phase_set import TwoPhaseSet
 from .or_set import ORSet
+from .lww import LWWElementSet
 
 # Export all CRDT classes
 __all__ = [
@@ -14,7 +15,8 @@ __all__ = [
     'PNCounter', 
     'GSet',
     'TwoPhaseSet',
-    'ORSet'
+    'ORSet',
+    'LWWElementSet'
 ]
 
 # CRDT type registry
@@ -23,7 +25,8 @@ CRDT_REGISTRY = {
     'pn_counter': PNCounter,
     'g_set': GSet,
     'two_phase_set': TwoPhaseSet,
-    'or_set': ORSet
+    'or_set': ORSet,
+    'lww': lww
 }
 
 def get_crdt_class(crdt_type):

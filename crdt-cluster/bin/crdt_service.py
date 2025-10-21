@@ -22,6 +22,8 @@ try:
     from src.crdt_types.two_phase_set import TwoPhaseSet
     from src.crdt_types.or_set import ORSet
     from src.base_crdt import BaseCRDTNode
+    from src.crdt_types.lww import LWWElementSet
+
 except ImportError as e:
     print(f"CRITICAL: Import error: {e}")
     print(f"Traceback: {traceback.format_exc()}")
@@ -33,7 +35,8 @@ CRDT_TYPES = {
     'pn_counter': PNCounter,
     'g_set': GSet,
     'two_phase_set': TwoPhaseSet,
-    'or_set': ORSet
+    'or_set': ORSet,
+    'lww': LWWElementSet
 }
 
 class CRDTService:
