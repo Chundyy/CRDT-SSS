@@ -10,6 +10,7 @@ sync_folder, similar to other CRDTs in this project.
 from datetime import datetime, timezone
 from pathlib import Path
 from ..base_crdt import BaseCRDT
+import os
 
 
 class LWWElementSet(BaseCRDT):
@@ -27,32 +28,56 @@ class LWWElementSet(BaseCRDT):
         super().__init__(node_id, sync_folder)
         self.adds = {}    # element -> iso timestamp
         self.removes = {} # element -> iso timestamp
+        self.file_timestamps = {}  # element -> iso timestamp (conteúdo)
 
     def _now_iso(self):
         # use timezone-aware UTC timestamp (ISO) and normalize to Z
         return datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
 
-    def add(self, element, timestamp=None):
-        """Record an add for element with optional timestamp (now if None)."""
+    def add(self, element, timestamp=None, content=None, content_timestamp=None):
+        """Record an add for element with optional timestamp (now if None).
+        Se content e content_timestamp forem dados, faz LWW ao conteúdo."""
         ts = timestamp or self._now_iso()
         prev = self.adds.get(element)
+        updated = False
         if prev is None or ts > prev:
             self.adds[element] = ts
             self.logger.info(f"LWW ADD: {element} @ {ts}")
-            return True
-        self.logger.debug(f"Ignored older add for {element}: {ts} <= {prev}")
-        return False
+            updated = True
+        else:
+            self.logger.debug(f"Ignored older add for {element}: {ts} <= {prev}")
+        # LWW para conteúdo
+        if content is not None and content_timestamp is not None:
+            prev_content_ts = self.file_timestamps.get(element)
+            if prev_content_ts is None or content_timestamp > prev_content_ts:
+                self._write_file_content(element, content)
+                self.file_timestamps[element] = content_timestamp
+                self.logger.info(f"LWW CONTENT: {element} @ {content_timestamp}")
+                updated = True
+        return updated
 
-    def remove(self, element, timestamp=None):
-        """Record a remove for element with optional timestamp (now if None)."""
-        ts = timestamp or self._now_iso()
-        prev = self.removes.get(element)
-        if prev is None or ts > prev:
-            self.removes[element] = ts
-            self.logger.info(f"LWW REMOVE: {element} @ {ts}")
-            return True
-        self.logger.debug(f"Ignored older remove for {element}: {ts} <= {prev}")
-        return False
+    def _write_file_content(self, element, content):
+        """Escreve o conteúdo do ficheiro na pasta lww."""
+        sync_path = self.get_lww_sync_path()
+        file_path = sync_path / element
+        file_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(file_path, 'wb') as f:
+            f.write(content)
+        # Atualiza o mtime do ficheiro para o timestamp fornecido (opcional)
+
+    def export_file_content(self, element):
+        """Exporta o conteúdo e timestamp do ficheiro, se existir."""
+        sync_path = self.get_lww_sync_path()
+        file_path = sync_path / element
+        if not file_path.exists():
+            return None, None
+        with open(file_path, 'rb') as f:
+            content = f.read()
+        ts = self.file_timestamps.get(element)
+        if ts is None:
+            ts = self._now_iso()
+            self.file_timestamps[element] = ts
+        return content, ts
 
     def is_present(self, element):
         """Return True if element is present in effective set."""
@@ -84,6 +109,11 @@ class LWWElementSet(BaseCRDT):
                 if file.is_file():
                     rel_path = file.relative_to(scan_path)
                     current_files.add(str(rel_path))
+                    # Atualiza o timestamp do conteúdo
+                    ts = datetime.utcfromtimestamp(file.stat().st_mtime).replace(tzinfo=timezone.utc).isoformat().replace('+00:00', 'Z')
+                    prev_ts = self.file_timestamps.get(str(rel_path))
+                    if prev_ts is None or ts > prev_ts:
+                        self.file_timestamps[str(rel_path)] = ts
 
             # Add newly found files
             for elem in current_files:
