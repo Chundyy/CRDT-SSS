@@ -64,29 +64,30 @@ class LWWElementSet(BaseCRDT):
             return True
         return a > r
 
-    def update_local_state(self):
-        """Scan sync_folder and update adds/removes according to file presence.
+    def get_lww_sync_path(self):
+        """Return the path to the LWW sync folder (sync_folder/lww)."""
+        # Garantir que nunca duplica o 'lww' no caminho
+        sync_path = self.sync_folder
+        if sync_path.name == 'lww':
+            return sync_path
+        return sync_path / 'lww'
 
-        Uses relative paths as identifiers. When a file is found it records an add
-        with current timestamp; when a previously-known file is missing it
-        records a remove with current timestamp.
-        """
+    def update_local_state(self):
+        """Scan the sync_folder/lww directory and update the CRDT state accordingly."""
         try:
-            # use the 'lww' subfolder inside the configured sync_folder
-            scan_path = Path(self.sync_folder) / 'lww'
-            # ensure the subfolder exists so scanning and tests don't fail
-            scan_path.mkdir(parents=True, exist_ok=True)
+            scan_path = self.get_lww_sync_path()
+            if not scan_path.exists():
+                scan_path.mkdir(parents=True, exist_ok=True)
             current_files = set()
 
-            for p in scan_path.rglob("*"):
-                if p.is_file():
-                    rel = str(p.relative_to(scan_path))
-                    current_files.add(rel)
+            for file in scan_path.glob('**/*'):
+                if file.is_file():
+                    rel_path = file.relative_to(scan_path)
+                    current_files.add(str(rel_path))
 
             # Add newly found files
             for elem in current_files:
                 if elem not in self.adds or not self.is_present(elem):
-                    # record an add (will be ignored if older than existing add)
                     self.add(elem)
 
             # Mark removed files (those we knew about but are not on disk)
