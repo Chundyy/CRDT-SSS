@@ -129,6 +129,7 @@ class LWWElementSet(BaseCRDT):
 
         if changed:
             self.logger.info(f"LWW merge changed state. active={len(self.active_elements())}")
+            self.apply_state_to_disk()
         return changed
 
     def to_dict(self):
