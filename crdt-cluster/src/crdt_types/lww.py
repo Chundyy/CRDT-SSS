@@ -82,17 +82,25 @@ class LWWFileSync(BaseCRDT):
     def merge(self, other_state):
         """
         Recebe um dicionário {rel_path: (timestamp, content)} e aplica LWW ao conteúdo.
+        Também suporta dicionários contendo apenas timestamps.
         """
         changed = False
         for rel_path, value in other_state.items():
-            if not isinstance(value, tuple) or len(value) != 2:
+            if isinstance(value, str):  # Handle case where value is a timestamp only
+                remote_ts = value
+                remote_content = None
+            elif isinstance(value, tuple) and len(value) == 2:
+                remote_ts, remote_content = value
+            else:
                 self.logger.error(f"Invalid state entry for {rel_path}: {value}")
                 continue
 
-            remote_ts, remote_content = value
             local_ts = self.file_timestamps.get(rel_path)
             if local_ts is None or remote_ts > local_ts:
-                self.add_or_update_file(rel_path, remote_content, remote_ts)
+                if remote_content is not None:
+                    self.add_or_update_file(rel_path, remote_content, remote_ts)
+                else:
+                    self.file_timestamps[rel_path] = remote_ts
                 changed = True
         return changed
 
