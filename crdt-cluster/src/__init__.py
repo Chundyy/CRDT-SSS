@@ -25,7 +25,7 @@ def get_crdt_types():
         'g_set': 'Grow-only Set',
         'two_phase_set': 'Two-Phase Set',
         'or_set': 'Observed-Removed Set',
-        'lww': 'Last-Writer-Wins Element Set'
+        'lww': 'Last-Writer-Wins File Synchronization'
     }
 
 def create_node(config_file, crdt_type):

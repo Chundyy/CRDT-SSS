@@ -22,7 +22,7 @@ try:
     from src.crdt_types.two_phase_set import TwoPhaseSet
     from src.crdt_types.or_set import ORSet
     from src.base_crdt import BaseCRDTNode
-    from src.crdt_types.lww import LWWElementSet
+    from src.crdt_types.lww import LWWFileSync
 
 except ImportError as e:
     print(f"CRITICAL: Import error: {e}")
@@ -36,7 +36,7 @@ CRDT_TYPES = {
     'g_set': GSet,
     'two_phase_set': TwoPhaseSet,
     'or_set': ORSet,
-    'lww': LWWElementSet
+    'lww': LWWFileSync
 }
 
 class CRDTService:

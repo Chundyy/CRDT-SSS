@@ -7,7 +7,7 @@ from .pn_counter import PNCounter
 from .g_set import GSet
 from .two_phase_set import TwoPhaseSet
 from .or_set import ORSet
-from .lww import LWWElementSet
+from .lww import LWWFileSync
 
 # Export all CRDT classes
 __all__ = [
@@ -16,7 +16,7 @@ __all__ = [
     'GSet',
     'TwoPhaseSet',
     'ORSet',
-    'LWWElementSet'
+    'LWWFileSync'
 ]
 
 # CRDT type registry
