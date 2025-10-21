@@ -133,13 +133,15 @@ class LWWElementSet(BaseCRDT):
     def merge(self, other_state):
         """Merge another node's state dict into this one.
 
-        other_state expected keys: 'adds' and 'removes' mapping element->timestamp.
-        For each element we keep the maximum timestamp per operation type.
-        Returns True if this node's state changed.
+        other_state expected keys: 'adds', 'removes', opcionalmente 'file_timestamps' e 'file_contents'.
+        Para cada elemento, mantém o timestamp máximo por operação e aplica LWW ao conteúdo.
+        Retorna True se o estado mudou.
         """
         changed = False
         other_adds = other_state.get('adds', {})
         other_removes = other_state.get('removes', {})
+        other_file_timestamps = other_state.get('file_timestamps', {})
+        other_file_contents = other_state.get('file_contents', {})
 
         # Merge adds
         for elem, ts in other_adds.items():
@@ -156,6 +158,17 @@ class LWWElementSet(BaseCRDT):
                 self.removes[elem] = ts
                 changed = True
                 self.logger.debug(f"Merged remove {elem} @ {ts}")
+
+        # Merge file contents (LWW para conteúdo)
+        for elem, remote_content_ts in other_file_timestamps.items():
+            local_content_ts = self.file_timestamps.get(elem)
+            if local_content_ts is None or remote_content_ts > local_content_ts:
+                content = other_file_contents.get(elem)
+                if content is not None:
+                    self._write_file_content(elem, content)
+                    self.file_timestamps[elem] = remote_content_ts
+                    changed = True
+                    self.logger.info(f"LWW MERGE CONTENT: {elem} @ {remote_content_ts}")
 
         if changed:
             self.logger.info(f"LWW merge changed state. active={len(self.active_elements())}")
