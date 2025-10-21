@@ -27,12 +27,3 @@ print(crdt.lookup("data.json"))     # True - still in set
 active_elements = crdt.get_active_elements()
 print(active_elements)  # {"document.txt", "data.json"}
 
-# Check files in the sync folder
-sync_folder_path = Path("sync_folder/two_phase_set")
-if sync_folder_path.exists() and sync_folder_path.is_dir():
-    files_in_sync_folder = {file.name for file in sync_folder_path.iterdir() if file.is_file()}
-    print("Files in sync folder:", files_in_sync_folder)
-    crdt.add(files_in_sync_folder)
-    print(active_elements)
-else:
-    print("Sync folder does not exist or is not a directory.")
