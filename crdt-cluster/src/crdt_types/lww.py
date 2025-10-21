@@ -146,3 +146,13 @@ class LWWElementSet(BaseCRDT):
     def get_state_summary(self):
         active = len(self.active_elements())
         return f"LWW-Set: {active} active, {len(self.adds)} adds, {len(self.removes)} removes"
+
+    def apply_state_to_disk(self):
+        """Garante que todos os elementos ativos existem fisicamente em sync_folder/lww."""
+        sync_path = self.get_lww_sync_path()
+        for elem in self.active_elements():
+            file_path = sync_path / elem
+            if not file_path.exists():
+                file_path.parent.mkdir(parents=True, exist_ok=True)
+                file_path.touch()
+                self.logger.info(f"LWW: Criado ficheiro localmente após merge: {file_path}")
