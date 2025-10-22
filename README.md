@@ -63,7 +63,7 @@ O projeto CRDT-SSS (Conflict-free Replicated Data Types - Secure Synchronization
 
 | Nome                | Email                |
 |---------------------|----------------------|
-|                     |                      |
+|Gonçalo Leitao          |                      |
 |                     |                      |
 |                     |                      |
 
