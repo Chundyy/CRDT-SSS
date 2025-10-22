@@ -1,0 +1,18 @@
+# NetGuardian - Dependências Python
+# Instalar com: pip install -r requirements.txt
+
+# Segurança e Autenticação
+bcrypt==4.1.2
+cryptography==41.0.7
+
+# Base de Dados
+psycopg2-binary==2.9.9  # PostgreSQL (opcional)
+
+# Configuração
+python-dotenv==1.0.0
+
+# Interface Gráfica
+Pillow==10.1.0
+
+# Utilities (opcionais mas recomendadas)
+python-dateutil==2.8.2
