@@ -47,6 +47,8 @@ class LWWFileSync(BaseCRDT):
                 file_path = scan_path / rel_path
                 file_path.parent.mkdir(parents=True, exist_ok=True)
                 if remote_content is not None:
+                    if isinstance(remote_content, str):
+                        remote_content = remote_content.encode('utf-8')
                     with open(file_path, 'wb') as f:
                         f.write(remote_content)
                     self.file_timestamps[rel_path] = remote_ts
@@ -66,7 +68,7 @@ class LWWFileSync(BaseCRDT):
         for rel_path, ts in self.file_timestamps.items():
             file_path = scan_path / rel_path
             if file_path.exists():
-                with open(file_path, 'r', encoding='utf-8') as f:
+                with open(file_path, 'rb') as f:
                     content = f.read()
                 state[rel_path] = (ts, content)
             else:
