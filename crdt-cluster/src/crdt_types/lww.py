@@ -6,6 +6,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 from ..base_crdt import BaseCRDT
 import os
+import base64
 
 
 class LWWFileSync(BaseCRDT):
@@ -47,8 +48,9 @@ class LWWFileSync(BaseCRDT):
                 file_path = scan_path / rel_path
                 file_path.parent.mkdir(parents=True, exist_ok=True)
                 if remote_content is not None:
+                    # Decode base64 string to bytes if needed
                     if isinstance(remote_content, str):
-                        remote_content = remote_content.encode('utf-8')
+                        remote_content = base64.b64decode(remote_content)
                     with open(file_path, 'wb') as f:
                         f.write(remote_content)
                     self.file_timestamps[rel_path] = remote_ts
@@ -70,7 +72,9 @@ class LWWFileSync(BaseCRDT):
             if file_path.exists():
                 with open(file_path, 'rb') as f:
                     content = f.read()
-                state[rel_path] = (ts, content)
+                # Encode bytes to base64 string for JSON serialization
+                content_str = base64.b64encode(content).decode('utf-8')
+                state[rel_path] = (ts, content_str)
             else:
                 state[rel_path] = (ts, None)
         return state
