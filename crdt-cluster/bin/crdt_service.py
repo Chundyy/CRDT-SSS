@@ -17,10 +17,8 @@ sys.path.insert(0, str(project_root))
 try:
     # Import CRDT types - CHANGED: types -> crdt_types
     from src.crdt_types.g_counter import GCounter
-    from src.crdt_types.pn_counter import PNCounter
     from src.crdt_types.g_set import GSet
     from src.crdt_types.two_phase_set import TwoPhaseSet
-    from src.crdt_types.or_set import ORSet
     from src.base_crdt import BaseCRDTNode
     from src.crdt_types.lww import LWWFileSync
 
@@ -32,10 +30,8 @@ except ImportError as e:
 # CRDT type mapping
 CRDT_TYPES = {
     'g_counter': GCounter,
-    'pn_counter': PNCounter,
     'g_set': GSet,
     'two_phase_set': TwoPhaseSet,
-    'or_set': ORSet,
     'lww': LWWFileSync
 }
 
