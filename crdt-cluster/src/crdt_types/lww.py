@@ -66,7 +66,7 @@ class LWWFileSync(BaseCRDT):
         for rel_path, ts in self.file_timestamps.items():
             file_path = scan_path / rel_path
             if file_path.exists():
-                with open(file_path, 'rb') as f:
+                with open(file_path, 'r', encoding='utf-8') as f:
                     content = f.read()
                 state[rel_path] = (ts, content)
             else:
