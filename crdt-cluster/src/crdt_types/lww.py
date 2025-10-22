@@ -35,20 +35,6 @@ class LWWFileSync(BaseCRDT):
                 ts = datetime.fromtimestamp(file_path.stat().st_mtime, timezone.utc).isoformat().replace('+00:00', 'Z')
                 self.file_timestamps[rel_path] = ts
 
-    def to_dict(self):
-        """Export state as {rel_path: (timestamp, content)}"""
-        scan_path = self.get_sync_path()
-        state = {}
-        for rel_path, ts in self.file_timestamps.items():
-            file_path = scan_path / rel_path
-            if file_path.exists():
-                with open(file_path, 'r', encoding='utf-8') as f:
-                    content = f.read()
-                state[rel_path] = (ts, content)
-            else:
-                state[rel_path] = (ts, None)
-        return state
-
     def merge(self, other_state):
         """Merge state from another node. State: {rel_path: (timestamp, content)}"""
         changed = False
@@ -61,7 +47,7 @@ class LWWFileSync(BaseCRDT):
                 file_path = scan_path / rel_path
                 file_path.parent.mkdir(parents=True, exist_ok=True)
                 if remote_content is not None:
-                    with open(file_path, 'w', encoding='utf-8') as f:
+                    with open(file_path, 'wb') as f:
                         f.write(remote_content)
                     self.file_timestamps[rel_path] = remote_ts
                     self.logger.info(f"LWW ADD/UPDATE: {rel_path} @ {remote_ts}")
@@ -73,6 +59,23 @@ class LWWFileSync(BaseCRDT):
                 changed = True
         return changed
 
+    def to_dict(self):
+        """Export state as {rel_path: (timestamp, content)}"""
+        scan_path = self.get_sync_path()
+        state = {}
+        for rel_path, ts in self.file_timestamps.items():
+            file_path = scan_path / rel_path
+            if file_path.exists():
+                with open(file_path, 'rb') as f:
+                    content = f.read()
+                state[rel_path] = (ts, content)
+            else:
+                state[rel_path] = (ts, None)
+        return state
+
+    def from_dict(self, data):
+        """Load state from {rel_path: (timestamp, content)}"""
+        self.merge(data)
 
     def get_state_summary(self):
         return f"Tracked files: {len(self.file_timestamps)}"
