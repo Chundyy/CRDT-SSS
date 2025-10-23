@@ -1,0 +1,264 @@
+2025-10-22 17:00:23,280 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-22 17:00:23,292 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-22 17:00:23,345 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-22 17:00:24,510 - src.gui.main_window - INFO - Login window displayed
+2025-10-22 17:00:24,542 - src.gui.main_window - INFO - Main window initialized
+2025-10-22 17:00:24,542 - __main__ - INFO - NetGuardian application started
+2025-10-22 17:00:32,402 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin
+2025-10-22 17:02:17,080 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin@cloud.app
+2025-10-22 17:02:27,375 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin@cloud.app
+2025-10-22 17:02:37,141 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: joao
+2025-10-22 17:03:02,188 - src.auth.auth_manager - INFO - User registered successfully: teste
+2025-10-22 17:03:12,339 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: teste@cloud.app
+2025-10-22 17:03:21,146 - src.database.db_manager - INFO - Database connection closed
+2025-10-22 17:03:21,207 - src.gui.main_window - INFO - Application closed successfully
+2025-10-22 17:03:37,590 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-22 17:03:37,592 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-22 17:03:37,592 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-22 17:03:38,059 - src.gui.main_window - INFO - Login window displayed
+2025-10-22 17:03:38,086 - src.gui.main_window - INFO - Main window initialized
+2025-10-22 17:03:38,086 - __main__ - INFO - NetGuardian application started
+2025-10-23 00:12:12,598 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 00:12:12,599 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 00:12:12,625 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 00:12:14,956 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 00:12:14,975 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 00:12:14,976 - __main__ - INFO - NetGuardian application started
+2025-10-23 00:17:59,228 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 00:17:59,230 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 00:17:59,232 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 00:18:00,839 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 00:18:00,871 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 00:18:00,876 - __main__ - INFO - NetGuardian application started
+2025-10-23 00:20:13,583 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 00:20:13,583 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 00:20:13,588 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 00:20:14,456 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 00:20:14,482 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 00:20:14,482 - __main__ - INFO - NetGuardian application started
+2025-10-23 00:20:30,062 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin
+2025-10-23 00:20:33,682 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 00:20:33,714 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 00:20:49,869 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin
+2025-10-23 00:21:27,344 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin@example.local
+2025-10-23 00:21:56,581 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin@example.local
+2025-10-23 00:21:59,452 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 00:21:59,481 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 00:22:16,856 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 00:22:16,856 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 00:22:16,861 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 00:22:17,666 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 00:22:17,687 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 00:22:17,687 - __main__ - INFO - NetGuardian application started
+2025-10-23 00:22:33,599 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 00:22:33,601 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 00:22:34,180 - src.utils.encryption - INFO - Generated new encryption key
+2025-10-23 00:22:34,180 - src.file_manager.file_handler - INFO - Created user storage directory: ./local_files\user_2
+2025-10-23 00:22:34,645 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 00:23:17,194 - src.file_manager.file_handler - INFO - File uploaded: '11.png' (14.3 KB) -> 01d5c6e4-73cb-4dc2-9d5c-7030a6a70ba1.png
+2025-10-23 00:23:24,256 - src.gui.dashboard - ERROR - Download error: bad option "-initialname": must be -confirmoverwrite, -defaultextension, -filetypes, -initialdir, -initialfile, -parent, -title, or -typevariable
+2025-10-23 00:23:32,137 - src.file_manager.file_handler - INFO - File deleted: '11.png' (ID: 1)
+2025-10-23 00:24:25,240 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/testes\testes.txt: Cannot upload empty files
+2025-10-23 00:24:34,731 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/testes\testes.txt: Cannot upload empty files
+2025-10-23 00:24:38,096 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/testes/testes.txt: Cannot upload empty files
+2025-10-23 00:24:42,545 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/testes/testes.txt: Cannot upload empty files
+2025-10-23 00:24:50,839 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/testes/testes.txt: Cannot upload empty files
+2025-10-23 00:24:59,871 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-23 00:24:59,871 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 00:24:59,939 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 00:27:59,227 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 00:27:59,227 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 00:27:59,232 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 00:28:00,096 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 00:28:00,144 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 00:28:00,144 - __main__ - INFO - NetGuardian application started
+2025-10-23 00:28:09,134 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 00:28:09,134 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 00:28:09,644 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 00:28:36,773 - src.file_manager.file_handler - INFO - File uploaded: 'tmpvun6nxn2.txt' (18.0 B) -> 4030d376-3278-40ca-9067-272c61e64c0e.txt
+2025-10-23 00:28:41,687 - src.gui.dashboard - ERROR - Download error: bad option "-initialname": must be -confirmoverwrite, -defaultextension, -filetypes, -initialdir, -initialfile, -parent, -title, or -typevariable
+2025-10-23 00:28:44,201 - src.gui.dashboard - ERROR - Download error: bad option "-initialname": must be -confirmoverwrite, -defaultextension, -filetypes, -initialdir, -initialfile, -parent, -title, or -typevariable
+2025-10-23 00:28:48,177 - src.file_manager.file_handler - INFO - File deleted: 'tmpvun6nxn2.txt' (ID: 2)
+2025-10-23 00:30:23,316 - src.file_manager.file_handler - INFO - File uploaded: 'tmpiuj09ni9.txt' (19.0 B) -> f6813f44-0b39-49fd-94d8-60ccc2a442e5.txt
+2025-10-23 00:30:34,351 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/testes/testes.txt: Cannot upload empty files
+2025-10-23 00:39:28,366 - src.file_manager.file_handler - INFO - File deleted: 'tmpiuj09ni9.txt' (ID: 3)
+2025-10-23 00:39:33,751 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/testes/testes.txt: Cannot upload empty files
+2025-10-23 00:39:40,971 - src.file_manager.file_handler - INFO - File uploaded: '5b04e506-f53b-4c0b-8aa6-9381160a9b34.jpg' (261.5 KB) -> 98b31178-e6ff-421e-b584-8f801d349e88.jpg
+2025-10-23 00:39:49,896 - src.file_manager.file_handler - INFO - File deleted: '5b04e506-f53b-4c0b-8aa6-9381160a9b34.jpg' (ID: 4)
+2025-10-23 00:40:04,567 - src.file_manager.file_handler - INFO - File uploaded: 'tmpcoqut0ze.txt' (11.0 B) -> 7c1509bf-612b-466c-8d93-929bbbe22db2.txt
+2025-10-23 00:49:38,310 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-23 00:49:38,311 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 00:49:38,381 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 00:49:51,671 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 00:49:51,672 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 00:49:51,675 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 00:49:52,531 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 00:49:52,551 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 00:49:52,551 - __main__ - INFO - NetGuardian application started
+2025-10-23 00:50:00,324 - src.auth.auth_manager - WARNING - Invalid password attempt for user: admin
+2025-10-23 00:50:05,087 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 00:50:05,087 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 00:50:05,729 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 00:50:41,959 - src.file_manager.file_handler - INFO - File deleted: 'tmpcoqut0ze.txt' (ID: 5)
+2025-10-23 00:50:58,593 - src.file_manager.file_handler - INFO - File uploaded: 'tmpprygavvv.txt' (8.0 B) -> 78d6e15d-5d92-4dbb-96ea-08e527dd064a.txt
+2025-10-23 00:52:09,094 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-23 00:52:09,094 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 00:52:09,142 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 00:52:30,140 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 00:52:30,141 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 00:52:30,145 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 00:52:31,002 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 00:52:31,021 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 00:52:31,022 - __main__ - INFO - NetGuardian application started
+2025-10-23 00:52:54,256 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 00:52:54,256 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 00:52:54,805 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 00:53:25,095 - src.file_manager.file_handler - INFO - File uploaded: 'tmp2wdhh5a7.txt' (7.0 B) -> d1d6d09b-5232-4e5e-98cb-a29987f63954.txt
+2025-10-23 00:53:47,683 - src.file_manager.file_handler - INFO - File uploaded: 'tmp9wm2vjc6.txt' (2.0 B) -> d45c7228-5cab-4d6a-83de-6e20b97df4b1.txt
+2025-10-23 00:54:15,024 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-23 00:54:15,025 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 00:54:15,098 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 00:54:35,729 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 00:54:35,731 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 00:54:35,734 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 00:54:36,689 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 00:54:36,732 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 00:54:36,732 - __main__ - INFO - NetGuardian application started
+2025-10-23 00:54:44,025 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 00:54:44,027 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 00:54:44,623 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 00:54:52,749 - src.file_manager.file_handler - INFO - File uploaded: 'tmpiich6u6q.txt' (8.0 B) -> bdd0043a-c69a-4dd0-9cd0-b74f0552f799.txt
+2025-10-23 00:55:21,960 - src.file_manager.file_handler - INFO - File uploaded: 'CHUNDY-90-E8-68-0F-59-C4.log' (638.0 B) -> f7e903d1-16e4-43f0-b30f-5a538410852f.log
+2025-10-23 00:56:01,418 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-23 00:56:01,418 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 00:56:01,472 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 00:58:58,946 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 00:58:58,948 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 00:58:58,952 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 00:58:59,826 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 00:58:59,864 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 00:58:59,864 - __main__ - INFO - NetGuardian application started
+2025-10-23 00:59:07,794 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 00:59:07,796 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 00:59:08,342 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 00:59:20,422 - src.file_manager.file_handler - INFO - File uploaded: 'tmp9z1e4zx_.txt' (8.0 B) -> 25a4f4c4-b302-4a91-8fea-24b918739bb4.txt
+2025-10-23 00:59:38,010 - src.file_manager.file_handler - INFO - File uploaded: 'tmpgicbcyct.txt' (8.0 B) -> aadea1a6-afff-41d7-bf29-584f51e7b496.txt
+2025-10-23 01:04:04,030 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-23 01:04:04,031 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 01:04:04,090 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 01:04:12,778 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 01:04:12,780 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 01:04:12,783 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 01:04:13,644 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 01:04:13,683 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 01:04:13,684 - __main__ - INFO - NetGuardian application started
+2025-10-23 01:04:19,975 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 01:04:19,975 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 01:04:19,983 - src.gui.main_window - ERROR - Failed to show dashboard: unindent does not match any outer indentation level (dashboard.py, line 934)
+2025-10-23 01:04:25,365 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 01:04:25,365 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 01:04:25,374 - src.gui.main_window - ERROR - Failed to show dashboard: unindent does not match any outer indentation level (dashboard.py, line 934)
+2025-10-23 01:04:30,865 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-23 01:04:30,866 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 01:04:30,898 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 01:05:00,224 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 01:05:00,227 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 01:05:00,229 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 01:05:01,131 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 01:05:01,170 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 01:05:01,170 - __main__ - INFO - NetGuardian application started
+2025-10-23 01:05:07,284 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 01:05:07,284 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 01:05:07,295 - src.gui.main_window - ERROR - Failed to show dashboard: unindent does not match any outer indentation level (dashboard.py, line 934)
+2025-10-23 01:05:46,462 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 01:05:46,462 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 01:05:46,468 - src.gui.main_window - ERROR - Failed to show dashboard: unindent does not match any outer indentation level (dashboard.py, line 934)
+2025-10-23 01:05:52,301 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-23 01:05:52,301 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 01:05:52,334 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 01:07:48,401 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 01:07:48,402 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 01:07:48,406 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 01:07:49,292 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 01:07:49,337 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 01:07:49,337 - __main__ - INFO - NetGuardian application started
+2025-10-23 01:07:55,773 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 01:07:55,773 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 01:07:56,336 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 01:08:01,616 - src.file_manager.file_handler - INFO - File uploaded: 'tmpuev9y77m.txt' (8.0 B) -> a097c873-a016-4b6c-96c3-f1f078ca314b.txt
+2025-10-23 01:08:14,109 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-23 01:08:14,110 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 01:08:14,168 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 01:10:25,641 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 01:10:25,643 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 01:10:25,648 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 01:10:26,527 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 01:10:26,548 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 01:10:26,548 - __main__ - INFO - NetGuardian application started
+2025-10-23 01:10:34,098 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 01:10:34,098 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 01:10:34,710 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 01:10:43,646 - src.file_manager.file_handler - INFO - File uploaded: 'untitled.txt' (6.0 B) -> 44f12fc2-b3dd-462d-8a8c-a5f074d62b4e.txt
+2025-10-23 01:10:51,848 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-23 01:10:51,849 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 01:10:51,912 - src.gui.main_window - INFO - Application closed successfully

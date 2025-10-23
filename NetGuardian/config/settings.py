@@ -28,7 +28,15 @@ class Config:
     LOCAL_STORAGE_PATH = os.getenv('LOCAL_STORAGE_PATH', './local_files')
     CLOUD_STORAGE_ENABLED = os.getenv('CLOUD_STORAGE_ENABLED', 'true').lower() == 'true'
     MAX_FILE_SIZE_MB = int(os.getenv('MAX_FILE_SIZE_MB', '100'))
-    
+
+    # CRDT / sync folder settings
+    # Default to server sync folder at /opt/crdt-cluster/sync_folder (can be overridden via CRDT_SYNC_FOLDER env)
+    CRDT_SYNC_FOLDER = os.getenv('CRDT_SYNC_FOLDER', '/opt/crdt-cluster/sync_folder/lww')
+    # When True, the dashboard will use files present in the CRDT sync folder as the main source
+    USE_CRDT_AS_MAIN = os.getenv('USE_CRDT_AS_MAIN', 'true').lower() == 'true'
+    # When True, uploaded files are mirrored into the CRDT sync folder (so CRDT nodes can sync them)
+    SYNC_TO_CRDT = os.getenv('SYNC_TO_CRDT', 'true').lower() == 'true'
+
     # GUI settings
     WINDOW_WIDTH = 1200
     WINDOW_HEIGHT = 800

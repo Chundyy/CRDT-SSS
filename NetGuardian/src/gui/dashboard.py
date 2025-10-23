@@ -4,13 +4,13 @@ Main application interface after login - Adobe Creative Cloud inspired design
 """
 
 import customtkinter as ctk
-from tkinter import messagebox, filedialog
+from tkinter import messagebox, filedialog, Toplevel, Text, END
 import logging
 import os
-import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+import tempfile
+import shutil
 
-from src.file_manager.file_handler import FileHandler
+from ..file_manager.file_handler import FileHandler
 
 logger = logging.getLogger(__name__)
 
@@ -25,21 +25,21 @@ class Dashboard:
         
         # Current view filter
         self.current_filter = "all"  # all, documents, images, archives
-        
+
         # Create main container
         self.main_frame = ctk.CTkFrame(parent, fg_color=colors['dark'])
         self.main_frame.pack(fill="both", expand=True)
         
         self.create_dashboard_interface()
         self.refresh_file_list()
-    
+
     def create_dashboard_interface(self):
         """Create the main dashboard interface - Adobe CC inspired"""
         
         # Create left sidebar and main content area
         self.create_sidebar()
         self.create_main_content()
-    
+
     def create_sidebar(self):
         """Create left navigation sidebar"""
         sidebar = ctk.CTkFrame(self.main_frame, fg_color=self.colors['sidebar'], width=220)
@@ -114,6 +114,23 @@ class Dashboard:
             border_width=0
         )
         self.nav_upload_btn.pack(padx=20, pady=5, anchor="w")
+
+        # New Document button (for creating text documents)
+        self.nav_newdoc_btn = ctk.CTkButton(
+            sidebar,
+            text="  ✏️  New Document",
+            command=self.create_text_document,
+            width=180,
+            height=40,
+            font=ctk.CTkFont(size=13),
+            fg_color="transparent",
+            hover_color=self.colors['gray'],
+            anchor="w",
+            corner_radius=8,
+            text_color=self.colors['light'],
+            border_width=0
+        )
+        self.nav_newdoc_btn.pack(padx=20, pady=5, anchor="w")
 
         # Separator
         separator2 = ctk.CTkFrame(sidebar, fg_color=self.colors['gray'], height=1)
@@ -590,8 +607,8 @@ class Dashboard:
             
             # Filter by search term
             if search_term:
-                files = [f for f in files if search_term in f['original_name'].lower()]
-            
+                files = [f for f in files if search_term in self._get_display_name(f).lower()]
+
             # Update section title
             filter_names = {
                 "all": "All Files",
@@ -669,7 +686,7 @@ class Dashboard:
         icon_frame.pack_propagate(False)
         
         # File type icon
-        file_extension = file_data['original_name'].split('.')[-1].lower()
+        file_extension = os.path.splitext(self._get_display_name(file_data))[1].lstrip('.').lower()
         icon_emoji = self.get_file_icon(file_extension)
         
         icon_label = ctk.CTkLabel(
@@ -684,8 +701,8 @@ class Dashboard:
         info_frame = ctk.CTkFrame(card_frame, fg_color="transparent")
         info_frame.pack(fill="both", expand=True, padx=10, pady=5)
         
-        # File name (truncated if too long)
-        file_name = file_data['original_name']
+        # File name (use display-friendly name and truncate if too long)
+        file_name = self._get_display_name(file_data)
         if len(file_name) > 28:
             file_name = file_name[:25] + "..."
         
@@ -782,6 +799,23 @@ class Dashboard:
         }
         return icons.get(extension, '📁')
     
+    def _get_display_name(self, file_data: dict) -> str:
+        """Return a human-friendly filename to display (strip encryption suffix if present)."""
+        name = None
+        # Prefer original_name if present
+        if file_data.get('original_name'):
+            name = file_data.get('original_name')
+        elif file_data.get('filename'):
+            name = file_data.get('filename')
+        else:
+            name = 'untitled'
+
+        # If file was stored encrypted (ends with .enc), strip that suffix for display
+        if name.endswith('.enc'):
+            name = name[:-4]
+
+        return name
+
     def show_file_options(self, file_data):
         """Show file options menu"""
         # Create a simple options dialog
@@ -804,9 +838,10 @@ class Dashboard:
         dialog.geometry(f'300x200+{x}+{y}')
         
         # File name label
+        display_name = self._get_display_name(file_data)
         name_label = ctk.CTkLabel(
             dialog,
-            text=file_data['original_name'],
+            text=display_name,
             font=ctk.CTkFont(size=14, weight="bold"),
             text_color="white"
         )
@@ -854,19 +889,29 @@ class Dashboard:
     def download_file(self, file_data):
         """Download a file"""
         try:
+            display_name = self._get_display_name(file_data)
             save_path = filedialog.asksaveasfilename(
                 title="Save file as",
-                initialname=file_data['original_name'],
+                initialfile=display_name,
                 defaultextension=""
             )
             
             if save_path:
-                success, message = self.file_handler.download_file(file_data['id'], save_path)
-                if success:
-                    messagebox.showinfo("Success", "File downloaded successfully!")
+                # If file comes from CRDT sync folder it may not have a DB id; copy directly from path
+                if not file_data.get('id') and file_data.get('file_path'):
+                    try:
+                        shutil.copy2(file_data['file_path'], save_path)
+                        messagebox.showinfo("Success", "File downloaded successfully!")
+                    except Exception as e:
+                        logger.error(f"CRDT file copy failed: {e}")
+                        messagebox.showerror("Error", f"Download failed: {e}")
                 else:
-                    messagebox.showerror("Error", f"Download failed: {message}")
-                    
+                    success, message = self.file_handler.download_file(file_data['id'], save_path)
+                    if success:
+                        messagebox.showinfo("Success", "File downloaded successfully!")
+                    else:
+                        messagebox.showerror("Error", f"Download failed: {message}")
+
         except Exception as e:
             logger.error(f"Download error: {e}")
             messagebox.showerror("Error", "Failed to download file")
@@ -874,26 +919,126 @@ class Dashboard:
     def delete_file(self, file_data):
         """Delete a file"""
         try:
+            display_name = self._get_display_name(file_data)
             result = messagebox.askyesno(
                 "Confirm Delete",
-                f"Are you sure you want to delete '{file_data['original_name']}'?\n\nThis action cannot be undone."
+                f"Are you sure you want to delete '{display_name}'?\n\nThis action cannot be undone."
             )
-            
-            if result:
+
+            if not result:
+                return
+
+            # If item is from CRDT folder (no DB id), remove file directly from disk
+            if not file_data.get('id') and file_data.get('file_path'):
+                try:
+                    if os.path.exists(file_data['file_path']):
+                        os.remove(file_data['file_path'])
+                        messagebox.showinfo("Success", f"'{display_name}' deleted from CRDT folder.")
+                    else:
+                        messagebox.showwarning("Not found", "File not found on disk")
+                    self.refresh_file_list()
+                except Exception as e:
+                    logger.error(f"Failed to delete CRDT file: {e}")
+                    messagebox.showerror("Error", f"Delete failed: {e}")
+            else:
                 success, message = self.file_handler.delete_file(file_data['id'])
                 if success:
-                    messagebox.showinfo("Success", "File deleted successfully!")
+                    messagebox.showinfo("Success", f"'{display_name}' deleted successfully!")
                     self.refresh_file_list()
                 else:
                     messagebox.showerror("Error", f"Delete failed: {message}")
-                    
+
         except Exception as e:
             logger.error(f"Delete error: {e}")
             messagebox.showerror("Error", "Failed to delete file")
-    
+
     def destroy(self):
         """Clean up the dashboard"""
         self.main_frame.destroy()
+
+
+    def create_text_document(self):
+        """Open a simple text editor window to create a new text document and upload it."""
+        win = Toplevel(self.parent)
+        win.title("New Document")
+        win.geometry("700x500")
+
+        # Filename entry
+        filename_label = ctk.CTkLabel(win, text="Filename:")
+        filename_label.pack(anchor="nw", padx=10, pady=(10, 0))
+        filename_entry = ctk.CTkEntry(win, width=500)
+        filename_entry.pack(anchor="nw", padx=10, pady=(0, 10))
+        filename_entry.insert(0, "untitled.txt")
+
+        # Text area
+        text_frame = ctk.CTkFrame(win)
+        text_frame.pack(fill="both", expand=True, padx=10, pady=5)
+
+        text_widget = Text(text_frame, wrap='word')
+        text_widget.pack(fill="both", expand=True)
+
+        # Buttons
+        btn_frame = ctk.CTkFrame(win)
+        btn_frame.pack(fill="x", padx=10, pady=10)
+
+        def on_save():
+            fname = filename_entry.get().strip()
+            if not fname:
+                messagebox.showwarning("Filename required", "Please provide a filename for the document.")
+                return
+            # Ensure .txt extension
+            if not os.path.splitext(fname)[1]:
+                fname = fname + ".txt"
+
+            content = text_widget.get('1.0', END)
+
+            # Write to a temporary file and use FileHandler.upload_file
+            try:
+                # Create a temp file with the user-chosen filename so original_name is preserved
+                tmp_dir = tempfile.gettempdir()
+                tmp_path = os.path.join(tmp_dir, fname)
+                # Avoid overwriting an existing temp file: add numeric suffix if needed
+                if os.path.exists(tmp_path):
+                    base, ext = os.path.splitext(fname)
+                    counter = 1
+                    while True:
+                        candidate = os.path.join(tmp_dir, f"{base}_{counter}{ext}")
+                        if not os.path.exists(candidate):
+                            tmp_path = candidate
+                            break
+                        counter += 1
+
+
+                with open(tmp_path, 'w', encoding='utf-8') as f:
+                    f.write(content)
+
+                success, msg = self.file_handler.upload_file(tmp_path)
+
+                # Remove temp file
+                try:
+                    if os.path.exists(tmp_path):
+                        os.remove(tmp_path)
+                except Exception:
+                    pass
+
+                if success:
+                    messagebox.showinfo("Saved", "Document uploaded successfully.")
+                    win.destroy()
+                    self.refresh_file_list()
+                else:
+                    messagebox.showerror("Upload failed", str(msg))
+
+            except Exception as e:
+                logger.error(f"Failed to save document: {e}")
+                messagebox.showerror("Error", f"Failed to create document: {e}")
+
+        def on_cancel():
+            win.destroy()
+
+        save_btn = ctk.CTkButton(btn_frame, text="Save & Upload", command=on_save, width=140)
+        save_btn.pack(side="right", padx=5)
+        cancel_btn = ctk.CTkButton(btn_frame, text="Cancel", command=on_cancel, width=100)
+        cancel_btn.pack(side="right", padx=5)
 
 
 class UploadProgressDialog:

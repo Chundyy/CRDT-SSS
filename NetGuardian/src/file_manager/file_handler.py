@@ -127,7 +127,42 @@ class FileHandler:
             # Copy file to storage
             shutil.copy2(file_path, stored_path)
             logger.debug(f"File copied to storage: {stored_path}")
-            
+
+            # Mirror to CRDT sync folder if configured (copy before optional encryption)
+            try:
+                if hasattr(Config, 'SYNC_TO_CRDT') and Config.SYNC_TO_CRDT:
+                    crdt_base = Config.CRDT_SYNC_FOLDER
+                    # If CRDT sync folder already points to 'lww', use it; otherwise use crdt_base/lww
+                    if os.path.basename(os.path.normpath(crdt_base)) == 'lww':
+                        dest_dir = crdt_base
+                    else:
+                        dest_dir = os.path.join(crdt_base, 'lww')
+
+                    # Ensure destination exists; exist_ok avoids error if it already exists
+                    os.makedirs(dest_dir, exist_ok=True)
+
+                    # Use the original filename but avoid overwriting existing files
+                    crdt_dest = os.path.join(dest_dir, original_name)
+                    try:
+                        if os.path.exists(crdt_dest):
+                            base_name, ext = os.path.splitext(original_name)
+                            counter = 1
+                            while True:
+                                new_name = f"{base_name}_{counter}{ext}"
+                                candidate = os.path.join(dest_dir, new_name)
+                                if not os.path.exists(candidate):
+                                    crdt_dest = candidate
+                                    break
+                                counter += 1
+
+                        shutil.copy2(file_path, crdt_dest)
+                        logger.debug(f"Mirrored file to CRDT sync folder: {crdt_dest}")
+                    except Exception as crdt_err:
+                        logger.error(f"Failed to copy file to CRDT folder: {crdt_err}")
+            except Exception:
+                # Non-fatal if mirroring fails
+                pass
+
             # Encrypt file if enabled
             if hasattr(Config, 'ENCRYPT_FILES') and Config.ENCRYPT_FILES:
                 encrypted_path = stored_path + '.enc'
@@ -296,18 +331,46 @@ class FileHandler:
         
         Returns:
             list: List of file dictionaries with metadata
-            
-        File dictionary contains:
-        - id: File ID
-        - filename: Stored filename (UUID-based)
-        - original_name: Original upload name
-        - file_size: Size in bytes
-        - file_size_formatted: Human-readable size
-        - file_hash: SHA-256 hash
-        - upload_date: Upload timestamp (formatted string)
-        - file_extension: File extension
         """
         try:
+            # If configured to use CRDT sync folder as main source, enumerate files there
+            if hasattr(Config, 'USE_CRDT_AS_MAIN') and Config.USE_CRDT_AS_MAIN:
+                crdt_base = Config.CRDT_SYNC_FOLDER
+                crdt_lww = os.path.join(crdt_base, 'lww')
+                scan_dir = crdt_lww if os.path.exists(crdt_lww) else crdt_base
+
+                if os.path.exists(scan_dir):
+                    result = []
+                    for root, dirs, files in os.walk(scan_dir):
+                        for fname in files:
+                            if fname.startswith('.') or fname.endswith('.swp'):
+                                continue
+                            fpath = os.path.join(root, fname)
+                            try:
+                                stat = os.stat(fpath)
+                                size = stat.st_size
+                                date_str = datetime.fromtimestamp(stat.st_mtime).strftime('%Y-%m-%d %H:%M:%S')
+                            except Exception:
+                                size = 0
+                                date_str = ''
+
+                            file_ext = os.path.splitext(fname)[1].lower()
+
+                            result.append({
+                                'id': None,
+                                'filename': fname,
+                                'original_name': fname,
+                                'file_size': size,
+                                'file_size_formatted': self._format_file_size(size),
+                                'file_hash': None,
+                                'upload_date': date_str,
+                                'file_extension': file_ext,
+                                'file_path': fpath
+                            })
+                    logger.debug(f"Retrieved {len(result)} files from CRDT sync folder: {scan_dir}")
+                    return result
+                # Fall through to DB if CRDT folder missing
+
             files = self.db_manager.execute_query(
                 """SELECT id, filename, original_name, file_size, file_hash, upload_date 
                    FROM files WHERE user_id = ? AND is_deleted = 0 
