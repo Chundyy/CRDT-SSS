@@ -256,10 +256,13 @@ class DatabaseManager:
             self.execute_query(users_table)
             self.execute_query(files_table)
             self.execute_query(sessions_table)
-            self.execute_query(crdt_events_table)
-            self.execute_query(crdt_snapshots_table)
-            self.execute_query(crdt_sync_log_table)
-            
+
+            # Only create internal CRDT tables when configured to use internal CRDT
+            if Config.APP_USE_INTERNAL_CRDT:
+                self.execute_query(crdt_events_table)
+                self.execute_query(crdt_snapshots_table)
+                self.execute_query(crdt_sync_log_table)
+
             logger.info("Database tables initialized successfully (with CRDT support)")
             
         except Exception as e:
@@ -360,11 +363,12 @@ class DatabaseManager:
             cursor.execute(users_table)
             cursor.execute(files_table)
             cursor.execute(sessions_table)
-            cursor.execute(crdt_events_table)
-            cursor.execute(crdt_events_index1)
-            cursor.execute(crdt_events_index2)
-            cursor.execute(crdt_snapshots_table)
-            cursor.execute(crdt_sync_log_table)
+            if Config.APP_USE_INTERNAL_CRDT:
+                cursor.execute(crdt_events_table)
+                cursor.execute(crdt_events_index1)
+                cursor.execute(crdt_events_index2)
+                cursor.execute(crdt_snapshots_table)
+                cursor.execute(crdt_sync_log_table)
             self.connection.commit()
             
             logger.info("SQLite fallback database initialized (with CRDT support)")

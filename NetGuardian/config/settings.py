@@ -14,12 +14,13 @@ class Config:
     """Application configuration class"""
     
     # Database settings
+    # Defaults set to your Postgres server (override via env if needed)
     DB_HOST = os.getenv('DB_HOST', 'localhost')
     DB_PORT = os.getenv('DB_PORT', '5432')
-    DB_NAME = os.getenv('DB_NAME', 'netguardian')
-    DB_USER = os.getenv('DB_USER', 'postgres')
-    DB_PASSWORD = os.getenv('DB_PASSWORD', '')
-    
+    DB_NAME = os.getenv('DB_NAME', 'CRDT-SSS-CLOUD')
+    DB_USER = os.getenv('DB_USER', 'guardian')
+    DB_PASSWORD = os.getenv('DB_PASSWORD', 'netguardian')
+
     # Application settings
     APP_SECRET_KEY = os.getenv('APP_SECRET_KEY', 'dev-secret-key')
     ENCRYPTION_KEY = os.getenv('ENCRYPTION_KEY', 'dev-encryption-key')
@@ -91,6 +92,9 @@ class Config:
     FILE_CARD_HEIGHT = 180
     GRID_COLUMNS = 3
     SPACING = 20
+
+    # Whether to use the internal CRDT implementation in NetGuardian
+    APP_USE_INTERNAL_CRDT = os.getenv('APP_USE_INTERNAL_CRDT', 'false').lower() == 'true'
 
 class DatabaseConfig:
     """Database configuration and connection utilities"""
