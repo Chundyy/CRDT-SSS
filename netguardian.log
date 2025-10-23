@@ -262,3 +262,577 @@ connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection re
 2025-10-23 01:10:51,848 - src.auth.auth_manager - INFO - User logged out successfully: admin
 2025-10-23 01:10:51,849 - src.database.db_manager - INFO - Database connection closed
 2025-10-23 01:10:51,912 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 02:05:05,041 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 02:05:05,042 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 02:05:05,043 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 02:05:06,150 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 02:05:06,175 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 02:05:06,175 - __main__ - INFO - NetGuardian application started
+2025-10-23 02:05:15,647 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 02:05:15,647 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 02:05:15,968 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 02:05:17,181 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-23 02:05:17,182 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 02:05:17,229 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 02:12:20,195 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 02:12:20,196 - src.database.db_manager - WARNING - Using fallback SQLite database
+2025-10-23 02:12:20,198 - src.database.db_manager - INFO - SQLite fallback database initialized (with CRDT support)
+2025-10-23 02:12:20,707 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 02:12:20,720 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 02:12:20,720 - __main__ - INFO - NetGuardian application started
+2025-10-23 02:16:13,241 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 02:16:13,276 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 02:18:40,305 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 88, in connect
+    self.connection = psycopg2.connect(
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 02:18:40,323 - src.database.db_manager - ERROR - Database initialization failed: connection to server at "localhost" (::1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 02:18:40,323 - __main__ - ERROR - Failed to start application: connection to server at "localhost" (::1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 02:23:17,742 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "localhost" (::1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 88, in connect
+    self.connection = psycopg2.connect(
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 02:23:17,746 - src.database.db_manager - ERROR - Database initialization failed: connection to server at "localhost" (::1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 02:23:17,746 - __main__ - ERROR - Failed to start application: connection to server at "localhost" (::1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5132 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 02:25:28,941 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "161.230.48.199", port 51232 failed: Connection timed out (0x0000274C/10060)
+	Is the server running on that host and accepting TCP/IP connections?
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 88, in connect
+    self.connection = psycopg2.connect(
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "161.230.48.199", port 51232 failed: Connection timed out (0x0000274C/10060)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 02:25:28,944 - src.database.db_manager - ERROR - Database initialization failed: connection to server at "161.230.48.199", port 51232 failed: Connection timed out (0x0000274C/10060)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 02:25:28,944 - __main__ - ERROR - Failed to start application: connection to server at "161.230.48.199", port 51232 failed: Connection timed out (0x0000274C/10060)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 02:31:51,770 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "161.230.48.199", port 51232 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 88, in connect
+    self.connection = psycopg2.connect(
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "161.230.48.199", port 51232 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 02:31:51,773 - src.database.db_manager - ERROR - Database initialization failed: connection to server at "161.230.48.199", port 51232 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 02:31:51,773 - __main__ - ERROR - Failed to start application: connection to server at "161.230.48.199", port 51232 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-23 02:34:41,712 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", SSL encryption
+connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", no encryption
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 88, in connect
+    self.connection = psycopg2.connect(
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", SSL encryption
+connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", no encryption
+
+2025-10-23 02:34:41,715 - src.database.db_manager - ERROR - Database initialization failed: connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", SSL encryption
+connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", no encryption
+
+2025-10-23 02:34:41,715 - __main__ - ERROR - Failed to start application: connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", SSL encryption
+connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", no encryption
+
+2025-10-23 02:36:57,295 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", SSL encryption
+connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", no encryption
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 88, in connect
+    self.connection = psycopg2.connect(
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", SSL encryption
+connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", no encryption
+
+2025-10-23 02:36:57,297 - src.database.db_manager - ERROR - Database initialization failed: connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", SSL encryption
+connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", no encryption
+
+2025-10-23 02:36:57,298 - __main__ - ERROR - Failed to start application: connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", SSL encryption
+connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "149.90.15.73", user "guardian", database "CRDT-SSS-CLOUD", no encryption
+
+2025-10-23 02:37:43,196 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 02:37:43,306 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 02:37:43,825 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 02:37:43,849 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 02:37:43,850 - __main__ - INFO - NetGuardian application started
+2025-10-23 02:38:05,220 - src.database.db_manager - ERROR - PostgreSQL query execution failed: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'maria@netguardian.com'
+                                  ^
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'maria@netguardian.com'
+                                  ^
+
+2025-10-23 02:38:05,249 - src.auth.auth_manager - ERROR - Login failed for user maria@netguardian.com: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'maria@netguardian.com'
+                                  ^
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\auth\auth_manager.py", line 169, in login_user
+    user = self.db_manager.execute_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'maria@netguardian.com'
+                                  ^
+
+2025-10-23 02:38:23,719 - src.database.db_manager - ERROR - PostgreSQL query execution failed: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'admin@netguardian.com'
+                                  ^
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'admin@netguardian.com'
+                                  ^
+
+2025-10-23 02:38:23,725 - src.auth.auth_manager - ERROR - Login failed for user admin@netguardian.com: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'admin@netguardian.com'
+                                  ^
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\auth\auth_manager.py", line 169, in login_user
+    user = self.db_manager.execute_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'admin@netguardian.com'
+                                  ^
+
+2025-10-23 02:38:28,597 - src.database.db_manager - ERROR - PostgreSQL query execution failed: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'admin'
+                                  ^
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'admin'
+                                  ^
+
+2025-10-23 02:38:28,603 - src.auth.auth_manager - ERROR - Login failed for user admin: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'admin'
+                                  ^
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\auth\auth_manager.py", line 169, in login_user
+    user = self.db_manager.execute_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'admin'
+                                  ^
+
+2025-10-23 02:38:49,960 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 02:38:49,993 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 02:41:05,669 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 02:41:05,732 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 02:41:06,254 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 02:41:06,283 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 02:41:06,284 - __main__ - INFO - NetGuardian application started
+2025-10-23 02:41:12,178 - src.database.db_manager - ERROR - PostgreSQL query execution failed: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'admin'
+                                  ^
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'admin'
+                                  ^
+
+2025-10-23 02:41:12,187 - src.auth.auth_manager - ERROR - Login failed for user admin: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'admin'
+                                  ^
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\auth\auth_manager.py", line 169, in login_user
+    user = self.db_manager.execute_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "username" does not exist
+LINE 1: SELECT * FROM users WHERE username = 'admin'
+                                  ^
+
+2025-10-23 02:41:14,257 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 02:41:14,291 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 02:42:42,668 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 02:42:42,700 - src.database.db_manager - ERROR - PostgreSQL query execution failed: syntax error at or near ")"
+LINE 8:             );
+                    ^
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.SyntaxError: syntax error at or near ")"
+LINE 8:             );
+                    ^
+
+2025-10-23 02:42:42,707 - src.database.db_manager - ERROR - Database initialization failed: syntax error at or near ")"
+LINE 8:             );
+                    ^
+
+2025-10-23 02:42:42,707 - __main__ - ERROR - Failed to start application: syntax error at or near ")"
+LINE 8:             );
+                    ^
+
+2025-10-23 02:43:04,547 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 02:43:04,621 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 02:43:05,284 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 02:43:05,309 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 02:43:05,310 - __main__ - INFO - NetGuardian application started
+2025-10-23 02:43:15,095 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin@netguardian.com
+2025-10-23 02:43:27,381 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin
+2025-10-23 02:43:32,283 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: maria
+2025-10-23 02:48:54,941 - src.auth.auth_manager - ERROR - Login failed for user Admin: 'password_hash'
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\auth\auth_manager.py", line 181, in login_user
+    if not self.verify_password(password, user['password_hash']):
+                                          ~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'password_hash'
+2025-10-23 02:49:09,444 - src.auth.auth_manager - ERROR - Login failed for user Admin: 'password_hash'
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\auth\auth_manager.py", line 181, in login_user
+    if not self.verify_password(password, user['password_hash']):
+                                          ~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'password_hash'
+2025-10-23 02:49:24,844 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin@netguardian.com
+2025-10-23 02:49:33,701 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin@netguardian.com
+2025-10-23 02:49:41,967 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin
+2025-10-23 02:49:45,111 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 02:49:45,145 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 02:49:51,792 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 02:49:51,862 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 02:49:52,390 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 02:49:52,415 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 02:49:52,415 - __main__ - INFO - NetGuardian application started
+2025-10-23 02:49:58,196 - src.auth.auth_manager - ERROR - Login failed for user Admin: 'password_hash'
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\auth\auth_manager.py", line 181, in login_user
+    if not self.verify_password(password, user['password_hash']):
+                                          ~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'password_hash'
+2025-10-23 02:50:43,563 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 02:50:43,596 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 02:50:46,725 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 02:50:46,795 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 02:50:47,329 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 02:50:47,353 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 02:50:47,355 - __main__ - INFO - NetGuardian application started
+2025-10-23 02:50:51,752 - src.auth.auth_manager - ERROR - Login failed for user Admin: 'password_hash'
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\auth\auth_manager.py", line 181, in login_user
+    if not self.verify_password(password, user['password_hash']):
+                                          ~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'password_hash'
+2025-10-23 02:50:54,356 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 02:50:54,386 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 02:51:04,622 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 02:51:04,693 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 02:51:05,227 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 02:51:05,251 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 02:51:05,252 - __main__ - INFO - NetGuardian application started
+2025-10-23 02:51:09,540 - src.auth.auth_manager - ERROR - Password verification failed - Invalid hash format: Invalid salt
+2025-10-23 02:51:09,540 - src.auth.auth_manager - WARNING - Invalid password attempt for user: Admin
+2025-10-23 02:53:49,762 - src.auth.auth_manager - ERROR - Password verification failed - Invalid hash format: Invalid salt
+2025-10-23 02:53:49,762 - src.auth.auth_manager - WARNING - Invalid password attempt for user: Admin
+2025-10-23 02:53:52,181 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 02:53:52,213 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 02:54:13,120 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 02:54:13,190 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 02:54:13,710 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 02:54:13,735 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 02:54:13,735 - __main__ - INFO - NetGuardian application started
+2025-10-23 02:54:18,387 - src.auth.auth_manager - WARNING - Invalid password attempt for user: Admin
+2025-10-23 02:54:25,919 - src.auth.auth_manager - WARNING - Invalid password attempt for user: Admin
+2025-10-23 02:54:37,328 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin@netguardian.com
+2025-10-23 02:54:39,895 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin@netguardian.com
+2025-10-23 02:54:49,715 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin
+2025-10-23 02:58:20,659 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 02:58:20,692 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 02:58:24,017 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 02:58:24,084 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 02:58:24,599 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 02:58:24,625 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 02:58:24,625 - __main__ - INFO - NetGuardian application started
+2025-10-23 02:58:37,761 - src.auth.auth_manager - WARNING - Invalid password attempt for user: admin
+2025-10-23 02:58:39,780 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 02:58:39,811 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 02:58:43,605 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 02:58:43,674 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 02:58:44,184 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 02:58:44,206 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 02:58:44,206 - __main__ - INFO - NetGuardian application started
+2025-10-23 02:58:50,014 - src.auth.auth_manager - WARNING - Invalid password attempt for user: admin
+2025-10-23 02:58:56,922 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin@netguardian.com
+2025-10-23 02:59:37,935 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 02:59:37,969 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 02:59:42,626 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 02:59:42,714 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 02:59:43,484 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 02:59:43,499 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 02:59:43,499 - __main__ - INFO - NetGuardian application started
+2025-10-23 02:59:47,621 - src.auth.auth_manager - WARNING - Invalid password attempt for user: admin
+2025-10-23 03:02:24,521 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 03:02:24,552 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 03:02:27,871 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 03:02:27,941 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 03:02:28,456 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 03:02:28,481 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 03:02:28,481 - __main__ - INFO - NetGuardian application started
+2025-10-23 03:02:32,401 - src.database.db_manager - ERROR - PostgreSQL query execution failed: column "last_login" of relation "users" does not exist
+LINE 1: UPDATE users SET last_login = '2025-10-23T03:02:32.389645'::...
+                         ^
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "last_login" of relation "users" does not exist
+LINE 1: UPDATE users SET last_login = '2025-10-23T03:02:32.389645'::...
+                         ^
+
+2025-10-23 03:02:32,640 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 03:02:32,640 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 03:02:32,668 - src.file_manager.file_handler - INFO - Created user storage directory: ./local_files\user_6
+2025-10-23 03:02:32,958 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 03:02:41,178 - src.database.db_manager - ERROR - PostgreSQL query execution failed: operator does not exist: boolean = integer
+LINE 1: ...3dfb414ae112a8b3ae214b85649bc24e4a85c0a8' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedFunction: operator does not exist: boolean = integer
+LINE 1: ...3dfb414ae112a8b3ae214b85649bc24e4a85c0a8' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+2025-10-23 03:02:41,185 - src.file_manager.file_handler - ERROR - Unexpected error during file upload: operator does not exist: boolean = integer
+LINE 1: ...3dfb414ae112a8b3ae214b85649bc24e4a85c0a8' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\file_manager\file_handler.py", line 117, in upload_file
+    existing_file = self.db_manager.execute_query(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedFunction: operator does not exist: boolean = integer
+LINE 1: ...3dfb414ae112a8b3ae214b85649bc24e4a85c0a8' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+2025-10-23 03:02:41,187 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/logs/90-E8-68-0F-59-C4_CHUNDY.log: Failed to upload file
+2025-10-23 03:02:49,406 - src.database.db_manager - ERROR - PostgreSQL query execution failed: operator does not exist: boolean = integer
+LINE 1: ...41961fcd8218e8a1455c2d1937bfc347e5a05493' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedFunction: operator does not exist: boolean = integer
+LINE 1: ...41961fcd8218e8a1455c2d1937bfc347e5a05493' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+2025-10-23 03:02:49,413 - src.file_manager.file_handler - ERROR - Unexpected error during file upload: operator does not exist: boolean = integer
+LINE 1: ...41961fcd8218e8a1455c2d1937bfc347e5a05493' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\file_manager\file_handler.py", line 117, in upload_file
+    existing_file = self.db_manager.execute_query(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedFunction: operator does not exist: boolean = integer
+LINE 1: ...41961fcd8218e8a1455c2d1937bfc347e5a05493' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+2025-10-23 03:03:22,921 - src.database.db_manager - ERROR - PostgreSQL query execution failed: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = 'Mh9...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.DatatypeMismatch: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = 'Mh9...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+
+2025-10-23 03:03:22,927 - src.auth.auth_manager - ERROR - Logout failed: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = 'Mh9...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\auth\auth_manager.py", line 258, in logout_user
+    self.db_manager.execute_query(
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.DatatypeMismatch: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = 'Mh9...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+
+2025-10-23 03:03:22,929 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 03:03:22,973 - src.gui.main_window - INFO - Application closed successfully

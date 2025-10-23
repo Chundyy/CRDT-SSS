@@ -77,19 +77,33 @@ class AuthManager:
             return False
             
         try:
+            # Normalize to string
             if isinstance(hashed_password, bytes):
-                # Handle bytes format
-                if len(hashed_password) == 64:  # SHA256 fallback
-                    return hashlib.sha256(password.encode()).hexdigest() == hashed_password.decode()
-                return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
+                hp = hashed_password.decode('utf-8', errors='ignore')
             else:
-                # Handle string format
-                if len(hashed_password) == 64:  # SHA256 fallback
-                    return hashlib.sha256(password.encode()).hexdigest() == hashed_password
-                return bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8'))
-        except (ValueError, AttributeError) as e:
-            logger.error(f"Password verification failed - Invalid hash format: {e}")
-            return False
+                hp = str(hashed_password)
+
+            hp = hp.strip()
+
+            # bcrypt hashes start with $2a$ / $2b$ / $2y$
+            if hp.startswith('$2'):
+                try:
+                    return bcrypt.checkpw(password.encode('utf-8'), hp.encode('utf-8'))
+                except Exception as e:
+                    logger.error(f"Bcrypt verification failed: {e}")
+                    return False
+
+            # SHA256 hex (64 hex chars)
+            import re
+            if re.fullmatch(r'[0-9a-fA-F]{64}', hp):
+                return hashlib.sha256(password.encode()).hexdigest() == hp.lower()
+
+            # Not a known hash format -> assume plaintext stored in DB. Compare directly.
+            try:
+                return password == hp
+            except Exception:
+                return False
+
         except Exception as e:
             logger.error(f"Unexpected error during password verification: {e}")
             return False
@@ -124,7 +138,7 @@ class AuthManager:
             
             # Check if user already exists
             existing_user = self.db_manager.execute_query(
-                "SELECT id FROM users WHERE username = ? OR email = ?",
+                "SELECT id FROM users WHERE name = ? OR email = ?",
                 (username, email)
             )
             
@@ -135,7 +149,7 @@ class AuthManager:
             password_hash = self.hash_password(password)
             
             self.db_manager.execute_query(
-                """INSERT INTO users (username, email, password_hash) 
+                """INSERT INTO users (name, email, password) 
                    VALUES (?, ?, ?)""",
                 (username, email, password_hash)
             )
@@ -167,7 +181,7 @@ class AuthManager:
         try:
             # Get user from database
             user = self.db_manager.execute_query(
-                "SELECT * FROM users WHERE username = ?",
+                "SELECT * FROM users WHERE name = ?",
                 (username,)
             )
             
@@ -178,7 +192,8 @@ class AuthManager:
             user = user[0]
             
             # Verify password
-            if not self.verify_password(password, user['password_hash']):
+            stored_pw = user.get('password')
+            if not self.verify_password(password, stored_pw):
                 logger.warning(f"Invalid password attempt for user: {username}")
                 return False, UIConstants.ERROR_LOGIN
             
@@ -201,8 +216,27 @@ class AuthManager:
             except Exception:
                 pass  # Column might not exist in older schemas
             
+            # After successful auth: if stored password was plaintext, upgrade to bcrypt
+            try:
+                sp = stored_pw or ''
+                if not (isinstance(sp, str) and sp.strip().startswith('$2')):
+                    # treat as plaintext or non-bcrypt: replace with bcrypt hash
+                    new_hash = self.hash_password(password)
+                    try:
+                        self.db_manager.execute_query(
+                            "UPDATE users SET password = ? WHERE id = ?",
+                            (new_hash, user['id'])
+                        )
+                    except Exception:
+                        logger.warning('Failed to upgrade stored plaintext password to bcrypt')
+            except Exception:
+                pass
+
             # Set current user and session
-            self.current_user = dict(user)
+            # normalize current_user to include 'username' for compatibility
+            u = dict(user)
+            u['username'] = u.get('name')
+            self.current_user = u
             self.current_session = session_token
             
             logger.info(f"User logged in successfully: {username}")
@@ -278,10 +312,11 @@ class AuthManager:
             
             if session:
                 session = session[0]
+                # session row contains user columns prefixed as in query; normalize
                 self.current_user = {
                     'id': session['user_id'],
-                    'username': session['username'],
-                    'email': session['email']
+                    'username': session.get('name') or session.get('username'),
+                    'email': session.get('email')
                 }
                 self.current_session = session_token
                 logger.info(f"Session restored for user: {self.current_user['username']}")

@@ -15,8 +15,8 @@ class Config:
     
     # Database settings
     # Defaults set to your Postgres server (override via env if needed)
-    DB_HOST = os.getenv('DB_HOST', 'localhost')
-    DB_PORT = os.getenv('DB_PORT', '5432')
+    DB_HOST = os.getenv('DB_HOST', '161.230.48.199')
+    DB_PORT = os.getenv('DB_PORT', '51232')
     DB_NAME = os.getenv('DB_NAME', 'CRDT-SSS-CLOUD')
     DB_USER = os.getenv('DB_USER', 'guardian')
     DB_PASSWORD = os.getenv('DB_PASSWORD', 'netguardian')
