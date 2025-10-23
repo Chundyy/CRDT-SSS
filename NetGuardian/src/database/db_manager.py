@@ -6,6 +6,7 @@ Handles PostgreSQL database connections
 import os
 import logging
 from typing import Optional, List, Dict, Any, Union
+import re
 
 # Try to import PostgreSQL driver
 try:
@@ -139,8 +140,31 @@ class DatabaseManager:
         """Execute query on PostgreSQL connection."""
         # Convert sqlite-style placeholders (?) to psycopg2-style (%s)
         q = query.replace('?', '%s')
-        # Ensure params is a sequence (psycopg2 accepts tuple/list)
+        # Normalize common boolean comparisons for PostgreSQL: replace literal 0/1 with FALSE/TRUE
+        # Handle case-insensitive occurrences like "is_deleted = 0" or "is_active=1"
+        q = re.sub(r'(?i)\bis_deleted\s*=\s*0\b', 'is_deleted = FALSE', q)
+        q = re.sub(r'(?i)\bis_deleted\s*=\s*1\b', 'is_deleted = TRUE', q)
+        q = re.sub(r'(?i)\bis_active\s*=\s*0\b', 'is_active = FALSE', q)
+        q = re.sub(r'(?i)\bis_active\s*=\s*1\b', 'is_active = TRUE', q)
+        # If placeholders used (converted to %s), convert matching params for boolean columns
         p = params if params is not None else None
+        if p is not None:
+            # work with a mutable list
+            try:
+                plist = list(p)
+                # For each boolean-column pattern using %s, find which %s index it maps to
+                for m in re.finditer(r'(?i)(is_deleted|is_active)\s*=\s*%s', q):
+                    # count how many %s occurrences are before this match -> index
+                    idx = q[:m.start()].count('%s')
+                    if idx < len(plist):
+                        val = plist[idx]
+                        if val in (0, '0'):
+                            plist[idx] = False
+                        elif val in (1, '1'):
+                            plist[idx] = True
+                p = tuple(plist)
+            except Exception:
+                p = params
         with self.connection.cursor() as cursor:
             cursor.execute(q, p)
 
@@ -178,7 +202,8 @@ class DatabaseManager:
                 name VARCHAR(100) UNIQUE NOT NULL,
                 group_id INTEGER REFERENCES groups(id),
                 email VARCHAR(100) UNIQUE NOT NULL,
-                password VARCHAR(255) NOT NULL
+                password VARCHAR(255) NOT NULL,
+                last_login TIMESTAMP
             );
             """
             
@@ -255,6 +280,12 @@ class DatabaseManager:
             # ensure groups exists before users
             self.execute_query(groups_table)
             self.execute_query(users_table)
+            # Ensure older installations get last_login column if missing
+            try:
+                self.execute_query("ALTER TABLE users ADD COLUMN IF NOT EXISTS last_login TIMESTAMP;")
+            except Exception:
+                # Non-fatal: some PostgreSQL versions may error on ALTER statement parsing in this context
+                pass
             self.execute_query(files_table)
             self.execute_query(sessions_table)
 

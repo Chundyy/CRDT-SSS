@@ -836,3 +836,831 @@ HINT:  You will need to rewrite or cast the expression.
 
 2025-10-23 03:03:22,929 - src.database.db_manager - INFO - Database connection closed
 2025-10-23 03:03:22,973 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 03:06:08,116 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 03:06:08,198 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 03:06:08,881 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 03:06:08,912 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 03:06:08,913 - __main__ - INFO - NetGuardian application started
+2025-10-23 03:06:18,096 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: Leitão
+2025-10-23 03:06:38,955 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 03:06:38,986 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 11:08:02,290 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 11:08:02,398 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 11:08:04,357 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 11:08:04,387 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 11:08:04,387 - __main__ - INFO - NetGuardian application started
+2025-10-23 11:08:12,359 - src.database.db_manager - ERROR - PostgreSQL query execution failed: column "last_login" of relation "users" does not exist
+LINE 1: UPDATE users SET last_login = '2025-10-23T11:08:12.345235'::...
+                         ^
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "last_login" of relation "users" does not exist
+LINE 1: UPDATE users SET last_login = '2025-10-23T11:08:12.345235'::...
+                         ^
+
+2025-10-23 11:08:12,396 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 11:08:12,397 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 11:08:12,886 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 11:08:20,596 - src.database.db_manager - ERROR - PostgreSQL query execution failed: operator does not exist: boolean = integer
+LINE 1: ...845fb46bc748fb8fe69dd64ab82ca1184642fffd' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedFunction: operator does not exist: boolean = integer
+LINE 1: ...845fb46bc748fb8fe69dd64ab82ca1184642fffd' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+2025-10-23 11:08:20,605 - src.file_manager.file_handler - ERROR - Unexpected error during file upload: operator does not exist: boolean = integer
+LINE 1: ...845fb46bc748fb8fe69dd64ab82ca1184642fffd' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\file_manager\file_handler.py", line 117, in upload_file
+    existing_file = self.db_manager.execute_query(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedFunction: operator does not exist: boolean = integer
+LINE 1: ...845fb46bc748fb8fe69dd64ab82ca1184642fffd' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+2025-10-23 11:08:43,982 - src.database.db_manager - ERROR - PostgreSQL query execution failed: operator does not exist: boolean = integer
+LINE 1: ...3dfb414ae112a8b3ae214b85649bc24e4a85c0a8' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedFunction: operator does not exist: boolean = integer
+LINE 1: ...3dfb414ae112a8b3ae214b85649bc24e4a85c0a8' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+2025-10-23 11:08:43,990 - src.file_manager.file_handler - ERROR - Unexpected error during file upload: operator does not exist: boolean = integer
+LINE 1: ...3dfb414ae112a8b3ae214b85649bc24e4a85c0a8' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\file_manager\file_handler.py", line 117, in upload_file
+    existing_file = self.db_manager.execute_query(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedFunction: operator does not exist: boolean = integer
+LINE 1: ...3dfb414ae112a8b3ae214b85649bc24e4a85c0a8' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+2025-10-23 11:08:43,992 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/logs/90-E8-68-0F-59-C4_CHUNDY.log: Failed to upload file
+2025-10-23 11:09:17,828 - src.database.db_manager - ERROR - PostgreSQL query execution failed: operator does not exist: boolean = integer
+LINE 1: ...f7e8649e94fb4fc21fe77e8310c060f61caaff8a' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedFunction: operator does not exist: boolean = integer
+LINE 1: ...f7e8649e94fb4fc21fe77e8310c060f61caaff8a' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+2025-10-23 11:09:17,838 - src.file_manager.file_handler - ERROR - Unexpected error during file upload: operator does not exist: boolean = integer
+LINE 1: ...f7e8649e94fb4fc21fe77e8310c060f61caaff8a' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\file_manager\file_handler.py", line 117, in upload_file
+    existing_file = self.db_manager.execute_query(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedFunction: operator does not exist: boolean = integer
+LINE 1: ...f7e8649e94fb4fc21fe77e8310c060f61caaff8a' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+2025-10-23 11:09:17,840 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/logs/node1_state.json: Failed to upload file
+2025-10-23 11:09:21,147 - src.database.db_manager - ERROR - PostgreSQL query execution failed: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = 'nvT...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.DatatypeMismatch: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = 'nvT...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+
+2025-10-23 11:09:21,159 - src.auth.auth_manager - ERROR - Logout failed: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = 'nvT...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\auth\auth_manager.py", line 258, in logout_user
+    self.db_manager.execute_query(
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.DatatypeMismatch: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = 'nvT...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+
+2025-10-23 11:09:21,177 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 11:09:21,241 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 11:11:16,036 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 11:11:16,146 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 11:11:17,210 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 11:11:17,249 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 11:11:17,249 - __main__ - INFO - NetGuardian application started
+2025-10-23 11:11:23,700 - src.database.db_manager - ERROR - PostgreSQL query execution failed: column "last_login" of relation "users" does not exist
+LINE 1: UPDATE users SET last_login = '2025-10-23T11:11:23.669821'::...
+                         ^
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "last_login" of relation "users" does not exist
+LINE 1: UPDATE users SET last_login = '2025-10-23T11:11:23.669821'::...
+                         ^
+
+2025-10-23 11:11:23,718 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 11:11:23,718 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 11:11:24,219 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 11:12:01,512 - src.database.db_manager - ERROR - PostgreSQL query execution failed: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = '607...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.DatatypeMismatch: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = '607...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+
+2025-10-23 11:12:01,525 - src.auth.auth_manager - ERROR - Logout failed: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = '607...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\auth\auth_manager.py", line 258, in logout_user
+    self.db_manager.execute_query(
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.DatatypeMismatch: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = '607...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+
+2025-10-23 11:12:01,528 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 11:12:01,660 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 11:54:56,920 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 11:54:57,078 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 11:54:57,806 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 11:54:57,853 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 11:54:57,853 - __main__ - INFO - NetGuardian application started
+2025-10-23 11:55:02,273 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 11:55:02,273 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 11:55:02,759 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 11:55:05,191 - src.database.db_manager - ERROR - PostgreSQL query execution failed: operator does not exist: boolean = integer
+LINE 1: ...de20a185c2467c226dbcb76c0aac8fe15878cd63' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedFunction: operator does not exist: boolean = integer
+LINE 1: ...de20a185c2467c226dbcb76c0aac8fe15878cd63' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+2025-10-23 11:55:05,220 - src.file_manager.file_handler - ERROR - Unexpected error during file upload: operator does not exist: boolean = integer
+LINE 1: ...de20a185c2467c226dbcb76c0aac8fe15878cd63' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\file_manager\file_handler.py", line 117, in upload_file
+    existing_file = self.db_manager.execute_query(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedFunction: operator does not exist: boolean = integer
+LINE 1: ...de20a185c2467c226dbcb76c0aac8fe15878cd63' AND is_deleted = 0
+                                                                    ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+2025-10-23 11:56:35,069 - src.database.db_manager - ERROR - PostgreSQL query execution failed: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = 'K3E...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    # Always use PostgreSQL in production; no SQLite fallback
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    q = re.sub(r'(?i)\bis_deleted\s*=\s*0\b', 'is_deleted = FALSE', q)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.DatatypeMismatch: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = 'K3E...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+
+2025-10-23 11:56:35,089 - src.auth.auth_manager - ERROR - Logout failed: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = 'K3E...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\auth\auth_manager.py", line 244, in logout_user
+    self.db_manager.execute_query(
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 131, in execute_query
+    # Always use PostgreSQL in production; no SQLite fallback
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 145, in _execute_postgres_query
+    q = re.sub(r'(?i)\bis_deleted\s*=\s*0\b', 'is_deleted = FALSE', q)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.DatatypeMismatch: column "is_active" is of type boolean but expression is of type integer
+LINE 1: UPDATE sessions SET is_active = 0 WHERE session_token = 'K3E...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+
+2025-10-23 11:56:35,094 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 11:56:35,195 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 12:08:11,745 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 12:08:12,002 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 12:08:12,765 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 12:08:12,816 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 12:08:12,816 - __main__ - INFO - NetGuardian application started
+2025-10-23 12:08:18,797 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 12:08:18,797 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 12:08:19,317 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 12:08:32,797 - src.file_manager.file_handler - INFO - File uploaded: 'untitled.txt' (7.0 B) -> 54f2429a-f1c7-4784-9cd8-cfe113bf8843.txt
+2025-10-23 12:10:56,847 - src.file_manager.file_handler - INFO - File uploaded: 'untitled.txt' (7.0 B) -> 56aa6bfc-9151-40dc-aff5-bd97c89ea33d.txt
+2025-10-23 12:12:39,718 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-23 12:12:39,718 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 12:12:39,842 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 12:12:47,153 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 12:12:47,334 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 12:12:48,240 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 12:12:48,278 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 12:12:48,278 - __main__ - INFO - NetGuardian application started
+2025-10-23 12:12:53,996 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 12:12:53,996 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 12:12:54,551 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 12:14:23,305 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-23 12:14:23,305 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 12:14:23,399 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 12:16:16,842 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 12:16:17,113 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 12:16:17,829 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 12:16:17,882 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 12:16:17,886 - __main__ - INFO - NetGuardian application started
+2025-10-23 12:16:23,148 - src.auth.auth_manager - WARNING - Login attempt for non-existent user: admin
+2025-10-23 12:18:39,394 - src.auth.auth_manager - INFO - User registered successfully: admin
+2025-10-23 12:18:44,561 - src.auth.auth_manager - WARNING - Invalid password attempt for user: admin
+2025-10-23 12:19:16,474 - src.auth.auth_manager - INFO - User registered successfully: 123123
+2025-10-23 12:19:31,601 - src.auth.auth_manager - INFO - User logged in successfully: 123123
+2025-10-23 12:19:31,617 - src.gui.main_window - INFO - Login successful for user: 123123
+2025-10-23 12:19:32,144 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 12:20:58,629 - src.auth.auth_manager - INFO - User logged out successfully: 123123
+2025-10-23 12:20:58,629 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 12:20:58,721 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 12:38:26,810 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 12:38:26,995 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 12:38:27,711 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 12:38:27,751 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 12:38:27,751 - __main__ - INFO - NetGuardian application started
+2025-10-23 12:38:35,320 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-23 12:38:35,320 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-23 12:38:35,369 - src.file_manager.file_handler - INFO - Created user storage directory: ./local_files\user_3
+2025-10-23 12:38:35,831 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 12:38:37,828 - src.auth.auth_manager - INFO - User logged out successfully: leitao
+2025-10-23 12:38:37,828 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 12:38:37,922 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 12:38:42,408 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 12:38:42,575 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 12:38:43,316 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 12:38:43,364 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 12:38:43,364 - __main__ - INFO - NetGuardian application started
+2025-10-23 12:38:47,624 - src.auth.auth_manager - INFO - User logged in successfully: oliv
+2025-10-23 12:38:47,624 - src.gui.main_window - INFO - Login successful for user: oliv
+2025-10-23 12:38:47,678 - src.file_manager.file_handler - INFO - Created user storage directory: ./local_files\user_4
+2025-10-23 12:38:48,168 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 12:38:56,531 - src.auth.auth_manager - INFO - User logged out successfully: oliv
+2025-10-23 12:38:56,539 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 12:38:56,634 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 12:39:00,491 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 12:39:00,627 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 12:39:01,430 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 12:39:01,473 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 12:39:01,473 - __main__ - INFO - NetGuardian application started
+2025-10-23 12:39:14,342 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-23 12:39:14,342 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-23 12:39:14,856 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 12:39:19,910 - src.file_manager.file_handler - INFO - File uploaded: 'untitled.txt' (8.0 B) -> 5c31c638-d2a3-42f1-b177-9d286fb205b8.txt
+2025-10-23 16:28:01,796 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 16:28:02,232 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 16:28:03,253 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 16:28:03,286 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 16:28:03,286 - __main__ - INFO - NetGuardian application started
+2025-10-23 16:28:12,515 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-23 16:28:12,515 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-23 16:28:12,878 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 16:28:24,201 - src.file_manager.file_handler - INFO - File uploaded: 'untitled.txt' (10.0 B) -> a48c40a8-e884-417d-9bd7-ea7c1565315e.txt
+2025-10-23 16:37:37,549 - src.auth.auth_manager - INFO - User logged out successfully: leitao
+2025-10-23 16:37:37,563 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 16:37:37,620 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 16:38:59,836 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 16:39:00,381 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 16:39:00,842 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 16:39:00,868 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 16:39:00,868 - __main__ - INFO - NetGuardian application started
+2025-10-23 16:39:07,569 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 16:39:07,569 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 16:39:17,903 - src.file_manager.file_handler - ERROR - SFTP connection failed: timed out
+2025-10-23 16:39:17,906 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 16:39:34,749 - src.file_manager.file_handler - ERROR - SFTP connection failed: timed out
+2025-10-23 16:39:34,749 - src.file_manager.file_handler - WARNING - SFTP mirror to CRDT failed
+2025-10-23 16:39:34,814 - src.file_manager.file_handler - INFO - File uploaded: 'untitled.txt' (14.0 B) -> ffce3939-a53e-46e0-943e-d032be242302.txt
+2025-10-23 16:39:46,447 - src.file_manager.file_handler - ERROR - SFTP connection failed: timed out
+2025-10-23 16:39:56,470 - src.file_manager.file_handler - ERROR - SFTP connection failed: timed out
+2025-10-23 16:40:10,243 - src.file_manager.file_handler - ERROR - SFTP connection failed: timed out
+2025-10-23 16:40:12,977 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-23 16:40:12,977 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 16:40:13,023 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 16:41:08,786 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 16:41:09,280 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 16:41:09,797 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 16:41:09,818 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 16:41:09,818 - __main__ - INFO - NetGuardian application started
+2025-10-23 16:41:14,448 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-23 16:41:14,448 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-23 16:41:35,805 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+2025-10-23 16:53:16,869 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 16:53:17,474 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 16:53:17,932 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 16:53:17,954 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 16:53:17,954 - __main__ - INFO - NetGuardian application started
+2025-10-23 16:53:21,646 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-23 16:53:21,646 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-23 16:54:22,646 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 16:54:23,329 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 16:54:23,782 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 16:54:23,804 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 16:54:23,804 - __main__ - INFO - NetGuardian application started
+2025-10-23 16:54:31,439 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-23 16:54:31,439 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-23 16:54:52,815 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+2025-10-23 16:55:15,943 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 2/3): [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+2025-10-23 16:55:41,185 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 3/3): [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+2025-10-23 16:55:41,187 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 16:56:13,982 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+2025-10-23 16:56:37,120 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 2/3): [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+2025-10-23 16:57:02,343 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 3/3): [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+2025-10-23 16:57:02,343 - src.file_manager.file_handler - WARNING - SFTP mirror to CRDT failed
+2025-10-23 16:57:02,432 - src.file_manager.file_handler - INFO - File uploaded: 'untitled.txt' (13.0 B) -> 70792c78-7093-4ef2-841b-1744e5c87163.txt
+2025-10-23 17:00:44,335 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 17:00:44,866 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 17:00:45,309 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 17:00:45,341 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 17:00:45,341 - __main__ - INFO - NetGuardian application started
+2025-10-23 17:00:51,870 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-23 17:00:51,870 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-23 17:00:52,492 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:00:54,843 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-23 17:00:54,847 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): Authentication failed.
+2025-10-23 17:00:57,072 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:01:01,326 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-23 17:01:01,326 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 2/3): Authentication failed.
+2025-10-23 17:01:05,726 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:01:07,932 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-23 17:01:07,932 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 3/3): Authentication failed.
+2025-10-23 17:01:07,949 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 17:02:36,198 - src.auth.auth_manager - INFO - User logged out successfully: leitao
+2025-10-23 17:02:36,198 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 17:02:36,253 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 17:02:41,282 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 17:02:41,877 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 17:02:42,335 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 17:02:42,360 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 17:02:42,360 - __main__ - INFO - NetGuardian application started
+2025-10-23 17:02:46,836 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-23 17:02:46,836 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-23 17:02:47,331 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:02:51,781 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-23 17:02:51,781 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): Authentication failed.
+2025-10-23 17:02:54,001 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:02:58,454 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-23 17:02:58,462 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 2/3): Authentication failed.
+2025-10-23 17:03:02,851 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:03:07,369 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-23 17:03:07,369 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 3/3): Authentication failed.
+2025-10-23 17:03:07,391 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 17:03:34,828 - src.auth.auth_manager - INFO - User logged out successfully: leitao
+2025-10-23 17:03:34,835 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 17:03:34,883 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 17:05:51,212 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 17:05:51,793 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 17:05:52,254 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 17:05:52,286 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 17:05:52,286 - __main__ - INFO - NetGuardian application started
+2025-10-23 17:05:56,581 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-23 17:05:56,581 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-23 17:05:56,979 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:06:26,919 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-23 17:06:29,321 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:06:30,835 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:06:31,578 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:06:31,912 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:06:31,929 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 17:07:11,157 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:07:12,022 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:07:12,912 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:07:13,156 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:07:13,279 - src.file_manager.file_handler - INFO - File uploaded: 'untitled.txt' (7.0 B) -> c95ca319-7cdc-4fd5-86ff-5f616776d81c.txt
+2025-10-23 17:07:14,529 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:07:15,066 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:07:15,800 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:07:16,232 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:11:28,982 - src.auth.auth_manager - INFO - User logged out successfully: leitao
+2025-10-23 17:11:28,982 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 17:11:29,060 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 17:18:37,921 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 17:18:38,561 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 17:18:39,373 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 17:18:39,379 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 17:18:39,379 - __main__ - INFO - NetGuardian application started
+2025-10-23 17:18:47,804 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-23 17:18:47,805 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-23 17:18:48,279 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:19:18,264 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-23 17:19:20,460 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:19:20,897 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:19:21,589 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:19:21,720 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:19:21,767 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 17:19:27,579 - src.auth.auth_manager - INFO - User logged out successfully: leitao
+2025-10-23 17:19:27,579 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 17:19:27,656 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 17:52:09,653 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 17:52:10,267 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 17:52:10,837 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 17:52:10,872 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 17:52:10,872 - __main__ - INFO - NetGuardian application started
+2025-10-23 17:52:15,345 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-23 17:52:15,345 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-23 17:52:15,759 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:52:45,719 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-23 17:52:47,945 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:52:48,574 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:52:49,660 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:52:49,822 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:52:49,873 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 17:53:12,967 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:53:13,479 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:53:14,363 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:53:14,703 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:53:14,773 - src.file_manager.file_handler - INFO - File uploaded: 'teste.txt' (17.0 B) -> 86d6be0b-5f2c-4ffe-b2db-3f425b5da316.txt
+2025-10-23 17:53:20,307 - src.file_manager.file_handler - INFO - Duplicate file detected: teste.txt matches teste.txt
+2025-10-23 17:53:22,097 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:53:22,593 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:53:22,813 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:53:22,957 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:55:52,668 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:55:53,124 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:55:54,007 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:55:54,199 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:56:07,456 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:56:07,959 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:56:08,885 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:56:09,001 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:56:12,787 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:56:13,435 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:56:13,708 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:56:13,867 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:56:17,812 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:56:18,302 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:56:18,543 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:56:18,735 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:56:19,601 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:56:20,074 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:56:20,464 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:56:20,641 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:56:20,816 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:56:21,296 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:56:21,508 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:56:21,690 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:56:21,857 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:56:22,377 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:56:22,628 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:56:22,820 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:56:23,012 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:56:23,606 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:56:23,904 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:56:24,063 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:56:24,245 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:56:24,686 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:56:24,894 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:56:25,054 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:56:37,430 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:56:37,874 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:56:38,956 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:56:39,115 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:56:43,979 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:56:44,443 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:56:44,713 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:56:44,920 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:56:59,546 - src.auth.auth_manager - INFO - User logged out successfully: leitao
+2025-10-23 17:56:59,546 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 17:56:59,609 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 17:57:03,806 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 17:57:04,419 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 17:57:04,910 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 17:57:04,934 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 17:57:04,934 - __main__ - INFO - NetGuardian application started
+2025-10-23 17:57:09,887 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-23 17:57:09,887 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-23 17:57:10,365 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:57:40,301 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-23 17:57:42,520 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:57:42,994 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:57:44,001 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:57:44,152 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:57:44,214 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 17:58:41,789 - src.gui.dashboard - ERROR - CRDT file copy failed: [WinError 2] The system cannot find the file specified
+2025-10-23 17:58:58,291 - src.file_manager.file_handler - INFO - Duplicate file detected: limpo.txt matches untitled.txt
+2025-10-23 17:59:13,878 - src.file_manager.file_handler - INFO - Duplicate file detected: aaaaa.md matches untitled.txt
+2025-10-23 17:59:33,673 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:59:34,408 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:59:35,323 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:59:35,624 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:59:35,724 - src.file_manager.file_handler - INFO - File uploaded: 'logs.txt' (13.0 B) -> 2ae9edf0-ed07-4d0d-9cb7-5dfd06ec300b.txt
+2025-10-23 17:59:37,419 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 17:59:38,049 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 17:59:38,351 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 17:59:38,511 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 17:59:45,282 - src.gui.dashboard - ERROR - CRDT file copy failed: [WinError 2] The system cannot find the file specified
+2025-10-23 18:00:33,393 - src.gui.dashboard - ERROR - CRDT file copy failed: [WinError 2] The system cannot find the file specified
+2025-10-23 18:04:01,006 - src.auth.auth_manager - INFO - User logged out successfully: leitao
+2025-10-23 18:04:01,006 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 18:04:01,066 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 18:04:05,348 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 18:04:05,865 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 18:04:06,367 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 18:04:06,391 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 18:04:06,391 - __main__ - INFO - NetGuardian application started
+2025-10-23 18:04:12,187 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-23 18:04:12,193 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-23 18:04:12,684 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:04:13,143 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:04:14,042 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 18:04:14,175 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 18:04:14,252 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 18:04:17,118 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:04:17,559 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:04:17,735 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 18:04:17,783 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 18:04:19,209 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:04:19,762 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:04:19,972 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 18:04:20,113 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 18:04:26,590 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:04:27,135 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:04:27,341 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 18:04:27,547 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 18:04:35,123 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:04:35,538 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:04:35,765 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 18:04:35,799 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 18:04:37,145 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:04:37,603 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:04:37,845 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 18:04:38,066 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 18:04:42,531 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:04:42,950 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:04:43,156 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 18:04:43,292 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 18:04:43,427 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:04:43,821 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:04:44,021 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 18:04:44,130 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 18:07:16,332 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:07:16,780 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:07:17,712 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 18:07:18,072 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 18:07:26,469 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:07:27,125 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:07:27,361 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 18:07:27,600 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 18:07:27,795 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:07:28,266 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:07:28,508 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 18:07:28,711 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 18:07:40,873 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:07:41,481 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:07:42,548 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 18:07:42,818 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 18:07:53,057 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:07:53,613 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:07:54,524 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 18:07:54,728 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 18:08:15,916 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+2025-10-23 18:08:18,219 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:08:18,797 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:08:19,697 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-23 18:08:19,859 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-23 18:09:31,824 - src.auth.auth_manager - INFO - User logged out successfully: leitao
+2025-10-23 18:09:31,824 - src.database.db_manager - INFO - Database connection closed
+2025-10-23 18:09:31,884 - src.gui.main_window - INFO - Application closed successfully
+2025-10-23 18:12:23,271 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-23 18:12:23,642 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-23 18:12:24,145 - src.gui.main_window - INFO - Login window displayed
+2025-10-23 18:12:24,173 - src.gui.main_window - INFO - Main window initialized
+2025-10-23 18:12:24,173 - __main__ - INFO - NetGuardian application started
+2025-10-23 18:12:28,592 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-23 18:12:28,607 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-23 18:12:29,010 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:12:58,974 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-23 18:13:01,341 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:13:01,902 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:13:05,120 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 2/3): EOF during negotiation
+2025-10-23 18:13:11,568 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:13:16,481 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:13:16,995 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 3/3): Socket is closed
+2025-10-23 18:13:17,017 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-23 18:13:23,904 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:13:24,432 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:13:24,656 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): EOF during negotiation
+2025-10-23 18:13:26,909 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-23 18:13:27,349 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-23 18:13:27,571 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 2/3): EOF during negotiation
+2025-10-23 18:13:31,985 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:43:12,446 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-24 00:43:12,771 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-24 00:43:13,799 - src.gui.main_window - INFO - Login window displayed
+2025-10-24 00:43:13,837 - src.gui.main_window - INFO - Main window initialized
+2025-10-24 00:43:13,839 - __main__ - INFO - NetGuardian application started
+2025-10-24 00:43:21,298 - src.auth.auth_manager - INFO - User logged in successfully: oliv
+2025-10-24 00:43:21,300 - src.gui.main_window - INFO - Login successful for user: oliv
+2025-10-24 00:43:21,957 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:43:51,996 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-24 00:43:54,166 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:43:54,466 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:43:55,153 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:43:55,193 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:43:55,342 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-24 00:44:12,905 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:44:13,205 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:44:14,005 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:44:14,020 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:44:15,360 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:44:15,643 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:44:15,797 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:44:15,827 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:44:18,325 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:44:18,635 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:44:18,797 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:44:18,831 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:44:22,625 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:44:22,926 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:44:23,060 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:44:23,072 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:44:24,620 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:44:24,915 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:44:25,066 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:44:25,092 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:44:26,893 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:44:27,200 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:44:27,369 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:44:27,388 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:44:28,358 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:44:28,659 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:44:28,799 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:44:28,866 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:44:29,557 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:44:29,857 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:44:30,019 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:44:30,059 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:44:30,194 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:44:30,488 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:44:30,630 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:44:30,680 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:44:33,888 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:44:34,192 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:44:34,383 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:44:34,417 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:44:34,576 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:44:34,881 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:44:35,027 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:44:35,082 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:44:35,222 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:44:35,526 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:44:35,681 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:44:35,712 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:49:41,531 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:49:41,821 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:49:42,584 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:49:42,627 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:50:22,361 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:50:22,649 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:50:23,228 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:50:23,283 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 00:50:23,297 - src.file_manager.file_handler - INFO - File uploaded: 'outro.txt' (22.0 B) -> 05444d9d-efb4-4592-90a1-d0656cb94fcf.txt
+2025-10-24 00:50:24,894 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 00:50:25,188 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 00:50:25,336 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 00:50:25,364 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.

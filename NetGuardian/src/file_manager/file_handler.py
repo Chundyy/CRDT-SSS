@@ -10,6 +10,8 @@ import uuid
 from datetime import datetime
 from typing import Tuple, List, Dict, Any, Optional
 import logging
+import paramiko
+import time
 
 from src.utils.encryption import FileEncryption
 from config.settings import Config, UIConstants
@@ -63,6 +65,162 @@ class FileHandler:
             logger.error(f"Failed to create storage directory: {e}")
             raise
     
+    def _sftp_connect(self):
+        """
+        Create and return an active SFTP client connected to the CRDT server.
+        Caller must close both sftp and ssh when finished.
+        Returns: (ssh_client, sftp_client) or (None, None) on failure
+        """
+        host = Config.CRDT_SFTP_HOST
+        port = Config.CRDT_SFTP_PORT
+        user = Config.CRDT_SFTP_USER
+        password = Config.CRDT_SFTP_PASSWORD
+        key_path = Config.CRDT_SFTP_KEY_PATH
+        retries = getattr(Config, 'CRDT_SFTP_RETRIES', 3)
+        timeout = getattr(Config, 'CRDT_SFTP_TIMEOUT', 30)
+
+        for attempt in range(1, retries + 1):
+            ssh = None
+            try:
+                ssh = paramiko.SSHClient()
+                ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+                if key_path:
+                    pkey = paramiko.RSAKey.from_private_key_file(key_path)
+                    ssh.connect(hostname=host, port=port, username=user, pkey=pkey, timeout=timeout)
+                elif password:
+                    ssh.connect(hostname=host, port=port, username=user, password=password, timeout=timeout)
+                else:
+                    ssh.connect(hostname=host, port=port, username=user, timeout=timeout)
+
+                sftp = ssh.open_sftp()
+                return ssh, sftp
+
+            except Exception as e:
+                logger.error(f"SFTP connection failed (attempt {attempt}/{retries}): {e}")
+                try:
+                    if ssh:
+                        ssh.close()
+                except Exception:
+                    pass
+
+                if attempt < retries:
+                    # exponential backoff with jitter
+                    sleep_sec = min(10, 2 ** attempt) + (0.1 * attempt)
+                    time.sleep(sleep_sec)
+
+        return None, None
+
+    def _sftp_upload_to_crdt(self, local_path: str, remote_name: str) -> bool:
+        """Upload a local file to remote CRDT sync folder via SFTP."""
+        ssh, sftp = self._sftp_connect()
+        if not sftp:
+            return False
+        try:
+            remote_dir = Config.CRDT_SFTP_REMOTE_PATH
+            try:
+                # ensure remote directory exists (may raise)
+                sftp.chdir(remote_dir)
+            except IOError:
+                # try to create directories recursively
+                parts = remote_dir.strip('/').split('/')
+                cur = ''
+                for p in parts:
+                    cur = cur + '/' + p
+                    try:
+                        sftp.chdir(cur)
+                    except IOError:
+                        try:
+                            sftp.mkdir(cur)
+                        except Exception:
+                            pass
+                        try:
+                            sftp.chdir(cur)
+                        except Exception:
+                            pass
+
+            remote_path = remote_dir.rstrip('/') + '/' + remote_name
+
+            # Avoid overwriting by checking existence and adding suffix if needed
+            try:
+                sftp.stat(remote_path)
+                base, ext = os.path.splitext(remote_name)
+                counter = 1
+                while True:
+                    candidate = f"{base}_{counter}{ext}"
+                    candidate_remote = remote_dir.rstrip('/') + '/' + candidate
+                    try:
+                        sftp.stat(candidate_remote)
+                        counter += 1
+                    except IOError:
+                        remote_path = candidate_remote
+                        break
+            except IOError:
+                # does not exist, ok
+                pass
+
+            sftp.put(local_path, remote_path)
+            logger.debug(f"Uploaded file to remote CRDT folder via SFTP: {remote_path}")
+            return True
+        except Exception as e:
+            logger.error(f"Failed to upload file via SFTP: {e}")
+            return False
+        finally:
+            try:
+                sftp.close()
+            except Exception:
+                pass
+            try:
+                ssh.close()
+            except Exception:
+                pass
+
+    def _sftp_list_crdt_files(self) -> list:
+        """List files in remote CRDT folder via SFTP and return metadata list similar to get_user_files."""
+        ssh, sftp = self._sftp_connect()
+        if not sftp:
+            return []
+        try:
+            remote_dir = Config.CRDT_SFTP_REMOTE_PATH
+            try:
+                files = sftp.listdir_attr(remote_dir)
+            except IOError:
+                return []
+
+            result = []
+            for attr in files:
+                fname = attr.filename
+                if fname.startswith('.') or fname.endswith('.swp'):
+                    continue
+                size = attr.st_size
+                mtime = datetime.fromtimestamp(attr.st_mtime).strftime('%Y-%m-%d %H:%M:%S')
+                fpath = remote_dir.rstrip('/') + '/' + fname
+                file_ext = os.path.splitext(fname)[1].lower()
+                result.append({
+                    'id': None,
+                    'filename': fname,
+                    'original_name': fname,
+                    'file_size': size,
+                    'file_size_formatted': self._format_file_size(size),
+                    'file_hash': None,
+                    'upload_date': mtime,
+                    'file_extension': file_ext,
+                    'file_path': fpath
+                })
+            return result
+        except Exception as e:
+            logger.error(f"Failed to list remote CRDT files via SFTP: {e}")
+            return []
+        finally:
+            try:
+                sftp.close()
+            except Exception:
+                pass
+            try:
+                ssh.close()
+            except Exception:
+                pass
+
     def upload_file(self, file_path: str) -> Tuple[bool, str]:
         """
         Upload a file to user's storage with validation and duplicate detection.
@@ -131,34 +289,37 @@ class FileHandler:
             # Mirror to CRDT sync folder if configured (copy before optional encryption)
             try:
                 if hasattr(Config, 'SYNC_TO_CRDT') and Config.SYNC_TO_CRDT:
-                    crdt_base = Config.CRDT_SYNC_FOLDER
-                    # If CRDT sync folder already points to 'lww', use it; otherwise use crdt_base/lww
-                    if os.path.basename(os.path.normpath(crdt_base)) == 'lww':
-                        dest_dir = crdt_base
+                    # If configured to use SFTP, upload to remote CRDT folder
+                    if getattr(Config, 'CRDT_USE_SFTP', False):
+                        try:
+                            uploaded = self._sftp_upload_to_crdt(file_path, original_name)
+                            if not uploaded:
+                                logger.warning("SFTP mirror to CRDT failed")
+                        except Exception as crdt_err:
+                            logger.error(f"SFTP mirror failed: {crdt_err}")
                     else:
-                        dest_dir = os.path.join(crdt_base, 'lww')
-
-                    # Ensure destination exists; exist_ok avoids error if it already exists
-                    os.makedirs(dest_dir, exist_ok=True)
-
-                    # Use the original filename but avoid overwriting existing files
-                    crdt_dest = os.path.join(dest_dir, original_name)
-                    try:
-                        if os.path.exists(crdt_dest):
-                            base_name, ext = os.path.splitext(original_name)
-                            counter = 1
-                            while True:
-                                new_name = f"{base_name}_{counter}{ext}"
-                                candidate = os.path.join(dest_dir, new_name)
-                                if not os.path.exists(candidate):
-                                    crdt_dest = candidate
-                                    break
-                                counter += 1
-
-                        shutil.copy2(file_path, crdt_dest)
-                        logger.debug(f"Mirrored file to CRDT sync folder: {crdt_dest}")
-                    except Exception as crdt_err:
-                        logger.error(f"Failed to copy file to CRDT folder: {crdt_err}")
+                        crdt_base = Config.CRDT_SYNC_FOLDER
+                        if os.path.basename(os.path.normpath(crdt_base)) == 'lww':
+                            dest_dir = crdt_base
+                        else:
+                            dest_dir = os.path.join(crdt_base, 'lww')
+                        os.makedirs(dest_dir, exist_ok=True)
+                        crdt_dest = os.path.join(dest_dir, original_name)
+                        try:
+                            if os.path.exists(crdt_dest):
+                                base_name, ext = os.path.splitext(original_name)
+                                counter = 1
+                                while True:
+                                    new_name = f"{base_name}_{counter}{ext}"
+                                    candidate = os.path.join(dest_dir, new_name)
+                                    if not os.path.exists(candidate):
+                                        crdt_dest = candidate
+                                        break
+                                    counter += 1
+                            shutil.copy2(file_path, crdt_dest)
+                            logger.debug(f"Mirrored file to CRDT sync folder: {crdt_dest}")
+                        except Exception as crdt_err:
+                            logger.error(f"Failed to copy file to CRDT folder: {crdt_err}")
             except Exception:
                 # Non-fatal if mirroring fails
                 pass
@@ -328,47 +489,53 @@ class FileHandler:
     def get_user_files(self) -> List[Dict[str, Any]]:
         """
         Get all non-deleted files for the current user.
-        
+
         Returns:
             list: List of file dictionaries with metadata
         """
         try:
             # If configured to use CRDT sync folder as main source, enumerate files there
             if hasattr(Config, 'USE_CRDT_AS_MAIN') and Config.USE_CRDT_AS_MAIN:
-                crdt_base = Config.CRDT_SYNC_FOLDER
-                crdt_lww = os.path.join(crdt_base, 'lww')
-                scan_dir = crdt_lww if os.path.exists(crdt_lww) else crdt_base
-
-                if os.path.exists(scan_dir):
-                    result = []
-                    for root, dirs, files in os.walk(scan_dir):
-                        for fname in files:
-                            if fname.startswith('.') or fname.endswith('.swp'):
-                                continue
-                            fpath = os.path.join(root, fname)
-                            try:
-                                stat = os.stat(fpath)
-                                size = stat.st_size
-                                date_str = datetime.fromtimestamp(stat.st_mtime).strftime('%Y-%m-%d %H:%M:%S')
-                            except Exception:
-                                size = 0
-                                date_str = ''
-
-                            file_ext = os.path.splitext(fname)[1].lower()
-
-                            result.append({
-                                'id': None,
-                                'filename': fname,
-                                'original_name': fname,
-                                'file_size': size,
-                                'file_size_formatted': self._format_file_size(size),
-                                'file_hash': None,
-                                'upload_date': date_str,
-                                'file_extension': file_ext,
-                                'file_path': fpath
-                            })
-                    logger.debug(f"Retrieved {len(result)} files from CRDT sync folder: {scan_dir}")
+                # If using SFTP, list remote CRDT folder
+                if getattr(Config, 'CRDT_USE_SFTP', False):
+                    result = self._sftp_list_crdt_files()
+                    logger.debug(f"Retrieved {len(result)} files from remote CRDT folder via SFTP")
                     return result
+                else:
+                    crdt_base = Config.CRDT_SYNC_FOLDER
+                    crdt_lww = os.path.join(crdt_base, 'lww')
+                    scan_dir = crdt_lww if os.path.exists(crdt_lww) else crdt_base
+
+                    if os.path.exists(scan_dir):
+                        result = []
+                        for root, dirs, files in os.walk(scan_dir):
+                            for fname in files:
+                                if fname.startswith('.') or fname.endswith('.swp'):
+                                    continue
+                                fpath = os.path.join(root, fname)
+                                try:
+                                    stat = os.stat(fpath)
+                                    size = stat.st_size
+                                    date_str = datetime.fromtimestamp(stat.st_mtime).strftime('%Y-%m-%d %H:%M:%S')
+                                except Exception:
+                                    size = 0
+                                    date_str = ''
+
+                                file_ext = os.path.splitext(fname)[1].lower()
+
+                                result.append({
+                                    'id': None,
+                                    'filename': fname,
+                                    'original_name': fname,
+                                    'file_size': size,
+                                    'file_size_formatted': self._format_file_size(size),
+                                    'file_hash': None,
+                                    'upload_date': date_str,
+                                    'file_extension': file_ext,
+                                    'file_path': fpath
+                                })
+                        logger.debug(f"Retrieved {len(result)} files from CRDT sync folder: {scan_dir}")
+                        return result
                 # Fall through to DB if CRDT folder missing
 
             files = self.db_manager.execute_query(
@@ -565,3 +732,101 @@ class FileHandler:
         except Exception as e:
             logger.error(f"Cleanup failed: {e}")
             return 0
+
+    def _sftp_download_from_crdt(self, remote_path: str, local_path: str) -> bool:
+        """Download a file from remote CRDT folder via SFTP to local path."""
+        ssh, sftp = self._sftp_connect()
+        if not sftp:
+            return False
+        try:
+            # Ensure local dir exists
+            local_dir = os.path.dirname(local_path)
+            if local_dir and not os.path.exists(local_dir):
+                os.makedirs(local_dir, exist_ok=True)
+
+            sftp.get(remote_path, local_path)
+            logger.debug(f"Downloaded remote CRDT file via SFTP: {remote_path} -> {local_path}")
+            return True
+        except Exception as e:
+            logger.error(f"Failed to download file via SFTP: {e}")
+            return False
+        finally:
+            try:
+                sftp.close()
+            except Exception:
+                pass
+            try:
+                ssh.close()
+            except Exception:
+                pass
+
+    def _sftp_delete_from_crdt(self, remote_path: str) -> bool:
+        """Delete a file from remote CRDT folder via SFTP."""
+        ssh, sftp = self._sftp_connect()
+        if not sftp:
+            return False
+        try:
+            sftp.remove(remote_path)
+            logger.debug(f"Removed remote CRDT file via SFTP: {remote_path}")
+            return True
+        except IOError as e:
+            logger.warning(f"Remote file not found or cannot remove via SFTP: {e}")
+            return False
+        except Exception as e:
+            logger.error(f"Failed to delete remote file via SFTP: {e}")
+            return False
+        finally:
+            try:
+                sftp.close()
+            except Exception:
+                pass
+            try:
+                ssh.close()
+            except Exception:
+                pass
+
+    def fetch_remote_file(self, remote_path: str, local_dest: str) -> (bool, str):
+        """Fetch a file either from local filesystem or via SFTP depending on config.
+        Returns (success, error_message_or_empty).
+        """
+        try:
+            if getattr(Config, 'CRDT_USE_SFTP', False):
+                ok = self._sftp_download_from_crdt(remote_path, local_dest)
+                return (ok, "" if ok else "SFTP download failed")
+            else:
+                # local copy
+                try:
+                    # Ensure parent exists
+                    parent = os.path.dirname(local_dest)
+                    if parent and not os.path.exists(parent):
+                        os.makedirs(parent, exist_ok=True)
+                    shutil.copy2(remote_path, local_dest)
+                    return (True, "")
+                except Exception as e:
+                    logger.error(f"Local copy from CRDT path failed: {e}")
+                    return (False, str(e))
+        except Exception as e:
+            logger.error(f"fetch_remote_file failed: {e}")
+            return (False, str(e))
+
+    def remove_remote_file(self, remote_path: str) -> (bool, str):
+        """Remove a file either from local filesystem or via SFTP depending on config.
+        Returns (success, error_message_or_empty).
+        """
+        try:
+            if getattr(Config, 'CRDT_USE_SFTP', False):
+                ok = self._sftp_delete_from_crdt(remote_path)
+                return (ok, "" if ok else "SFTP delete failed")
+            else:
+                try:
+                    if os.path.exists(remote_path):
+                        os.remove(remote_path)
+                        return (True, "")
+                    else:
+                        return (False, "File not found on local filesystem")
+                except Exception as e:
+                    logger.error(f"Local delete from CRDT path failed: {e}")
+                    return (False, str(e))
+        except Exception as e:
+            logger.error(f"remove_remote_file failed: {e}")
+            return (False, str(e))

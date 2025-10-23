@@ -38,6 +38,19 @@ class Config:
     # When True, uploaded files are mirrored into the CRDT sync folder (so CRDT nodes can sync them)
     SYNC_TO_CRDT = os.getenv('SYNC_TO_CRDT', 'true').lower() == 'true'
 
+    # Remote SFTP settings for reading/writing CRDT sync folder on the server
+    # Set CRDT_USE_SFTP to true to always access the server path over SFTP instead of local filesystem
+    CRDT_USE_SFTP = os.getenv('CRDT_USE_SFTP', 'true').lower() == 'true'
+    CRDT_SFTP_HOST = os.getenv('CRDT_SFTP_HOST', '161.230.48.199')
+    CRDT_SFTP_PORT = int(os.getenv('CRDT_SFTP_PORT', '51230'))
+    CRDT_SFTP_USER = os.getenv('CRDT_SFTP_USER', 'root')
+    CRDT_SFTP_PASSWORD = os.getenv('CRDT_SFTP_PASSWORD', 'N3tGu@rdi@n123_')
+    CRDT_SFTP_KEY_PATH = os.getenv('CRDT_SFTP_KEY_PATH', '')
+    CRDT_SFTP_REMOTE_PATH = os.getenv('CRDT_SFTP_REMOTE_PATH', CRDT_SYNC_FOLDER)
+    # SFTP connection tuning
+    CRDT_SFTP_TIMEOUT = int(os.getenv('CRDT_SFTP_TIMEOUT', '30'))  # seconds
+    CRDT_SFTP_RETRIES = int(os.getenv('CRDT_SFTP_RETRIES', '3'))
+
     # GUI settings
     WINDOW_WIDTH = 1200
     WINDOW_HEIGHT = 800
@@ -174,3 +187,4 @@ class UIConstants:
     ERROR_REGISTER = "Registration failed"
     ERROR_NETWORK = "Network connection error"
     ERROR_FILE_SIZE = "File size exceeds maximum allowed"
+

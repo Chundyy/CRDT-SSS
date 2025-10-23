@@ -64,18 +64,11 @@ class AuthManager:
         """
         Verify a password against its stored hash.
         
-        Supports both bcrypt and SHA256 (legacy) hashing.
-        
-        Args:
-            password: Plain text password to verify
-            hashed_password: Stored password hash (string or bytes)
-            
-        Returns:
-            bool: True if password matches, False otherwise
+        Supports bcrypt, SHA256 (legacy) hashing and plaintext.
         """
         if not password or not hashed_password:
             return False
-            
+
         try:
             # Normalize to string
             if isinstance(hashed_password, bytes):
@@ -89,14 +82,21 @@ class AuthManager:
             if hp.startswith('$2'):
                 try:
                     return bcrypt.checkpw(password.encode('utf-8'), hp.encode('utf-8'))
+                except (ValueError, TypeError) as e:
+                    # Invalid salt or bad format — treat as non-match but do not crash
+                    logger.warning(f"Bcrypt verification error (invalid hash format): {e}")
+                    return False
                 except Exception as e:
-                    logger.error(f"Bcrypt verification failed: {e}")
+                    logger.warning(f"Bcrypt verification raised an unexpected error: {e}")
                     return False
 
             # SHA256 hex (64 hex chars)
             import re
             if re.fullmatch(r'[0-9a-fA-F]{64}', hp):
-                return hashlib.sha256(password.encode()).hexdigest() == hp.lower()
+                try:
+                    return hashlib.sha256(password.encode()).hexdigest() == hp.lower()
+                except Exception:
+                    return False
 
             # Not a known hash format -> assume plaintext stored in DB. Compare directly.
             try:
@@ -107,106 +107,108 @@ class AuthManager:
         except Exception as e:
             logger.error(f"Unexpected error during password verification: {e}")
             return False
-    
+
     def register_user(self, username: str, email: str, password: str) -> Tuple[bool, str]:
         """
-        Register a new user account.
-        
-        Args:
-            username: Desired username (3-50 characters)
-            email: User's email address
-            password: Plain text password (min 6 characters)
-            
-        Returns:
-            tuple: (success: bool, message: str)
+        Register a new user account using bcrypt for password hashing.
         """
         try:
             # Validate input presence
             if not all([username, email, password]):
                 return False, "All fields are required"
-            
+
             # Validate username length
             if not (ValidationRules.MIN_USERNAME_LENGTH <= len(username) <= ValidationRules.MAX_USERNAME_LENGTH):
                 return False, f"Username must be {ValidationRules.MIN_USERNAME_LENGTH}-{ValidationRules.MAX_USERNAME_LENGTH} characters"
-            
+
             # Validate password length
             if len(password) < ValidationRules.MIN_PASSWORD_LENGTH:
                 return False, f"Password must be at least {ValidationRules.MIN_PASSWORD_LENGTH} characters"
-            
+
             if len(password) > ValidationRules.MAX_PASSWORD_LENGTH:
                 return False, f"Password too long (max {ValidationRules.MAX_PASSWORD_LENGTH} characters)"
-            
+
             # Check if user already exists
             existing_user = self.db_manager.execute_query(
                 "SELECT id FROM users WHERE name = ? OR email = ?",
                 (username, email)
             )
-            
+
             if existing_user:
                 return False, "Username or email already exists"
-            
-            # Hash password and create user
+
+            # Hash password and create user using bcrypt
             password_hash = self.hash_password(password)
-            
+
             self.db_manager.execute_query(
                 """INSERT INTO users (name, email, password) 
                    VALUES (?, ?, ?)""",
                 (username, email, password_hash)
             )
-            
+
             logger.info(f"User registered successfully: {username}")
             return True, UIConstants.SUCCESS_REGISTER
-            
+
         except ValueError as e:
             logger.error(f"Validation error during registration: {e}")
             return False, str(e)
         except Exception as e:
             logger.error(f"User registration failed: {e}", exc_info=True)
             return False, UIConstants.ERROR_REGISTER
-    
+
     def login_user(self, username: str, password: str) -> Tuple[bool, str]:
         """
-        Authenticate user login credentials.
-        
-        Args:
-            username: User's username
-            password: Plain text password
-            
-        Returns:
-            tuple: (success: bool, message: str)
+        Authenticate user login credentials and migrate legacy/plaintext passwords to bcrypt on success.
         """
         if not username or not password:
             return False, UIConstants.ERROR_LOGIN
-            
+
         try:
             # Get user from database
             user = self.db_manager.execute_query(
                 "SELECT * FROM users WHERE name = ?",
                 (username,)
             )
-            
+
             if not user:
                 logger.warning(f"Login attempt for non-existent user: {username}")
                 return False, UIConstants.ERROR_LOGIN
-            
+
             user = user[0]
-            
+
             # Verify password
             stored_pw = user.get('password')
             if not self.verify_password(password, stored_pw):
                 logger.warning(f"Invalid password attempt for user: {username}")
                 return False, UIConstants.ERROR_LOGIN
-            
+
+            # If stored password was plaintext or legacy SHA256, migrate it to bcrypt
+            try:
+                sp = stored_pw if isinstance(stored_pw, str) else str(stored_pw)
+                if not sp.strip().startswith('$2'):
+                    try:
+                        new_hash = self.hash_password(password)
+                        # Update DB password to bcrypt hash
+                        self.db_manager.execute_query(
+                            "UPDATE users SET password = ? WHERE id = ?",
+                            (new_hash, user['id'])
+                        )
+                        logger.info(f"Migrated password to bcrypt for user: {username}")
+                    except Exception as e:
+                        logger.warning(f"Password migration to bcrypt failed for user {username}: {e}")
+            except Exception:
+                pass
+
             # Create session
             session_token = secrets.token_urlsafe(32)
             expires_at = datetime.now() + timedelta(days=ValidationRules.SESSION_EXPIRY_DAYS)
-            
+
             self.db_manager.execute_query(
                 """INSERT INTO sessions (user_id, session_token, expires_at) 
                    VALUES (?, ?, ?)""",
                 (user['id'], session_token, expires_at)
             )
-            
+
             # Update last login (skip if column doesn't exist)
             try:
                 self.db_manager.execute_query(
@@ -215,22 +217,6 @@ class AuthManager:
                 )
             except Exception:
                 pass  # Column might not exist in older schemas
-            
-            # After successful auth: if stored password was plaintext, upgrade to bcrypt
-            try:
-                sp = stored_pw or ''
-                if not (isinstance(sp, str) and sp.strip().startswith('$2')):
-                    # treat as plaintext or non-bcrypt: replace with bcrypt hash
-                    new_hash = self.hash_password(password)
-                    try:
-                        self.db_manager.execute_query(
-                            "UPDATE users SET password = ? WHERE id = ?",
-                            (new_hash, user['id'])
-                        )
-                    except Exception:
-                        logger.warning('Failed to upgrade stored plaintext password to bcrypt')
-            except Exception:
-                pass
 
             # Set current user and session
             # normalize current_user to include 'username' for compatibility
@@ -238,10 +224,10 @@ class AuthManager:
             u['username'] = u.get('name')
             self.current_user = u
             self.current_session = session_token
-            
+
             logger.info(f"User logged in successfully: {username}")
             return True, UIConstants.SUCCESS_LOGIN
-            
+
         except Exception as e:
             logger.error(f"Login failed for user {username}: {e}", exc_info=True)
             return False, UIConstants.ERROR_LOGIN

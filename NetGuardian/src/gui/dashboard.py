@@ -900,8 +900,13 @@ class Dashboard:
                 # If file comes from CRDT sync folder it may not have a DB id; copy directly from path
                 if not file_data.get('id') and file_data.get('file_path'):
                     try:
-                        shutil.copy2(file_data['file_path'], save_path)
-                        messagebox.showinfo("Success", "File downloaded successfully!")
+                        # Use FileHandler to fetch remote file (supports SFTP)
+                        ok, err = self.file_handler.fetch_remote_file(file_data['file_path'], save_path)
+                        if ok:
+                            messagebox.showinfo("Success", "File downloaded successfully!")
+                        else:
+                            logger.error(f"CRDT file fetch failed: {err}")
+                            messagebox.showerror("Error", f"Download failed: {err}")
                     except Exception as e:
                         logger.error(f"CRDT file copy failed: {e}")
                         messagebox.showerror("Error", f"Download failed: {e}")
@@ -931,11 +936,13 @@ class Dashboard:
             # If item is from CRDT folder (no DB id), remove file directly from disk
             if not file_data.get('id') and file_data.get('file_path'):
                 try:
-                    if os.path.exists(file_data['file_path']):
-                        os.remove(file_data['file_path'])
+                    ok, err = self.file_handler.remove_remote_file(file_data['file_path'])
+                    if ok:
                         messagebox.showinfo("Success", f"'{display_name}' deleted from CRDT folder.")
                     else:
-                        messagebox.showwarning("Not found", "File not found on disk")
+                        # If remote delete failed, inform user
+                        logger.error(f"Failed to delete CRDT file: {err}")
+                        messagebox.showerror("Error", f"Delete failed: {err}")
                     self.refresh_file_list()
                 except Exception as e:
                     logger.error(f"Failed to delete CRDT file: {e}")
