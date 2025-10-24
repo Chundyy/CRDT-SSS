@@ -2065,3 +2065,84 @@ HINT:  You will need to rewrite or cast the expression.
 2025-10-24 02:05:31,954 - src.auth.auth_manager - INFO - User logged out successfully: leitao
 2025-10-24 02:05:31,958 - src.database.db_manager - INFO - Database connection closed
 2025-10-24 02:05:32,088 - src.gui.main_window - INFO - Application closed successfully
+2025-10-24 15:31:23,454 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-24 15:31:23,755 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-24 15:31:24,438 - src.gui.main_window - INFO - Login window displayed
+2025-10-24 15:31:24,465 - src.gui.main_window - INFO - Main window initialized
+2025-10-24 15:31:24,466 - __main__ - INFO - NetGuardian application started
+2025-10-24 15:31:34,353 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-24 15:31:34,354 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-24 15:31:35,106 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:31:35,514 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:31:36,144 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:31:36,222 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:31:36,325 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-24 15:32:05,826 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:32:06,350 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:32:07,002 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:32:07,075 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 16:32:17,441 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-24 16:32:17,945 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-24 16:32:18,655 - src.gui.main_window - INFO - Login window displayed
+2025-10-24 16:32:18,715 - src.gui.main_window - INFO - Main window initialized
+2025-10-24 16:32:18,716 - __main__ - INFO - NetGuardian application started
+2025-10-24 16:32:21,728 - src.auth.auth_manager - INFO - User logged in successfully: admin
+2025-10-24 16:32:21,729 - src.gui.main_window - INFO - Login successful for user: admin
+2025-10-24 16:32:22,506 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 16:32:22,862 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 16:32:23,516 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 16:32:23,904 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 16:32:24,068 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-24 16:33:59,249 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 16:33:59,600 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 16:34:00,277 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 16:34:00,562 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 16:35:20,733 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 16:35:21,123 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 16:35:21,740 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 16:35:22,009 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 16:35:38,927 - src.auth.auth_manager - INFO - User logged out successfully: admin
+2025-10-24 16:35:38,928 - src.database.db_manager - INFO - Database connection closed
+2025-10-24 16:35:39,121 - src.gui.main_window - INFO - Application closed successfully
+2025-10-24 16:35:44,407 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-24 16:35:44,732 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-24 16:35:45,450 - src.gui.main_window - INFO - Login window displayed
+2025-10-24 16:35:45,530 - src.gui.main_window - INFO - Main window initialized
+2025-10-24 16:35:45,530 - __main__ - INFO - NetGuardian application started
+2025-10-24 16:35:58,765 - src.auth.auth_manager - INFO - User logged in successfully: oliv
+2025-10-24 16:35:58,766 - src.gui.main_window - INFO - Login successful for user: oliv
+2025-10-24 16:35:59,502 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 16:35:59,794 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 16:36:00,454 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 16:36:00,712 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 16:36:00,832 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-24 16:37:58,268 - src.auth.auth_manager - INFO - User logged out successfully: oliv
+2025-10-24 16:37:58,269 - src.database.db_manager - INFO - Database connection closed
+2025-10-24 16:37:58,471 - src.gui.main_window - INFO - Application closed successfully
+2025-10-24 16:38:01,326 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-24 16:38:01,686 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-24 16:38:02,323 - src.gui.main_window - INFO - Login window displayed
+2025-10-24 16:38:02,379 - src.gui.main_window - INFO - Main window initialized
+2025-10-24 16:38:02,379 - __main__ - INFO - NetGuardian application started
+2025-10-24 16:38:04,983 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-24 16:38:04,984 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-24 16:38:05,787 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 16:38:06,180 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 16:38:06,892 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 16:38:07,299 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 16:38:07,542 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-24 16:38:17,879 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 16:38:18,245 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 16:38:19,006 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 16:38:19,378 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 16:38:20,179 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 16:38:20,529 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 16:38:20,698 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 16:38:21,054 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 16:38:21,769 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 16:38:22,174 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 16:38:22,434 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 16:38:22,810 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 16:39:28,725 - src.auth.auth_manager - INFO - User logged out successfully: leitao
+2025-10-24 16:39:28,726 - src.database.db_manager - INFO - Database connection closed
+2025-10-24 16:39:28,907 - src.gui.main_window - INFO - Application closed successfully

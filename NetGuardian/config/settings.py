@@ -51,6 +51,11 @@ class Config:
     CRDT_SFTP_TIMEOUT = int(os.getenv('CRDT_SFTP_TIMEOUT', '30'))  # seconds
     CRDT_SFTP_RETRIES = int(os.getenv('CRDT_SFTP_RETRIES', '3'))
 
+    # NEW: Explicit CRDT g_counter remote path
+    # The file used by the CRDT g_counter is always at /opt/crdt-cluster/sync_folder/g_counter/counter.txt
+    # Exposed as CRDT_G_COUNTER_REMOTE_PATH and can be overridden via environment variable if needed.
+    CRDT_G_COUNTER_REMOTE_PATH = os.getenv('CRDT_G_COUNTER_REMOTE_PATH', '/opt/crdt-cluster/sync_folder/g_counter/counter.txt')
+
     # GUI settings
     WINDOW_WIDTH = 1200
     WINDOW_HEIGHT = 800
@@ -187,4 +192,3 @@ class UIConstants:
     ERROR_REGISTER = "Registration failed"
     ERROR_NETWORK = "Network connection error"
     ERROR_FILE_SIZE = "File size exceeds maximum allowed"
-
