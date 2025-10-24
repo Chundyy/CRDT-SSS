@@ -72,7 +72,11 @@ class FileHandler:
         Returns: (ssh_client, sftp_client) or (None, None) on failure
         """
         host = Config.CRDT_SFTP_HOST
-        port = Config.CRDT_SFTP_PORT
+        # Prefer runtime-set port (db_manager.crdt_port) set at login based on user's group
+        try:
+            port = int(getattr(self.db_manager, 'crdt_port', Config.CRDT_SFTP_PORT))
+        except Exception:
+            port = Config.CRDT_SFTP_PORT
         user = Config.CRDT_SFTP_USER
         password = Config.CRDT_SFTP_PASSWORD
         key_path = Config.CRDT_SFTP_KEY_PATH

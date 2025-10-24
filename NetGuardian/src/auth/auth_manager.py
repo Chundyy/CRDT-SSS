@@ -9,8 +9,30 @@ import secrets
 from typing import Tuple, Optional, Dict, Any
 from datetime import datetime, timedelta
 import logging
+import importlib
 
-from config.settings import ValidationRules, UIConstants
+# Robust dynamic import for settings module: try package paths in order
+_settings_module = None
+for _mod_name in ('NetGuardian.config.settings', 'config.settings'):
+    try:
+        _settings_module = importlib.import_module(_mod_name)
+        break
+    except Exception:
+        _settings_module = None
+
+if _settings_module is None:
+    # Try a fallback relative import path
+    try:
+        _settings_module = importlib.import_module('config.settings')
+    except Exception:
+        _settings_module = None
+
+if _settings_module is None:
+    raise ImportError('Could not import config.settings - ensure PYTHONPATH includes project root')
+
+ValidationRules = _settings_module.ValidationRules
+UIConstants = _settings_module.UIConstants
+Config = _settings_module.Config
 
 logger = logging.getLogger(__name__)
 
@@ -182,6 +204,38 @@ class AuthManager:
                 logger.warning(f"Invalid password attempt for user: {username}")
                 return False, UIConstants.ERROR_LOGIN
 
+            # Determine CRDT SFTP port based on user's group (runtime setting)
+            try:
+                port = getattr(Config, 'CRDT_SFTP_PORT', 51230)
+                gid = user.get('group_id')
+                if gid == 2:
+                    port = 51230
+                elif gid == 3:
+                    port = 51231
+                else:
+                    # fallback: try to read group name from DB
+                    try:
+                        grp = self.db_manager.execute_query("SELECT name FROM groups WHERE id = ?", (gid,))
+                        if grp:
+                            gname = (grp[0].get('name') or '').upper()
+                            if gname == 'PORTO':
+                                port = 51230
+                            elif gname == 'LISBOA':
+                                port = 51231
+                    except Exception:
+                        pass
+                # store runtime port on db_manager for FileHandler to use
+                try:
+                    self.db_manager.crdt_port = int(port)
+                except Exception:
+                    self.db_manager.crdt_port = getattr(Config, 'CRDT_SFTP_PORT', 51230)
+            except Exception:
+                # ignore port mapping errors and use default
+                try:
+                    self.db_manager.crdt_port = getattr(Config, 'CRDT_SFTP_PORT', 51230)
+                except Exception:
+                    self.db_manager.crdt_port = 51230
+
             # If stored password was plaintext or legacy SHA256, migrate it to bcrypt
             try:
                 sp = stored_pw if isinstance(stored_pw, str) else str(stored_pw)
@@ -305,6 +359,36 @@ class AuthManager:
                     'email': session.get('email')
                 }
                 self.current_session = session_token
+
+                # Restore runtime CRDT port based on user's group (mirror login logic)
+                try:
+                    gid = session.get('group_id') or session.get('groupid') or None
+                    port = getattr(Config, 'CRDT_SFTP_PORT', 51230)
+                    if gid == 2:
+                        port = 51230
+                    elif gid == 3:
+                        port = 51231
+                    else:
+                        try:
+                            grp = self.db_manager.execute_query("SELECT name FROM groups WHERE id = ?", (gid,))
+                            if grp:
+                                gname = (grp[0].get('name') or '').upper()
+                                if gname == 'PORTO':
+                                    port = 51230
+                                elif gname == 'LISBOA':
+                                    port = 51231
+                        except Exception:
+                            pass
+                    try:
+                        self.db_manager.crdt_port = int(port)
+                    except Exception:
+                        self.db_manager.crdt_port = getattr(Config, 'CRDT_SFTP_PORT', 51230)
+                except Exception:
+                    try:
+                        self.db_manager.crdt_port = getattr(Config, 'CRDT_SFTP_PORT', 51230)
+                    except Exception:
+                        self.db_manager.crdt_port = 51230
+
                 logger.info(f"Session restored for user: {self.current_user['username']}")
                 return True
             
