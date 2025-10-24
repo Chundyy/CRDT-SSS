@@ -7,6 +7,9 @@ from datetime import datetime, timezone
 from ..base_crdt import BaseCRDT
 import os
 import base64
+import json
+import tempfile
+from typing import Dict
 
 
 class LWWFileSync(BaseCRDT):
@@ -15,6 +18,12 @@ class LWWFileSync(BaseCRDT):
     def __init__(self, node_id, sync_folder):
         super().__init__(node_id, sync_folder)
         self.file_timestamps = {}  # rel_path -> iso timestamp
+        self._state_file_name = '.lww_state.json'
+        # load persisted tombstones/state if present
+        try:
+            self.load_state_file()
+        except Exception:
+            pass
         self.update_local_state()
 
     def _now_iso(self):
@@ -27,14 +36,77 @@ class LWWFileSync(BaseCRDT):
         return sync_path / 'lww'
 
     def update_local_state(self):
-        """Scan sync folder and update file_timestamps with latest mtime."""
+        """Scan sync folder and update file_timestamps with latest mtime.
+
+        Preserve existing tombstones so deletions propagate. For current files update mtimes if newer.
+        Record a tombstone (deletion timestamp) when a previously tracked file is missing.
+        """
         scan_path = self.get_sync_path()
-        self.file_timestamps = {}
+        # collect current files and mtimes
+        current_files: Dict[str, str] = {}
         for file_path in scan_path.glob('**/*'):
             if file_path.is_file() and not file_path.name.startswith('.') and not file_path.name.endswith('.swp'):
                 rel_path = str(file_path.relative_to(scan_path))
                 ts = datetime.fromtimestamp(file_path.stat().st_mtime, timezone.utc).isoformat().replace('+00:00', 'Z')
-                self.file_timestamps[rel_path] = ts
+                current_files[rel_path] = ts
+
+        # initialize from current files if no prior state
+        if not self.file_timestamps:
+            for rel, ts in current_files.items():
+                self.file_timestamps[rel] = ts
+            try:
+                self.save_state_file()
+            except Exception:
+                pass
+            return
+
+        # update entries for current files if newer
+        for rel, ts in current_files.items():
+            existing = self.file_timestamps.get(rel)
+            if existing is None or ts > existing:
+                self.file_timestamps[rel] = ts
+
+        # mark tombstones for previously tracked files that are now missing
+        now_ts = self._now_iso()
+        for rel in list(self.file_timestamps.keys()):
+            file_path = scan_path / rel
+            if not file_path.exists():
+                existing = self.file_timestamps.get(rel)
+                if existing is None or now_ts > existing:
+                    self.file_timestamps[rel] = now_ts
+
+        try:
+            self.save_state_file()
+        except Exception:
+            pass
+
+    def state_file_path(self) -> Path:
+        return self.get_sync_path() / self._state_file_name
+
+    def load_state_file(self):
+        sf = self.state_file_path()
+        if sf.exists():
+            try:
+                with open(sf, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                self.file_timestamps = {str(k): str(v) for k, v in data.items()}
+            except Exception as e:
+                self.logger.warning(f"Failed to load LWW state file: {e}")
+
+    def save_state_file(self):
+        sf = self.state_file_path()
+        sf.parent.mkdir(parents=True, exist_ok=True)
+        fd, tmp_path = tempfile.mkstemp(dir=str(sf.parent))
+        try:
+            with os.fdopen(fd, 'w', encoding='utf-8') as f:
+                json.dump(self.file_timestamps, f, ensure_ascii=False, indent=2)
+            os.replace(tmp_path, str(sf))
+        finally:
+            if os.path.exists(tmp_path):
+                try:
+                    os.remove(tmp_path)
+                except Exception:
+                    pass
 
     def merge(self, other_state):
         """Merge state from another node. State: {rel_path: (timestamp, content)}"""
@@ -61,7 +133,36 @@ class LWWFileSync(BaseCRDT):
                     self.file_timestamps[rel_path] = remote_ts
                     self.logger.info(f"LWW REMOVE: {rel_path} @ {remote_ts}")
                 changed = True
+        if changed:
+            try:
+                self.save_state_file()
+            except Exception:
+                pass
         return changed
+
+    def delete_file(self, rel_path: str) -> bool:
+        """Record local deletion (tombstone) and remove local file if present."""
+        try:
+            scan_path = self.get_sync_path()
+            file_path = scan_path / rel_path
+            try:
+                if file_path.exists():
+                    file_path.unlink()
+            except Exception as e:
+                self.logger.warning(f"Failed to remove local file during delete_file: {rel_path} - {e}")
+            ts = self._now_iso()
+            existing = self.file_timestamps.get(rel_path)
+            if existing is None or ts > existing:
+                self.file_timestamps[rel_path] = ts
+                try:
+                    self.save_state_file()
+                except Exception:
+                    pass
+                self.logger.info(f"LWW LOCAL REMOVE: {rel_path} @ {ts}")
+            return True
+        except Exception as e:
+            self.logger.error(f"delete_file failed for {rel_path}: {e}")
+            return False
 
     def to_dict(self):
         """Export state as {rel_path: (timestamp, content)}"""
