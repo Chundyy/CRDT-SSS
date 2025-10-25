@@ -24,6 +24,19 @@ export function DownloadContent({ user }: DownloadContentProps) {
     router.refresh()
   }
 
+  // Client-side download handler — builds the URL at runtime so static analyzers don't try to resolve the file at build time.
+  const handleDownload = (e: any) => {
+    e.preventDefault()
+    if (typeof window === "undefined") return
+    const url = "aa.txt" // public/aa.txt — replace with your installer name when ready
+    const a = document.createElement("a")
+    a.href = url
+    a.download = "aa.txt"
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+  }
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       {/* Header */}
@@ -61,7 +74,7 @@ export function DownloadContent({ user }: DownloadContentProps) {
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="bg-zinc-800 rounded-lg p-6 space-y-4">
-              <h3 className="text-lg font-semibold text-white">CloudApp Desktop Client</h3>
+              <h3 className="text-lg font-semibold text-white">NetGuardian Desktop Client</h3>
               <p className="text-zinc-400 text-sm">
                 Access your files from anywhere with our desktop application. Sync your data seamlessly across all your
                 devices.
@@ -83,10 +96,15 @@ export function DownloadContent({ user }: DownloadContentProps) {
             </div>
 
             <div className="grid-cols-1 md:grid-cols-3 gap-4">
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+              <button
+                type="button"
+                onClick={handleDownload}
+                aria-label="Download for Windows"
+                className="w-full inline-flex items-center justify-center py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded"
+              >
                 <Download className="w-4 h-4 mr-2" />
                 Windows
-              </Button>
+              </button>
             </div>
 
             <div className="text-center text-sm text-zinc-500">Version 2.4.1 • Released October 2025</div>

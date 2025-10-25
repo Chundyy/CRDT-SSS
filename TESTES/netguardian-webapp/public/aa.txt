@@ -1,0 +1,5 @@
+This is a placeholder file for the Windows download link.
+
+Replace this file with your actual installer (for example, MyApp-setup.exe) or update the anchor href to point to the correct file.
+
+If you want to serve a binary installer, put the .exe here (or use a backend route to stream it).

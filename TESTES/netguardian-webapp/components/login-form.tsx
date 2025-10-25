@@ -38,7 +38,7 @@ export function LoginForm() {
         </div>
         <div className="space-y-2 text-center">
           <CardTitle className="text-2xl font-semibold text-white">Welcome back</CardTitle>
-          <CardDescription className="text-zinc-400">Sign in to your NetGuardian dashboard</CardDescription>
+          <CardDescription className="text-zinc-400">Sign in to your NetGuardian</CardDescription>
         </div>
       </CardHeader>
       <CardContent>

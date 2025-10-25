@@ -58,11 +58,11 @@ export function DashboardHome({ user }: DashboardHomeProps) {
     <div className="p-8">
       {/* Header */}
       <div className="mb-8">
-        <p className="text-zinc-400 text-sm mb-2">Monitor your cloud infrastructure and application performance</p>
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold">Dashboard</h1>
+          <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
           <div className="text-sm text-zinc-400">{user.email}</div>
         </div>
+        <p className="text-zinc-400 text-sm">Monitor your cloud infrastructure and application performance</p>
       </div>
 
       {/* Stats Grid */}
