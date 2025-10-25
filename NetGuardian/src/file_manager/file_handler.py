@@ -98,6 +98,11 @@ class FileHandler:
                     ssh.connect(hostname=host, port=port, username=user, timeout=timeout)
 
                 sftp = ssh.open_sftp()
+                # Increment the server-side counter file via SFTP (best-effort).
+                try:
+                    self._increment_crdt_counter_remote(sftp)
+                except Exception as e:
+                    logger.debug(f'Failed to increment remote CRDT counter (non-fatal): {e}')
                 return ssh, sftp
 
             except Exception as e:
@@ -865,3 +870,77 @@ class FileHandler:
         except Exception as e:
             logger.error(f"remove_remote_file failed: {e}")
             return (False, str(e))
+
+    def _increment_crdt_counter_remote(self, sftp) -> int:
+        """Read and increment the integer stored in the remote CRDT g_counter file.
+
+        This function uses only Config.CRDT_G_COUNTER_REMOTE_PATH (must be defined)
+        which should point to the remote file '/opt/crdt-cluster/sync_folder/g_counter/counter.txt'.
+        It writes to a temporary remote file and renames it for atomicity.
+
+        Returns the new value on success, or -1 on failure.
+        """
+        # Use the explicit config constant only (no fallback)
+        remote_path = Config.CRDT_G_COUNTER_REMOTE_PATH
+        try:
+            # Read current value (best-effort)
+            current = 0
+            try:
+                # read in binary to avoid str/bytes ambiguity across paramiko versions
+                with sftp.open(remote_path, 'rb') as rf:
+                    data = rf.read()
+                    if data:
+                        try:
+                            txt = data.decode('utf-8').strip()
+                            if txt:
+                                current = int(txt)
+                        except Exception:
+                            current = 0
+            except IOError:
+                # file does not exist remotely; we'll create it
+                current = 0
+            except Exception as e:
+                logger.debug(f'Could not read remote counter file: {e}')
+                current = 0
+
+            new_val = current + 1
+
+            # Write to temp remote file then rename for atomic update
+            tmp_remote = remote_path + '.tmp'
+            try:
+                # write bytes explicitly
+                with sftp.open(tmp_remote, 'wb') as wf:
+                    wf.write(str(new_val).encode('utf-8'))
+                # Try a direct rename; if it fails because the target exists, remove and retry
+                try:
+                    sftp.rename(tmp_remote, remote_path)
+                except Exception:
+                    try:
+                        sftp.remove(remote_path)
+                    except Exception:
+                        pass
+                    try:
+                        sftp.rename(tmp_remote, remote_path)
+                    except Exception as e:
+                        logger.warning(f'Failed to move temp counter file into place: {e}')
+                        try:
+                            sftp.remove(tmp_remote)
+                        except Exception:
+                            pass
+                        return -1
+
+                logger.debug(f'Remote CRDT g_counter incremented: {current} -> {new_val} ({remote_path})')
+                return new_val
+            except Exception as e:
+                logger.warning(f'Failed to write remote CRDT counter file: {e}')
+                try:
+                    # attempt to cleanup tmp
+                    sftp.remove(tmp_remote)
+                except Exception:
+                    pass
+                return -1
+
+        except Exception as e:
+            logger.warning(f'Unexpected error incrementing remote CRDT counter: {e}')
+            return -1
+
