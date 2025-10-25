@@ -943,4 +943,3 @@ class FileHandler:
         except Exception as e:
             logger.warning(f'Unexpected error incrementing remote CRDT counter: {e}')
             return -1
-
