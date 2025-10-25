@@ -1,121 +1,109 @@
 # CRDT-SSS
 
-## Objetivo do Projeto
+## Project Overview
 
-O projeto CRDT-SSS (Conflict-free Replicated Data Types - Secure Synchronization System) tem como objetivo implementar e demonstrar mecanismos de sincronização de dados distribuídos utilizando CRDTs, garantindo consistência eventual e tolerância a falhas em ambientes distribuídos. O sistema também explora aspectos de segurança, gestão de conflitos e integração com aplicações reais.
+CRDT-SSS (Conflict-free Replicated Data Types - Secure Synchronization System) demonstrates distributed data synchronization using CRDTs to achieve eventual consistency and fault tolerance. The project also explores security, conflict resolution, and integration with client applications.
 
-## Estrutura do Projeto
+## Project Structure
 
-- **crdt-cluster/**: Implementação dos serviços de CRDT, scripts de gestão, configuração de logs e exemplos de dados.
-  - `bin/`: Scripts e serviços principais (ex: `crdt_service.py`).
-  - `config/`: Configurações de logging.
-  - `data/`: Exemplos de dados utilizados.
-  - `logs/`: Logs de execução.
-  - `src/`: Implementação dos tipos CRDT básicos (G-Counter, G-Set, LWW, Two-Phase Set).
-  - `sync_folder/`: Exemplos de sincronização para cada tipo de CRDT.
+- crdt-cluster/: CRDT service implementation, management scripts, configuration and sample data.
+  - bin/: Main service scripts (e.g. crdt_service.py).
+  - config/: Logging and configuration files.
+  - data/: Sample data.
+  - logs/: Log files.
+  - src/: CRDT implementations (G-Counter, G-Set, LWW, Two-Phase Set).
+  - sync_folder/: Example sync folders for each CRDT type.
 
-- **NetGuardian/**: Aplicação principal que utiliza CRDTs para sincronização segura de arquivos e dados.
-  - `src/`: Código-fonte da aplicação, incluindo módulos de autenticação, CRDT, banco de dados, gerenciamento de arquivos, GUI e utilitários.
-  - `config/`: Configurações da aplicação.
-  - `main.py`: Ponto de entrada da aplicação.
-  - `requirements.txt`: Dependências do projeto.
-  - `README.md`, `INSTALL.md`, `QUICKSTART.md`: Documentação adicional.
+- NetGuardian/: Desktop application that uses CRDTs for secure file and data synchronization.
+  - src/: Application source code (auth, CRDT client, DB, file management, GUI, utilities).
+  - config/: Application configuration.
+  - main.py: Application entry point.
+  - requirements.txt: Python dependencies.
 
-- **TESTES/**: Testes e exemplos de integração, incluindo uma aplicação web (cloud-webapp) para demonstração dos CRDTs em ambiente web.
+- TESTS/: Integration tests and examples, including a web demo application.
 
-- **Vulnerabilidades/**: Documentação sobre vulnerabilidades e segurança relacionadas ao projeto.
+- Vulnerabilities/: Security documentation and notes.
 
-## Funcionalidades Principais
+## Main Features
 
-- Implementação de múltiplos tipos de CRDT (G-Counter, G-Set, LWW, Two-Phase Set)
-- Sincronização distribuída de dados
-- Gerenciamento de conflitos de forma automática
-- Interface gráfica para demonstração e testes (NetGuardian)
-- Scripts para deploy e gestão dos serviços
-- Exemplos de integração com aplicações web
-- Documentação sobre segurança e vulnerabilidades
+- Multiple CRDT types implemented (G-Counter, G-Set, LWW, Two-Phase Set)
+- Distributed synchronization and automatic conflict resolution
+- Desktop GUI for testing and demonstration (NetGuardian)
+- Scripts for deployment and service management
+- Documentation about security and known issues
 
-## Como Executar
+## How to Run
 
-1. **Pré-requisitos:**
-   - Python 3.10+
-   - Instalar dependências: `pip install -r NetGuardian/requirements.txt`
+1. Prerequisites
+   - Python 3.10 or newer
+   - PostgreSQL server for NetGuardian (SQLite is not supported for production)
 
-2. **Executar aplicação principal:**
-   - Navegue até a pasta `NetGuardian/`
-   - Execute: `python main.py`
+2. Install dependencies
+   - python -m venv .venv
+   - On Windows: .venv\Scripts\activate
+   - pip install -r NetGuardian/requirements.txt
 
-3. **Executar serviços CRDT:**
-   - Navegue até `crdt-cluster/bin/`
-   - Execute: `python crdt_service.py`
+3. Run the desktop application
+   - cd NetGuardian
+   - python main.py
 
-4. **Testes Web (Opcional):**
-   - Navegue até `TESTES/cloud-webapp/`
-   - Instale dependências: `pnpm install` ou `npm install`
-   - Execute: `pnpm dev` ou `npm run dev`
+4. Run CRDT services
+   - cd crdt-cluster/bin
+   - python crdt_service.py
 
-## Documentação
+5. Optional web demo
+   - cd TESTES/cloud-webapp
+   - Install and run with pnpm or npm (see project README in the webapp folder)
 
-- Consulte os arquivos `README.md`, `INSTALL.md` e `QUICKSTART.md` em cada diretório para instruções detalhadas.
-- Veja exemplos de uso e diagramas em `NetGuardian/use_case_diagram.md`.
+## Deployment & Configuration
 
-## Participantes do Projeto
+These notes explain how to run NetGuardian with a remote crdt-cluster in real environments.
 
-| Nome                | Email                |
-|---------------------|----------------------|
-|Gonçalo Leitao          |                      |
-|                     |                      |
-|                     |                      |
+Database
+- NetGuardian requires PostgreSQL. Configure DB connection parameters either with environment variables (DATABASE_URL or DB_HOST/DB_PORT/DB_USER/DB_PASSWORD/DB_NAME) or in the application's settings file.
+- Ensure PostgreSQL accepts connections from the client host and credentials are correct.
 
-(Preencha com os nomes e contatos dos participantes)
+CRDT cluster sync folder
+- The authoritative files are stored in the CRDT cluster sync folder, commonly at: /opt/crdt-cluster/sync_folder/lww on the server nodes.
+- NetGuardian mirrors uploads to the CRDT cluster using SFTP to the node that corresponds to the user's group.
 
-## Deployment & Configuration (important notes)
+SFTP / Node port mapping (per-group)
+- Map groups to CRDT node SFTP ports via environment variables or settings. Example options:
+  - GROUP_CRDT_PORTS = {"PORTO": 51230, "LISBOA": 51234}
+  - Or individual env vars: CRDT_SFTP_PORT_PORTO=51230 and CRDT_SFTP_PORT_LISBOA=51234
+- At login the application determines the user's group and uses the corresponding port for SFTP.
+- Convention used in this project: group_id == 2 -> PORTO, group_id == 3 -> LISBOA
 
-This section collects operational details to run NetGuardian with the crdt-cluster in real environments.
+Authentication and passwords
+- Initial database records may store plaintext passwords. For production, enable bcrypt hashing and migrate users to hashed passwords.
+- The authentication module can be configured temporarily to accept plaintext passwords during migration.
 
-1) Database
-- NetGuardian must connect to a PostgreSQL server (no SQLite). Configure DB connection in `NetGuardian/src/database` settings or via environment variables.
-- Ensure PostgreSQL is reachable from the client and that credentials are correct.
+File handling behavior
+- Uploads should place files into the CRDT sync folder on the corresponding node via SFTP. Re-uploads must overwrite existing files (use the same logical ID/filename) rather than creating duplicates.
+- Deletions must be mirrored using tombstones so deleted files are not reintroduced by other nodes. The LWW (Last-Write-Wins) implementation must correctly propagate deletions.
+- All file types (binary and text) are supported — SFTP transfers are binary-safe when using paramiko to transfer bytes.
 
-2) CRDT cluster sync folder
-- The authoritative files are stored in the CRDT cluster sync folder, by default: `/opt/crdt-cluster/sync_folder/lww` on the server nodes.
-- NetGuardian mirrors uploads to the CRDT cluster via SFTP to the node corresponding to the user's group.
-
-3) SFTP / Node port mapping (per-group)
-- Ports used to reach CRDT nodes must be configurable by environment or settings. Example config keys supported:
-  - GROUP_CRDT_PORTS = {'PORTO': 51230, 'LISBOA': 51234}
-  - or individual env vars: CRDT_SFTP_PORT_PORTO=51230, CRDT_SFTP_PORT_LISBOA=51234
-- At login the app determines the group of the user (e.g. PORTO or LISBOA) and selects the corresponding port to open the SFTP connection.
-- Example mapping used by the project: group_id == 2 -> PORTO, group_id == 3 -> LISBOA.
-
-4) Authentication and passwords
-- Passwords in the initial DB may be plaintext. The app now supports bcrypt hashing for production — configure to use bcrypt and migrate users by hashing passwords.
-- If your DB currently stores plaintext, the authentication module can be configured to accept plaintext verification temporarily, but enable bcrypt for real deployments.
-
-5) File handling behavior
-- Uploads should write files into the CRDT sync folder on the node (SFTP). Re-uploads should overwrite the existing file (same logical id) instead of creating duplicates. If you see duplicates, check the local filename -> remote mapping (UUIDs) and the LWW tombstone logic.
-- Deletion must be mirrored (tombstones) so other nodes do not reintroduce deleted files later; configure the LWW implementation to propagate deletions correctly.
-- Any file type (binary or text) is supported. Ensure SFTP transfer uses binary mode (paramiko handles this automatically when transferring bytes).
-
-6) Building and packaging
+Building and packaging
 - Install dependencies: pip install -r NetGuardian/requirements.txt
-- Example single-file build with PyInstaller (may require hooks for cryptography/paramiko/customtkinter):
+- Example PyInstaller build (single-file). Note: PyInstaller may require hooks for cryptography, paramiko and customtkinter:
   - pyinstaller --onefile NetGuardian/main.py
-- On Windows you may need to bundle libmagic or remove python-magic if not available.
+- On Windows, bundling python-magic may require native libmagic binaries; if unavailable, remove python-magic from requirements.
 
-7) Troubleshooting
-- SFTP timeouts (connection timed out / WinError 10060): check network routing, firewall rules, and that the SSH daemon is listening on the target port (5131/5132/51230/51234 etc).
-- DB connection refused: confirm PostgreSQL is listening on network interfaces and allow remote connections (postgresql.conf and pg_hba.conf).
-- If files you delete reappear later: check the LWW logic and that deletions are propagated as tombstones; ensure clocks/timestamps are consistent across nodes.
-- If uploads create new files instead of overwriting: verify the app uses consistent logical IDs (UUIDs) for files and uses the same filename when re-uploading.
+Troubleshooting
+- SFTP timeouts (WinError 10060 / connection timed out): verify network, firewall, and that SSH daemon on the server listens on the configured port.
+- Database connection refused: check PostgreSQL's listen_addresses and pg_hba.conf to allow remote connections, and confirm port and credentials.
+- Deleted files reappearing: ensure LWW deletions are sent as tombstones and that timestamps/clock synchronization across nodes is consistent.
+- Re-uploads creating new files: verify the app uses a stable logical ID (UUID) for each file and reuses it when overwriting.
 
-8) Environment variables recommended
+Recommended environment variables
 - DATABASE_URL (or DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME)
 - GROUP_CRDT_PORTS (JSON) or CRDT_SFTP_PORT_PORTO and CRDT_SFTP_PORT_LISBOA
 - LOG_LEVEL
 
-If you want, I can update the code to: make CRDT ports read from environment/settings, implement bcrypt password hashing and migration, fix SFTP overwrite behaviour, and correct LWW delete propagation. Tell me which of these to do next.
+## Contributing
 
----
+Please follow the CONTRIBUTING.md guidelines in the NetGuardian folder for development workflows and code style.
 
-Este projeto é distribuído sob a licença MIT. Consulte o arquivo LICENSE para mais informações.
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
