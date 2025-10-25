@@ -9,6 +9,7 @@ import os
 import base64
 import json
 import tempfile
+import time
 from typing import Dict
 
 
@@ -46,7 +47,8 @@ class LWWFileSync(BaseCRDT):
         current_files: Dict[str, str] = {}
         for file_path in scan_path.glob('**/*'):
             if file_path.is_file() and not file_path.name.startswith('.') and not file_path.name.endswith('.swp'):
-                rel_path = str(file_path.relative_to(scan_path))
+                # normalize to posix-style relative path to avoid backslash issues across platforms
+                rel_path = file_path.relative_to(scan_path).as_posix()
                 ts = datetime.fromtimestamp(file_path.stat().st_mtime, timezone.utc).isoformat().replace('+00:00', 'Z')
                 current_files[rel_path] = ts
 
@@ -122,7 +124,18 @@ class LWWFileSync(BaseCRDT):
                 if remote_content is not None:
                     # Decode base64 string to bytes if needed
                     if isinstance(remote_content, str):
-                        remote_content = base64.b64decode(remote_content)
+                        try:
+                            remote_content = base64.b64decode(remote_content)
+                        except Exception as e:
+                            self.logger.error(f"Failed to decode base64 content for {rel_path}: {e}")
+                            # skip this entry
+                            continue
+                    elif isinstance(remote_content, (bytes, bytearray, memoryview)):
+                        # convert memoryview to bytes
+                        remote_content = bytes(remote_content)
+                    else:
+                        self.logger.warning(f"Unexpected remote_content type for {rel_path}: {type(remote_content)}")
+                        continue
                     with open(file_path, 'wb') as f:
                         f.write(remote_content)
                     self.file_timestamps[rel_path] = remote_ts
@@ -168,16 +181,36 @@ class LWWFileSync(BaseCRDT):
         """Export state as {rel_path: (timestamp, content)}"""
         scan_path = self.get_sync_path()
         state = {}
-        for rel_path, ts in self.file_timestamps.items():
-            file_path = scan_path / rel_path
+        for rel, ts in self.file_timestamps.items():
+            # ensure consistent path handling
+            file_path = scan_path / Path(rel)
             if file_path.exists():
-                with open(file_path, 'rb') as f:
-                    content = f.read()
-                # Encode bytes to base64 string for JSON serialization
-                content_str = base64.b64encode(content).decode('utf-8')
-                state[rel_path] = (ts, content_str)
+                # attempt to read with retries to handle transient IO/lock issues (e.g., large files)
+                content = None
+                for attempt in range(3):
+                    try:
+                        with open(file_path, 'rb') as f:
+                            content = f.read()
+                        break
+                    except Exception as e:
+                        # brief backoff
+                        time.sleep(0.1)
+                        if attempt == 2:
+                            # final failure
+                            self.logger.error(f"Failed to read file for to_dict: {file_path} - {e}")
+                if content is not None:
+                    try:
+                        # Encode bytes to base64 string for JSON serialization
+                        content_str = base64.b64encode(content).decode('utf-8')
+                        state[rel] = (ts, content_str)
+                    except Exception as e:
+                        self.logger.error(f"Failed to base64-encode file {file_path}: {e}")
+                        state[rel] = (ts, None)
+                else:
+                    # Could not read file; keep timestamp but no content (will not overwrite remote newer content)
+                    state[rel] = (ts, None)
             else:
-                state[rel_path] = (ts, None)
+                state[rel] = (ts, None)
         return state
 
     def from_dict(self, data):
@@ -186,3 +219,4 @@ class LWWFileSync(BaseCRDT):
 
     def get_state_summary(self):
         return f"Tracked files: {len(self.file_timestamps)}"
+

@@ -207,21 +207,26 @@ class AuthManager:
             # Determine CRDT SFTP port based on user's group (runtime setting)
             try:
                 port = getattr(Config, 'CRDT_SFTP_PORT', 51230)
+                group_ports = getattr(Config, 'GROUP_CRDT_PORTS', {}) or {}
                 gid = user.get('group_id')
-                if gid == 2:
-                    port = 51230
-                elif gid == 3:
-                    port = 51231
+                try:
+                    # normalize gid to int when possible
+                    gid_int = int(gid) if gid is not None else None
+                except Exception:
+                    gid_int = None
+
+                # Map common group_id values to group names, then to ports using GROUP_CRDT_PORTS
+                if gid_int == 2:
+                    port = group_ports.get('PORTO', port)
+                elif gid_int == 3:
+                    port = group_ports.get('LISBOA', port)
                 else:
-                    # fallback: try to read group name from DB
+                    # fallback: try to read group name from DB and use mapping
                     try:
                         grp = self.db_manager.execute_query("SELECT name FROM groups WHERE id = ?", (gid,))
                         if grp:
                             gname = (grp[0].get('name') or '').upper()
-                            if gname == 'PORTO':
-                                port = 51230
-                            elif gname == 'LISBOA':
-                                port = 51231
+                            port = group_ports.get(gname, port)
                     except Exception:
                         pass
                 # store runtime port on db_manager for FileHandler to use
@@ -363,20 +368,23 @@ class AuthManager:
                 # Restore runtime CRDT port based on user's group (mirror login logic)
                 try:
                     gid = session.get('group_id') or session.get('groupid') or None
+                    try:
+                        gid_int = int(gid) if gid is not None else None
+                    except Exception:
+                        gid_int = None
+
                     port = getattr(Config, 'CRDT_SFTP_PORT', 51230)
-                    if gid == 2:
-                        port = 51230
-                    elif gid == 3:
-                        port = 51231
+                    group_ports = getattr(Config, 'GROUP_CRDT_PORTS', {}) or {}
+                    if gid_int == 2:
+                        port = group_ports.get('PORTO', port)
+                    elif gid_int == 3:
+                        port = group_ports.get('LISBOA', port)
                     else:
                         try:
                             grp = self.db_manager.execute_query("SELECT name FROM groups WHERE id = ?", (gid,))
                             if grp:
                                 gname = (grp[0].get('name') or '').upper()
-                                if gname == 'PORTO':
-                                    port = 51230
-                                elif gname == 'LISBOA':
-                                    port = 51231
+                                port = group_ports.get(gname, port)
                         except Exception:
                             pass
                     try:

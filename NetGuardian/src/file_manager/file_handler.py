@@ -145,23 +145,14 @@ class FileHandler:
 
             remote_path = remote_dir.rstrip('/') + '/' + remote_name
 
-            # Avoid overwriting by checking existence and adding suffix if needed
+            # Ensure we overwrite existing remote file (remove if present)
             try:
-                sftp.stat(remote_path)
-                base, ext = os.path.splitext(remote_name)
-                counter = 1
-                while True:
-                    candidate = f"{base}_{counter}{ext}"
-                    candidate_remote = remote_dir.rstrip('/') + '/' + candidate
-                    try:
-                        sftp.stat(candidate_remote)
-                        counter += 1
-                    except IOError:
-                        remote_path = candidate_remote
-                        break
+                sftp.remove(remote_path)
             except IOError:
-                # does not exist, ok
+                # not present --- ok
                 pass
+            except Exception as e:
+                logger.debug(f"Could not remove existing remote file before upload: {e}")
 
             sftp.put(local_path, remote_path)
             logger.debug(f"Uploaded file to remote CRDT folder via SFTP: {remote_path}")
@@ -274,29 +265,47 @@ class FileHandler:
             file_hash = self._calculate_file_hash(file_path)
             if not file_hash:
                 return False, "Failed to calculate file hash"
-            
-            # Check for duplicate files by hash
-            existing_file = self.db_manager.execute_query(
-                "SELECT id, original_name FROM files WHERE user_id = ? AND file_hash = ? AND is_deleted = 0",
-                (self.user_id, file_hash)
+
+            # First, check if a file with the same original name already exists for this user
+            existing_by_name = self.db_manager.execute_query(
+                "SELECT id, filename, original_name, file_path FROM files WHERE user_id = ? AND original_name = ? AND is_deleted = 0",
+                (self.user_id, original_name)
             )
-            
-            if existing_file:
-                duplicate_name = existing_file[0]['original_name']
-                logger.info(f"Duplicate file detected: {original_name} matches {duplicate_name}")
-                return False, f"File already exists as '{duplicate_name}'"
-            
-            # Copy file to storage
-            shutil.copy2(file_path, stored_path)
-            logger.debug(f"File copied to storage: {stored_path}")
+
+            if existing_by_name:
+                # Overwrite existing file: reuse stored filename/path and update DB record later
+                existing = existing_by_name[0]
+                stored_filename = existing['filename']
+                stored_path = existing['file_path']
+                logger.info(f"Overwriting existing file record id={existing['id']} original_name={original_name}")
+                overwriting_id = existing['id']
+            else:
+                # No existing file with same name -> create new unique filename
+                unique_id = str(uuid.uuid4())
+                file_extension = os.path.splitext(original_name)[1].lower()
+                stored_filename = f"{unique_id}{file_extension}"
+                stored_path = os.path.join(self.user_storage_path, stored_filename)
+                overwriting_id = None
+
+            # If there's still no stored_path (should not happen), ensure it's set
+            if not stored_path:
+                stored_path = os.path.join(self.user_storage_path, stored_filename)
+
+            # Copy file to storage (overwrite if exists)
+            try:
+                shutil.copy2(file_path, stored_path)
+                logger.debug(f"File copied to storage: {stored_path}")
+            except Exception as copy_err:
+                logger.error(f"Failed to copy file to storage: {copy_err}")
+                return False, UIConstants.ERROR_UPLOAD
 
             # Mirror to CRDT sync folder if configured (copy before optional encryption)
             try:
                 if hasattr(Config, 'SYNC_TO_CRDT') and Config.SYNC_TO_CRDT:
-                    # If configured to use SFTP, upload to remote CRDT folder
+                    # If configured to use SFTP, upload to remote CRDT folder (overwrite existing)
                     if getattr(Config, 'CRDT_USE_SFTP', False):
                         try:
-                            uploaded = self._sftp_upload_to_crdt(file_path, original_name)
+                            uploaded = self._sftp_upload_to_crdt(stored_path, original_name)  # pass stored_path to upload file content
                             if not uploaded:
                                 logger.warning("SFTP mirror to CRDT failed")
                         except Exception as crdt_err:
@@ -310,18 +319,9 @@ class FileHandler:
                         os.makedirs(dest_dir, exist_ok=True)
                         crdt_dest = os.path.join(dest_dir, original_name)
                         try:
-                            if os.path.exists(crdt_dest):
-                                base_name, ext = os.path.splitext(original_name)
-                                counter = 1
-                                while True:
-                                    new_name = f"{base_name}_{counter}{ext}"
-                                    candidate = os.path.join(dest_dir, new_name)
-                                    if not os.path.exists(candidate):
-                                        crdt_dest = candidate
-                                        break
-                                    counter += 1
-                            shutil.copy2(file_path, crdt_dest)
-                            logger.debug(f"Mirrored file to CRDT sync folder: {crdt_dest}")
+                            # Overwrite existing file instead of creating a suffixed copy
+                            shutil.copy2(stored_path, crdt_dest)
+                            logger.debug(f"Mirrored file to CRDT sync folder (overwrite): {crdt_dest}")
                         except Exception as crdt_err:
                             logger.error(f"Failed to copy file to CRDT folder: {crdt_err}")
             except Exception:
@@ -340,19 +340,32 @@ class FileHandler:
                 except Exception as enc_error:
                     logger.error(f"Encryption failed: {enc_error}")
                     # Continue without encryption
-            
-            # Save file metadata to database
-            self.db_manager.execute_query(
-                """INSERT INTO files (user_id, filename, original_name, file_path, 
-                   file_size, file_hash, upload_date) 
-                   VALUES (?, ?, ?, ?, ?, ?, ?)""",
-                (self.user_id, stored_filename, original_name, stored_path, 
-                 file_size, file_hash, datetime.now())
-            )
-            
+
+            # Save or update file metadata to database
+            if overwriting_id:
+                # Update existing record
+                try:
+                    self.db_manager.execute_query(
+                        """UPDATE files SET filename = ?, file_path = ?, file_size = ?, file_hash = ?, upload_date = ? WHERE id = ?""",
+                        (stored_filename, stored_path, file_size, file_hash, datetime.now(), overwriting_id)
+                    )
+                    logger.info(f"File metadata updated for id={overwriting_id}")
+                except Exception as upd_err:
+                    logger.error(f"Failed to update file record: {upd_err}")
+                    return False, UIConstants.ERROR_UPLOAD
+            else:
+                # Insert new record
+                self.db_manager.execute_query(
+                    """INSERT INTO files (user_id, filename, original_name, file_path, 
+                       file_size, file_hash, upload_date) 
+                       VALUES (?, ?, ?, ?, ?, ?, ?)""",
+                    (self.user_id, stored_filename, original_name, stored_path,
+                     file_size, file_hash, datetime.now())
+                )
+
             logger.info(f"File uploaded: '{original_name}' ({self._format_file_size(file_size)}) -> {stored_filename}")
             return True, UIConstants.SUCCESS_UPLOAD
-            
+
         except PermissionError as e:
             logger.error(f"Permission denied during file upload: {e}")
             self._cleanup_file(stored_path)
@@ -473,7 +486,7 @@ class FileHandler:
                 "UPDATE files SET is_deleted = 1 WHERE id = ?",
                 (file_id,)
             )
-            
+
             # Remove physical file (hard delete)
             if os.path.exists(stored_path):
                 try:
@@ -482,10 +495,28 @@ class FileHandler:
                 except OSError as e:
                     logger.warning(f"Could not remove physical file: {e}")
                     # Database already marked as deleted, so continue
-            
+
+            # Also attempt to remove mirrored copy from CRDT sync folder (local or SFTP)
+            try:
+                if hasattr(Config, 'SYNC_TO_CRDT') and Config.SYNC_TO_CRDT:
+                    if getattr(Config, 'CRDT_USE_SFTP', False):
+                        remote_dir = Config.CRDT_SFTP_REMOTE_PATH
+                    else:
+                        crdt_base = Config.CRDT_SYNC_FOLDER
+                        remote_dir = crdt_base if os.path.basename(os.path.normpath(crdt_base)) == 'lww' else os.path.join(crdt_base, 'lww')
+
+                    remote_path = os.path.join(remote_dir, original_name)
+                    ok, msg = self.remove_remote_file(remote_path)
+                    if ok:
+                        logger.debug(f"Removed mirrored CRDT file: {remote_path}")
+                    else:
+                        logger.debug(f"Mirror removal returned: {msg}")
+            except Exception as e:
+                logger.error(f"Failed to remove mirrored CRDT file: {e}")
+
             logger.info(f"File deleted: '{original_name}' (ID: {file_id})")
             return True, UIConstants.SUCCESS_DELETE
-            
+
         except Exception as e:
             logger.error(f"File deletion failed for ID {file_id}: {e}", exc_info=True)
             return False, UIConstants.ERROR_DELETE

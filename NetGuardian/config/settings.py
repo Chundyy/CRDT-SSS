@@ -51,6 +51,16 @@ class Config:
     CRDT_SFTP_TIMEOUT = int(os.getenv('CRDT_SFTP_TIMEOUT', '30'))  # seconds
     CRDT_SFTP_RETRIES = int(os.getenv('CRDT_SFTP_RETRIES', '3'))
 
+    # Per-group CRDT SFTP ports (override per environment)
+    # Example: set CRDT_SFTP_PORT_PORTO=51230 and CRDT_SFTP_PORT_LISBOA=51234 in the environment
+    CRDT_SFTP_PORT_PORTO = int(os.getenv('CRDT_SFTP_PORT_PORTO', '51230'))
+    CRDT_SFTP_PORT_LISBOA = int(os.getenv('CRDT_SFTP_PORT_LISBOA', '51231'))
+
+    GROUP_CRDT_PORTS = {
+        'PORTO': CRDT_SFTP_PORT_PORTO,
+        'LISBOA': CRDT_SFTP_PORT_LISBOA,
+    }
+
     # GUI settings
     WINDOW_WIDTH = 1200
     WINDOW_HEIGHT = 800

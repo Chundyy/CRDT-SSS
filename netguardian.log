@@ -2065,3 +2065,414 @@ HINT:  You will need to rewrite or cast the expression.
 2025-10-24 02:05:31,954 - src.auth.auth_manager - INFO - User logged out successfully: leitao
 2025-10-24 02:05:31,958 - src.database.db_manager - INFO - Database connection closed
 2025-10-24 02:05:32,088 - src.gui.main_window - INFO - Application closed successfully
+2025-10-24 02:15:25,838 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-24 02:15:25,955 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-24 02:15:26,676 - src.gui.main_window - INFO - Login window displayed
+2025-10-24 02:15:26,723 - src.gui.main_window - INFO - Main window initialized
+2025-10-24 02:15:26,725 - __main__ - INFO - NetGuardian application started
+2025-10-24 02:15:39,013 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-24 02:15:39,013 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-24 02:15:39,559 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 02:16:09,621 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-24 02:16:11,797 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 02:16:12,104 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 02:16:12,725 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 02:16:12,767 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 02:16:12,782 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-24 02:16:17,577 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 02:16:17,921 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 02:16:18,063 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 02:16:18,096 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 02:16:22,742 - src.file_manager.file_handler - INFO - Duplicate file detected: cv.pdf matches cv.pdf
+2025-10-24 02:16:22,742 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/cv.pdf: File already exists as 'cv.pdf'
+2025-10-24 02:18:15,502 - src.file_manager.file_handler - INFO - Duplicate file detected: cv.pdf matches cv.pdf
+2025-10-24 02:18:15,502 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/cv.pdf: File already exists as 'cv.pdf'
+2025-10-24 02:18:21,412 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 02:18:21,710 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 02:18:22,385 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 02:18:22,420 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 02:18:24,305 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 02:18:24,609 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 02:18:24,746 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 02:18:24,767 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 02:18:29,894 - src.auth.auth_manager - INFO - User logged out successfully: leitao
+2025-10-24 02:18:29,894 - src.database.db_manager - INFO - Database connection closed
+2025-10-24 02:18:29,998 - src.gui.main_window - INFO - Application closed successfully
+2025-10-24 14:09:18,183 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-24 14:09:18,367 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-24 14:09:19,497 - src.gui.main_window - INFO - Login window displayed
+2025-10-24 14:09:19,521 - src.gui.main_window - INFO - Main window initialized
+2025-10-24 14:09:19,521 - __main__ - INFO - NetGuardian application started
+2025-10-24 14:09:34,435 - src.auth.auth_manager - INFO - User logged in successfully: oliv
+2025-10-24 14:09:34,435 - src.gui.main_window - INFO - Login successful for user: oliv
+2025-10-24 14:09:34,828 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:10:04,830 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-24 14:10:07,037 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:10:07,576 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:10:08,202 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:10:08,262 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:10:08,317 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-24 14:11:56,045 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:11:56,282 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:11:56,840 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:11:56,935 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:11:57,016 - src.file_manager.file_handler - INFO - File uploaded: 'teste.txt' (7.0 B) -> cb55111b-447e-4172-b5ce-3197441d92ac.txt
+2025-10-24 14:11:58,057 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:11:58,420 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:11:58,601 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:11:58,682 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:13:33,181 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:13:33,437 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:13:34,008 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:13:34,075 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:14:05,635 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:14:05,926 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:14:06,523 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:14:06,646 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:14:10,003 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:14:10,305 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:14:10,501 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:14:10,623 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:14:10,670 - src.file_manager.file_handler - INFO - File uploaded: 'cv_en.pdf' (53.7 KB) -> 8596c9be-3d7f-47a6-a7b3-5b654df90a3e.pdf
+2025-10-24 14:14:11,960 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:14:12,300 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:14:12,502 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:14:12,555 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:14:15,985 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:14:16,258 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:14:16,459 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:14:16,538 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:14:40,182 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:14:40,571 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:14:41,197 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:14:41,273 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:15:51,371 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:15:51,754 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:15:52,380 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:15:52,474 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:15:52,509 - src.file_manager.file_handler - INFO - File uploaded: 'teste.txt' (2.0 B) -> 68c8ecbd-e25b-4f4a-84e1-fe263c5d752d.txt
+2025-10-24 14:15:53,750 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:15:53,994 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:15:54,149 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:15:54,215 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:16:44,918 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:16:45,176 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:16:45,780 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:16:45,822 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:16:46,748 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:16:47,002 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:16:47,159 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:16:47,178 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:22:32,082 - src.file_manager.file_handler - INFO - Duplicate file detected: teste.pdf matches teste.txt
+2025-10-24 14:22:46,310 - src.file_manager.file_handler - INFO - Duplicate file detected: cv.pdf matches teste.txt
+2025-10-24 14:22:52,254 - src.file_manager.file_handler - INFO - Duplicate file detected: cv.txt matches teste.txt
+2025-10-24 14:23:04,520 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:23:04,917 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:23:05,639 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:23:05,742 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:23:05,784 - src.file_manager.file_handler - INFO - File uploaded: 'testeeeeeee.pdf' (8.0 B) -> 57a7e6a9-58d9-4675-86e9-41bc22a2971f.pdf
+2025-10-24 14:23:06,984 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:23:07,358 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:23:07,519 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:23:07,614 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:24:16,041 - src.file_manager.file_handler - INFO - Duplicate file detected: cv_en.pdf matches cv_en.pdf
+2025-10-24 14:24:16,041 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/cv_en.pdf: File already exists as 'cv_en.pdf'
+2025-10-24 14:24:21,778 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:24:22,161 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:24:22,745 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:24:22,816 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:24:23,558 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:24:23,897 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:24:24,149 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:24:24,279 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:24:27,573 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:24:28,020 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:24:28,308 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:24:28,511 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:24:28,527 - src.file_manager.file_handler - INFO - File uploaded: 'cv.pdf' (54.1 KB) -> b4d5168a-2a16-4e3a-8f5b-fc81c7be38bb.pdf
+2025-10-24 14:24:29,880 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:24:30,199 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:24:30,424 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:24:30,678 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:24:36,119 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:24:36,422 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:24:36,609 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:24:36,724 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:24:38,520 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:24:38,939 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:24:39,125 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:24:39,221 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:24:59,436 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:24:59,705 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:25:00,279 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:25:00,294 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:25:01,545 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:25:01,804 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:25:01,948 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:25:01,996 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:25:03,842 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:25:04,100 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:25:04,284 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:25:04,291 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:25:05,477 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:25:05,720 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:25:05,885 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:25:05,933 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:25:18,242 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:25:18,526 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:25:19,105 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:25:19,219 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:25:19,261 - src.file_manager.file_handler - INFO - File uploaded: 'formulario-rarus-2025.pdf' (62.4 KB) -> 959b43e5-9f8f-4965-9ff4-3702a345482e.pdf
+2025-10-24 14:25:20,307 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:25:20,552 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:25:20,745 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:25:20,833 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:25:24,689 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:25:24,980 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:25:25,168 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:25:25,266 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:25:27,648 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:25:27,910 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:25:28,068 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:25:28,120 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:46:13,303 - src.database.db_manager - ERROR - PostgreSQL query execution failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 132, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 169, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+2025-10-24 14:46:13,324 - src.database.db_manager - ERROR - Rollback failed: connection already closed
+2025-10-24 14:46:13,324 - src.auth.auth_manager - ERROR - Logout failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\auth\auth_manager.py", line 298, in logout_user
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 132, in execute_query
+    return self._execute_postgres_query(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 169, in _execute_postgres_query
+    cursor.execute(q, p)
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+2025-10-24 14:46:13,324 - src.database.db_manager - INFO - Database connection closed
+2025-10-24 14:46:13,404 - src.gui.main_window - INFO - Application closed successfully
+2025-10-24 14:50:03,234 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-24 14:50:03,486 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-24 14:50:03,949 - src.gui.main_window - INFO - Login window displayed
+2025-10-24 14:50:03,975 - src.gui.main_window - INFO - Main window initialized
+2025-10-24 14:50:03,975 - __main__ - INFO - NetGuardian application started
+2025-10-24 14:50:13,831 - src.auth.auth_manager - INFO - User logged in successfully: oliv
+2025-10-24 14:50:13,831 - src.gui.main_window - INFO - Login successful for user: oliv
+2025-10-24 14:50:14,294 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:50:44,264 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-24 14:50:46,436 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:50:46,842 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:50:47,529 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:50:47,622 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:50:47,664 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-24 14:51:14,263 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:51:14,531 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:51:15,208 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:51:15,293 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:52:00,266 - src.auth.auth_manager - INFO - User logged out successfully: oliv
+2025-10-24 14:52:00,266 - src.database.db_manager - INFO - Database connection closed
+2025-10-24 14:52:00,340 - src.gui.main_window - INFO - Application closed successfully
+2025-10-24 14:52:03,636 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-24 14:52:03,827 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-24 14:52:04,295 - src.gui.main_window - INFO - Login window displayed
+2025-10-24 14:52:04,325 - src.gui.main_window - INFO - Main window initialized
+2025-10-24 14:52:04,326 - __main__ - INFO - NetGuardian application started
+2025-10-24 14:52:08,249 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-24 14:52:08,249 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-24 14:52:08,669 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:52:38,657 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-24 14:52:40,871 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:52:41,217 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:52:41,850 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:52:41,926 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:52:41,940 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-24 14:52:56,417 - src.file_manager.file_handler - INFO - Duplicate file detected: contas.pdf matches adadbasbdasd.txt
+2025-10-24 14:53:06,251 - src.file_manager.file_handler - INFO - Duplicate file detected: contas.pdf matches untitled.txt
+2025-10-24 14:53:11,749 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:53:12,202 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:53:12,860 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:53:12,983 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:53:13,083 - src.file_manager.file_handler - INFO - File uploaded: 'contas.pdf' (15.0 B) -> 79939edc-9a4a-4bc2-8d48-3c7e55d3c2f9.pdf
+2025-10-24 14:53:17,841 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:53:18,236 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:53:18,421 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:53:18,499 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:53:19,674 - src.auth.auth_manager - INFO - User logged out successfully: leitao
+2025-10-24 14:53:19,674 - src.database.db_manager - INFO - Database connection closed
+2025-10-24 14:53:19,732 - src.gui.main_window - INFO - Application closed successfully
+2025-10-24 14:53:30,060 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-24 14:53:30,342 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-24 14:53:30,808 - src.gui.main_window - INFO - Login window displayed
+2025-10-24 14:53:30,831 - src.gui.main_window - INFO - Main window initialized
+2025-10-24 14:53:30,831 - __main__ - INFO - NetGuardian application started
+2025-10-24 14:53:34,819 - src.auth.auth_manager - INFO - User logged in successfully: oliv
+2025-10-24 14:53:34,819 - src.gui.main_window - INFO - Login successful for user: oliv
+2025-10-24 14:53:35,233 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:54:05,307 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-24 14:54:07,486 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:54:07,902 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:54:08,543 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:54:08,640 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:54:08,704 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-24 14:54:43,071 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:54:43,320 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:54:43,996 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:54:44,197 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:56:11,623 - src.auth.auth_manager - INFO - User logged out successfully: oliv
+2025-10-24 14:56:11,623 - src.database.db_manager - INFO - Database connection closed
+2025-10-24 14:56:11,709 - src.gui.main_window - INFO - Application closed successfully
+2025-10-24 14:57:56,954 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-24 14:57:57,189 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-24 14:57:57,647 - src.gui.main_window - INFO - Login window displayed
+2025-10-24 14:57:57,676 - src.gui.main_window - INFO - Main window initialized
+2025-10-24 14:57:57,676 - __main__ - INFO - NetGuardian application started
+2025-10-24 14:59:06,220 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-24 14:59:06,220 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-24 14:59:06,618 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:59:06,987 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:59:07,629 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:59:07,758 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:59:07,795 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-24 14:59:48,604 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:59:48,903 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:59:49,584 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:59:49,728 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 14:59:49,776 - src.file_manager.file_handler - INFO - File uploaded: 'olaola.txt' (5.0 B) -> d64f627e-f614-4b67-acd6-a267bfd567ac.txt
+2025-10-24 14:59:53,710 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 14:59:54,080 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 14:59:54,245 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 14:59:54,289 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:01:28,896 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:01:29,252 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:01:29,866 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:01:29,955 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:01:39,058 - src.file_manager.file_handler - INFO - Duplicate file detected: olaola.txt matches olaola.txt
+2025-10-24 15:01:39,058 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/olaola.txt: File already exists as 'olaola.txt'
+2025-10-24 15:01:46,940 - src.file_manager.file_handler - INFO - Duplicate file detected: olaola.txt matches olaola.txt
+2025-10-24 15:01:46,940 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/olaola.txt: File already exists as 'olaola.txt'
+2025-10-24 15:03:08,530 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:03:08,881 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:03:09,506 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:03:09,602 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:03:11,069 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:03:11,391 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:03:11,549 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:03:11,629 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:03:14,802 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:03:15,180 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:03:15,371 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:03:15,398 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:03:16,518 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:03:16,849 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:03:17,019 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:03:17,073 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:03:20,340 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:03:20,666 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:03:20,843 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:03:20,857 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:03:22,058 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:03:22,408 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:03:22,557 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:03:22,605 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:03:47,954 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:03:48,371 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:03:49,024 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:03:49,142 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:03:50,096 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:03:50,463 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:03:50,606 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:03:50,706 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:03:51,940 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:04:22,010 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-24 15:04:24,243 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:04:24,653 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:04:25,330 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:04:25,531 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:04:28,499 - src.file_manager.file_handler - INFO - Duplicate file detected: foto.jpg matches foto.jpg
+2025-10-24 15:04:28,499 - src.gui.dashboard - WARNING - Failed to upload C:/Users/fwf/Desktop/foto.jpg: File already exists as 'foto.jpg'
+2025-10-24 15:04:32,279 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:04:32,729 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:04:32,910 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:04:33,222 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:04:33,234 - src.file_manager.file_handler - INFO - File uploaded: 'keylogger.png' (1.1 MB) -> 38cd113b-0115-4235-8fec-f5c96fb908b2.png
+2025-10-24 15:04:34,341 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:04:34,655 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:04:34,810 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:04:34,875 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:07:24,292 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:07:24,596 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:07:25,194 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:07:25,308 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:07:26,638 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-24 15:07:26,953 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-24 15:07:27,127 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-24 15:07:27,192 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-24 15:07:28,258 - src.auth.auth_manager - INFO - User logged out successfully: leitao
+2025-10-24 15:07:28,258 - src.database.db_manager - INFO - Database connection closed
+2025-10-24 15:07:28,320 - src.gui.main_window - INFO - Application closed successfully
+2025-10-25 09:49:12,618 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-25 09:49:13,254 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-25 09:49:14,344 - src.gui.main_window - INFO - Login window displayed
+2025-10-25 09:49:14,392 - src.gui.main_window - INFO - Main window initialized
+2025-10-25 09:49:14,392 - __main__ - INFO - NetGuardian application started
+2025-10-25 09:49:31,425 - src.auth.auth_manager - INFO - User logged in successfully: leitao
+2025-10-25 09:49:31,425 - src.gui.main_window - INFO - Login successful for user: leitao
+2025-10-25 09:49:32,133 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-25 09:49:32,580 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-25 09:49:33,412 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-25 09:49:33,486 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-25 09:49:33,598 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-25 09:49:50,553 - src.file_manager.file_handler - INFO - Overwriting existing file record id=16 original_name=leitao.txt
+2025-10-25 09:49:50,663 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-25 09:49:51,085 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-25 09:49:51,739 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-25 09:49:51,996 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-25 09:49:52,075 - src.file_manager.file_handler - INFO - File metadata updated for id=16
+2025-10-25 09:49:52,075 - src.file_manager.file_handler - INFO - File uploaded: 'leitao.txt' (5.0 B) -> ae653403-b50f-4e4d-97a8-23675da46cf7.txt
+2025-10-25 09:49:53,776 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-25 09:49:54,181 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-25 09:49:54,404 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-25 09:49:54,488 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-25 09:50:01,812 - src.file_manager.file_handler - INFO - Overwriting existing file record id=16 original_name=leitao.txt
+2025-10-25 09:50:01,894 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-25 09:50:02,400 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-25 09:50:02,653 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-25 09:50:02,911 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-25 09:50:03,001 - src.file_manager.file_handler - INFO - File metadata updated for id=16
+2025-10-25 09:50:03,001 - src.file_manager.file_handler - INFO - File uploaded: 'leitao.txt' (5.0 B) -> ae653403-b50f-4e4d-97a8-23675da46cf7.txt
+2025-10-25 09:50:04,386 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-25 09:50:04,825 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-25 09:50:05,042 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-25 09:50:05,188 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
