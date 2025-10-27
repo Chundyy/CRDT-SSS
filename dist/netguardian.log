@@ -23,3 +23,6 @@
 2025-10-27 17:54:04,049 - paramiko.transport - INFO - Authentication (password) successful!
 2025-10-27 17:54:04,213 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
 2025-10-27 17:54:04,251 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 18:03:44,262 - src.auth.auth_manager - INFO - User logged out successfully: oliv
+2025-10-27 18:03:44,262 - src.database.db_manager - INFO - Database connection closed
+2025-10-27 18:03:44,358 - src.gui.main_window - INFO - Application closed successfully
