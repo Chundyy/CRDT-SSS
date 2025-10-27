@@ -2568,3 +2568,212 @@ server closed the connection unexpectedly
 2025-10-25 16:27:40,474 - paramiko.transport - INFO - Authentication (password) successful!
 2025-10-25 16:27:40,623 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
 2025-10-25 16:27:40,648 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 16:50:08,610 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "161.230.48.199", port 51232 failed: Connection timed out (0x0000274C/10060)
+	Is the server running on that host and accepting TCP/IP connections?
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 89, in connect
+    self.connection = psycopg2.connect(
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "161.230.48.199", port 51232 failed: Connection timed out (0x0000274C/10060)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-27 16:50:08,626 - src.database.db_manager - ERROR - Database initialization failed: connection to server at "161.230.48.199", port 51232 failed: Connection timed out (0x0000274C/10060)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-27 16:50:08,626 - __main__ - ERROR - Failed to start application: connection to server at "161.230.48.199", port 51232 failed: Connection timed out (0x0000274C/10060)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-27 16:52:19,078 - src.database.db_manager - ERROR - PostgreSQL connection failed: connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "194.65.134.81", user "guardian", database "CRDT-SSS-CLOUD", SSL encryption
+connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "194.65.134.81", user "guardian", database "CRDT-SSS-CLOUD", no encryption
+Traceback (most recent call last):
+  File "C:\Users\fwf\Documents\GitHub\CRDT-SSS\NetGuardian\src\database\db_manager.py", line 89, in connect
+    self.connection = psycopg2.connect(
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\fwf\PycharmProjects\CSaaS\.venv\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "194.65.134.81", user "guardian", database "CRDT-SSS-CLOUD", SSL encryption
+connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "194.65.134.81", user "guardian", database "CRDT-SSS-CLOUD", no encryption
+
+2025-10-27 16:52:19,095 - src.database.db_manager - ERROR - Database initialization failed: connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "194.65.134.81", user "guardian", database "CRDT-SSS-CLOUD", SSL encryption
+connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "194.65.134.81", user "guardian", database "CRDT-SSS-CLOUD", no encryption
+
+2025-10-27 16:52:19,095 - __main__ - ERROR - Failed to start application: connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "194.65.134.81", user "guardian", database "CRDT-SSS-CLOUD", SSL encryption
+connection to server at "161.230.48.199", port 51232 failed: FATAL:  no pg_hba.conf entry for host "194.65.134.81", user "guardian", database "CRDT-SSS-CLOUD", no encryption
+
+2025-10-27 16:55:54,055 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-27 16:55:54,246 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-27 16:55:54,818 - src.gui.main_window - INFO - Login window displayed
+2025-10-27 16:55:54,849 - src.gui.main_window - INFO - Main window initialized
+2025-10-27 16:55:54,849 - __main__ - INFO - NetGuardian application started
+2025-10-27 16:55:59,599 - src.auth.auth_manager - INFO - User logged in successfully: oliv
+2025-10-27 16:55:59,599 - src.gui.main_window - INFO - Login successful for user: oliv
+2025-10-27 16:55:59,647 - src.file_manager.file_handler - INFO - Created user storage directory: ./local_files\user_2
+2025-10-27 16:56:00,027 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 16:56:02,253 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-27 16:56:02,253 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): Authentication failed.
+2025-10-27 16:56:04,430 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 16:56:06,642 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-27 16:56:06,642 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 2/3): Authentication failed.
+2025-10-27 16:56:10,911 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 16:56:13,124 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-27 16:56:13,124 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 3/3): Authentication failed.
+2025-10-27 16:56:13,140 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-27 16:56:13,182 - src.auth.auth_manager - INFO - User logged out successfully: oliv
+2025-10-27 16:56:13,182 - src.database.db_manager - INFO - Database connection closed
+2025-10-27 16:56:13,241 - src.gui.main_window - INFO - Application closed successfully
+2025-10-27 17:13:45,155 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-27 17:13:45,319 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-27 17:13:45,783 - src.gui.main_window - INFO - Login window displayed
+2025-10-27 17:13:45,801 - src.gui.main_window - INFO - Main window initialized
+2025-10-27 17:13:45,801 - __main__ - INFO - NetGuardian application started
+2025-10-27 17:13:52,326 - src.auth.auth_manager - INFO - User logged in successfully: oliv
+2025-10-27 17:13:52,326 - src.gui.main_window - INFO - Login successful for user: oliv
+2025-10-27 17:13:52,721 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:14:22,699 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-27 17:14:24,865 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:14:29,204 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-27 17:14:29,204 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 2/3): Authentication failed.
+2025-10-27 17:14:33,467 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:14:37,796 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-27 17:14:37,796 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 3/3): Authentication failed.
+2025-10-27 17:14:37,817 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-27 17:15:25,647 - src.auth.auth_manager - INFO - User logged out successfully: oliv
+2025-10-27 17:15:25,647 - src.database.db_manager - INFO - Database connection closed
+2025-10-27 17:15:25,711 - src.gui.main_window - INFO - Application closed successfully
+2025-10-27 17:15:28,691 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-27 17:15:28,843 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-27 17:15:29,377 - src.gui.main_window - INFO - Login window displayed
+2025-10-27 17:15:29,406 - src.gui.main_window - INFO - Main window initialized
+2025-10-27 17:15:29,406 - __main__ - INFO - NetGuardian application started
+2025-10-27 17:15:33,856 - src.auth.auth_manager - INFO - User logged in successfully: oliv
+2025-10-27 17:15:33,856 - src.gui.main_window - INFO - Login successful for user: oliv
+2025-10-27 17:15:34,327 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:16:04,298 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-27 17:16:06,461 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:16:08,681 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-27 17:16:08,681 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 2/3): Authentication failed.
+2025-10-27 17:16:12,954 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:16:15,217 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-27 17:16:15,219 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 3/3): Authentication failed.
+2025-10-27 17:16:15,232 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-27 17:17:45,302 - src.auth.auth_manager - INFO - User logged out successfully: oliv
+2025-10-27 17:17:45,302 - src.database.db_manager - INFO - Database connection closed
+2025-10-27 17:17:45,359 - src.gui.main_window - INFO - Application closed successfully
+2025-10-27 17:32:09,636 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-27 17:32:09,832 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-27 17:32:10,290 - src.gui.main_window - INFO - Login window displayed
+2025-10-27 17:32:10,317 - src.gui.main_window - INFO - Main window initialized
+2025-10-27 17:32:10,317 - __main__ - INFO - NetGuardian application started
+2025-10-27 17:32:15,414 - src.auth.auth_manager - INFO - User logged in successfully: oliv
+2025-10-27 17:32:15,414 - src.gui.main_window - INFO - Login successful for user: oliv
+2025-10-27 17:32:15,812 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:32:45,846 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-27 17:32:48,004 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:32:52,344 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-27 17:32:52,351 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 2/3): Authentication failed.
+2025-10-27 17:32:56,614 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:32:58,833 - paramiko.transport - INFO - Authentication (password) failed.
+2025-10-27 17:32:58,833 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 3/3): Authentication failed.
+2025-10-27 17:32:58,851 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-27 17:36:45,953 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-27 17:36:46,357 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-27 17:36:47,037 - src.gui.main_window - INFO - Login window displayed
+2025-10-27 17:36:47,049 - src.gui.main_window - INFO - Main window initialized
+2025-10-27 17:36:47,049 - __main__ - INFO - NetGuardian application started
+2025-10-27 17:36:50,900 - src.auth.auth_manager - WARNING - Invalid password attempt for user: leitao
+2025-10-27 17:36:56,421 - src.auth.auth_manager - WARNING - Invalid password attempt for user: leitao
+2025-10-27 17:37:04,556 - src.auth.auth_manager - INFO - User logged in successfully: oliv
+2025-10-27 17:37:04,556 - src.gui.main_window - INFO - Login successful for user: oliv
+2025-10-27 17:37:04,980 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:37:05,285 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:37:06,574 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:37:06,621 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:37:06,686 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-27 17:37:31,754 - src.auth.auth_manager - INFO - User logged out successfully: oliv
+2025-10-27 17:37:31,754 - src.database.db_manager - INFO - Database connection closed
+2025-10-27 17:37:31,778 - src.gui.main_window - INFO - Application closed successfully
+2025-10-27 17:44:36,834 - src.database.db_manager - INFO - PostgreSQL database connection established
+2025-10-27 17:44:37,050 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
+2025-10-27 17:44:37,537 - src.gui.main_window - INFO - Login window displayed
+2025-10-27 17:44:37,561 - src.gui.main_window - INFO - Main window initialized
+2025-10-27 17:44:37,561 - __main__ - INFO - NetGuardian application started
+2025-10-27 17:44:42,125 - src.auth.auth_manager - INFO - User logged in successfully: oliv
+2025-10-27 17:44:42,125 - src.gui.main_window - INFO - Login successful for user: oliv
+2025-10-27 17:44:42,509 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:45:12,547 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-27 17:45:14,703 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:45:15,051 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:45:15,659 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:45:15,691 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:45:15,741 - src.gui.main_window - INFO - Dashboard displayed
+2025-10-27 17:45:51,140 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:45:51,449 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:45:52,122 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:45:52,159 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:45:53,570 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:45:53,892 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:45:54,051 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:45:54,091 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:47:59,104 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:47:59,409 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:48:00,012 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:48:00,084 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:48:00,109 - src.file_manager.file_handler - INFO - File uploaded: 'teste.txt' (5.0 B) -> 09a102fe-05c2-4793-802e-4b579ca40a79.txt
+2025-10-27 17:48:01,911 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:48:02,214 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:48:02,371 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:48:02,417 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:48:03,708 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:48:04,011 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:48:04,162 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:48:04,187 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:48:06,125 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:48:06,445 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:48:06,590 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:48:06,601 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:48:07,590 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:48:07,894 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:48:08,056 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:48:08,100 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:48:09,560 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:48:09,900 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:48:10,059 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:48:10,091 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:48:36,836 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:49:06,851 - src.file_manager.file_handler - ERROR - SFTP connection failed (attempt 1/3): No existing session
+2025-10-27 17:49:09,012 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:49:09,330 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:49:09,937 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:49:09,974 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:49:22,508 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:49:23,028 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:49:23,641 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:49:23,703 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:49:23,719 - src.file_manager.file_handler - INFO - File uploaded: 'ola.txt' (5.0 B) -> 9acbb415-ddf6-4252-b938-58e7757b2286.txt
+2025-10-27 17:49:25,012 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:49:25,319 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:49:25,466 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:49:25,515 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:52:00,983 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:52:01,308 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:52:01,932 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:52:01,932 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:52:03,115 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:52:03,425 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:52:03,573 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:52:03,605 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:52:11,139 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:52:11,450 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:52:11,619 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:52:11,652 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:52:12,723 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_9.2p1)
+2025-10-27 17:52:13,027 - paramiko.transport - INFO - Authentication (password) successful!
+2025-10-27 17:52:13,158 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-10-27 17:52:13,190 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-10-27 17:52:42,216 - src.auth.auth_manager - INFO - User logged out successfully: oliv
+2025-10-27 17:52:42,216 - src.database.db_manager - INFO - Database connection closed
+2025-10-27 17:52:42,297 - src.gui.main_window - INFO - Application closed successfully
