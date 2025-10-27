@@ -43,13 +43,12 @@ class Config:
     CRDT_USE_SFTP = os.getenv('CRDT_USE_SFTP', 'true').lower() == 'true'
     CRDT_SFTP_HOST = os.getenv('CRDT_SFTP_HOST', '161.230.48.199')
     CRDT_SFTP_PORT = int(os.getenv('CRDT_SFTP_PORT', '51230'))
-    CRDT_SFTP_USER = os.getenv('CRDT_SFTP_USER', 'root')
+    CRDT_SFTP_USER = os.getenv('CRDT_SFTP_USER', 'crdt')
     CRDT_SFTP_PASSWORD = os.getenv('CRDT_SFTP_PASSWORD', 'N3tGu@rdi@n123_')
     CRDT_SFTP_KEY_PATH = os.getenv('CRDT_SFTP_KEY_PATH', '')
     CRDT_SFTP_REMOTE_PATH = os.getenv('CRDT_SFTP_REMOTE_PATH', CRDT_SYNC_FOLDER)
     # SFTP connection tuning
     CRDT_SFTP_TIMEOUT = int(os.getenv('CRDT_SFTP_TIMEOUT', '30'))  # seconds
-    CRDT_SFTP_RETRIES = int(os.getenv('CRDT_SFTP_RETRIES', '3'))
 
     # Per-group CRDT SFTP ports (override per environment)
     # Example: set CRDT_SFTP_PORT_PORTO=51230 and CRDT_SFTP_PORT_LISBOA=51234 in the environment

@@ -1,41 +1,49 @@
-# NetGuardian - Dependências Python
-# Instalar com: pip install -r requirements.txt
+# NetGuardian - Comprehensive Python dependencies for development and PyInstaller builds
+# Install with: pip install -r requirements.txt
 
-# Segurança e Autenticação
+# Security / Password hashing
 bcrypt==4.1.2
+passlib==1.7.4
 cryptography==41.0.7
 
-# Base de Dados
-psycopg2-binary==2.9.9  # PostgreSQL (opcional)
+# Database
+psycopg2-binary==2.9.9  # PostgreSQL client
 
-# Configuração
+# Configuration / env
 python-dotenv==1.0.0
 
-# Interface Gráfica
+# GUI
 Pillow==10.1.0
 customtkinter==6.1.0
 
 # SFTP / SSH
 paramiko==3.4.0
+pynacl==1.6.1
 
-# Utilitários
+# Utilities
 python-dateutil==2.8.2
 requests==2.31.0
 psutil==5.9.5
+python-magic==0.4.27  # file type detection (may need libmagic on the system)
+python-benedict==0.25.3
 typing-extensions==4.8.0
 
-# Segurança / Hashing helpers
-passlib==1.7.4
+# Logging / helpers
+colorlog==6.7.0
 
-# Ferramentas de build / empacotamento
+# Build / packaging
 pyinstaller==5.13.0
 setuptools>=65.0.0
 wheel>=0.38.0
+pywin32==305  # Windows support for PyInstaller executables
 
-# Opcional / utilitários adicionais que podem ser úteis
-python-magic==0.4.27  # file type detection (libmagic)
-python-benedict==0.25.3  # dict utilities (optional)
+# Optional / useful extras
+jinja2==3.1.2
+markupsafe==2.1.3
 
-# OBS:
-# - Ajuste versões se necessário. Algumas dependências (tkinter) são fornecidas pelo SO.
-# - Se preferir não fixar versões, remova os '==<version>' conforme necessário.
+# Notes:
+# - Some libraries (like tkinter) are provided by the OS / Python installation and are not installed via pip.
+# - python-magic may require the libmagic system library on Windows; consider using python-magic-bin on Windows if needed.
+# - If you prefer looser pins, remove the '==' versions.
+# - After installing these packages, build the executable with PyInstaller, e.g.:
+#   pyinstaller --noconfirm --onefile --windowed --add-data "config;config" main.spec
