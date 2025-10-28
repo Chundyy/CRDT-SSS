@@ -34,7 +34,7 @@ export function UsersPage() {
     name: "",
     email: "",
     password: "",
-    group_id: 2,
+    group_id: "",
   })
 
   useEffect(() => {
@@ -80,7 +80,7 @@ export function UsersPage() {
       }
 
       setIsAddDialogOpen(false)
-      setNewUser({ name: "", email: "", password: "", group_id: 2 })
+      setNewUser({ name: "", email: "", password: "", group_id: "" })
       setError("")
       fetchUsers()
     } catch (error) {
@@ -158,7 +158,7 @@ export function UsersPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="group">User Role</Label>
+                  <Label htmlFor="group">User Group</Label>
                   <select
                     id="group"
                     value={newUser.group_id}
@@ -166,7 +166,8 @@ export function UsersPage() {
                     className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md text-white"
                   >
                     <option value={1}>Admin</option>
-                    <option value={2}>User</option>
+                    <option value={2}>Porto</option>
+                    <option value={3}>Lisboa</option>
                   </select>
                 </div>
                 {error && (
@@ -210,7 +211,7 @@ export function UsersPage() {
                   <TableHead className="text-zinc-400">ID</TableHead>
                   <TableHead className="text-zinc-400">Name</TableHead>
                   <TableHead className="text-zinc-400">Email</TableHead>
-                  <TableHead className="text-zinc-400">Role</TableHead>
+                  <TableHead className="text-zinc-400">Group</TableHead>
                   <TableHead className="text-zinc-400 text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -227,12 +228,17 @@ export function UsersPage() {
                             <Shield className="w-4 h-4 text-blue-500" />
                             <span className="text-blue-500 font-medium">Admin</span>
                           </>
-                        ) : (
+                        ) : user.group_id === 2 ? (
                           <>
                             <UserIcon className="w-4 h-4 text-zinc-400" />
-                            <span className="text-zinc-400">User</span>
+                            <span className="text-zinc-400">Porto</span>
                           </>
-                        )}
+                        ) : user.group_id === 3 ? (
+                          <>
+                            <UserIcon className="w-4 h-4 text-zinc-400" />
+                            <span className="text-zinc-400">Lisboa</span>
+                          </>
+                        ) : null}
                       </div>
                     </TableCell>
                     <TableCell className="text-right">
