@@ -1,109 +1,144 @@
 # CRDT-SSS
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE) [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/) [![Repo size](https://img.shields.io/github/repo-size/fwfg/CRDT-SSS?label=repo%20size)]()
+
 ## Project Overview
 
 CRDT-SSS (Conflict-free Replicated Data Types - Secure Synchronization System) demonstrates distributed data synchronization using CRDTs to achieve eventual consistency and fault tolerance. The project also explores security, conflict resolution, and integration with client applications.
 
-## Project Structure
+> 🚀 Quick highlight: this repo contains state-based CRDT implementations, a desktop client (NetGuardian), packaging helpers, and demo web front-ends.
 
-- crdt-cluster/: CRDT service implementation, management scripts, configuration and sample data.
-  - bin/: Main service scripts (e.g. crdt_service.py).
-  - config/: Logging and configuration files.
-  - data/: Sample data.
-  - logs/: Log files.
-  - src/: CRDT implementations (G-Counter, G-Set, LWW, Two-Phase Set).
-  - sync_folder/: Example sync folders for each CRDT type.
+---
 
-- NetGuardian/: Desktop application that uses CRDTs for secure file and data synchronization.
-  - src/: Application source code (auth, CRDT client, DB, file management, GUI, utilities).
-  - config/: Application configuration.
-  - main.py: Application entry point.
-  - requirements.txt: Python dependencies.
+## Table of Contents
 
-- TESTS/: Integration tests and examples, including a web demo application.
+- [Project Structure](#project-structure-summary)
+- [Quick Start](#quick-start)
+- [CRDT_STATE_BASED](#crdt_state_based-details)
+- [NetGuardian (desktop)](#netguardian-desktop-application)
+- [NetGuardian_APP](#netguardian_app-packaging--helpers)
+- [NetGuardian_Web](#netguardian_web-web-demos)
+- [Vulnerabilidades (security notes)](#vulnerabilidades-security-notes)
+- [Environment variables](#environment-variables)
+- [Contributing & License](#contributing--license)
 
-- Vulnerabilities/: Security documentation and notes.
+---
 
-## Main Features
+## Project Structure (summary)
 
-- Multiple CRDT types implemented (G-Counter, G-Set, LWW, Two-Phase Set)
-- Distributed synchronization and automatic conflict resolution
-- Desktop GUI for testing and demonstration (NetGuardian)
-- Scripts for deployment and service management
-- Documentation about security and known issues
+- CRDT_STATE_BASED/: State-based CRDT implementations, service scripts, configuration and example sync folders.
+- NetGuardian/: Desktop application that uses CRDTs for secure file and data synchronization (source code, GUI, auth, DB and utilities).
+- NetGuardian_APP/: Packaging, installation helpers, scripts and additional app resources for building the desktop distribution.
+- NetGuardian_Web/: Two Next.js webapp versions (v1 and v2) used for demos and web-based clients.
+- crdt-cluster/: Example CRDT service and cluster scripts (see folder for service code and sync examples).
+- Vulnerabilidades/: Security documents and vulnerability notes.
 
-## How to Run
 
-1. Prerequisites
-   - Python 3.10 or newer
-   - PostgreSQL server for NetGuardian (SQLite is not supported for production)
+## Quick Start
 
-2. Install dependencies
-   - python -m venv .venv
-   - On Windows: .venv\Scripts\activate
-   - pip install -r NetGuardian/requirements.txt
+> **Note:** these commands are minimal examples for local development on Windows. Adjust paths and env vars for your platform.
 
-3. Run the desktop application
-   - cd NetGuardian
-   - python main.py
+<details>
+<summary><strong>Setup Python environment & run desktop app</strong></summary>
 
-4. Run CRDT services
-   - cd crdt-cluster/bin
-   - python crdt_service.py
+```powershell
+# create & activate venv (Windows)
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r NetGuardian/requirements.txt
+python NetGuardian/main.py
+```
 
-5. Optional web demo
-   - cd TESTES/cloud-webapp
-   - Install and run with pnpm or npm (see project README in the webapp folder)
+```bash
+# run CRDT service (example)
+cd CRDT_STATE_BASED/bin
+python crdt_service.py
+```
 
-## Deployment & Configuration
+</details>
 
-These notes explain how to run NetGuardian with a remote crdt-cluster in real environments.
+> **Tip:** open Vulnerabilidades/ first to review security notes before running services.
 
-Database
-- NetGuardian requires PostgreSQL. Configure DB connection parameters either with environment variables (DATABASE_URL or DB_HOST/DB_PORT/DB_USER/DB_PASSWORD/DB_NAME) or in the application's settings file.
-- Ensure PostgreSQL accepts connections from the client host and credentials are correct.
 
-CRDT cluster sync folder
-- The authoritative files are stored in the CRDT cluster sync folder, commonly at: /opt/crdt-cluster/sync_folder/lww on the server nodes.
-- NetGuardian mirrors uploads to the CRDT cluster using SFTP to the node that corresponds to the user's group.
+## CRDT_STATE_BASED (details)
 
-SFTP / Node port mapping (per-group)
-- Map groups to CRDT node SFTP ports via environment variables or settings. Example options:
-  - GROUP_CRDT_PORTS = {"PORTO": 51230, "LISBOA": 51234}
-  - Or individual env vars: CRDT_SFTP_PORT_PORTO=51230 and CRDT_SFTP_PORT_LISBOA=51234
-- At login the application determines the user's group and uses the corresponding port for SFTP.
-- Convention used in this project: group_id == 2 -> PORTO, group_id == 3 -> LISBOA
+Path: CRDT_STATE_BASED/
 
-Authentication and passwords
-- Initial database records may store plaintext passwords. For production, enable bcrypt hashing and migrate users to hashed passwords.
-- The authentication module can be configured temporarily to accept plaintext passwords during migration.
+Purpose: Reference state-based CRDT implementations and a simple service to run them locally for tests and demonstrations.
 
-File handling behavior
-- Uploads should place files into the CRDT sync folder on the corresponding node via SFTP. Re-uploads must overwrite existing files (use the same logical ID/filename) rather than creating duplicates.
-- Deletions must be mirrored using tombstones so deleted files are not reintroduced by other nodes. The LWW (Last-Write-Wins) implementation must correctly propagate deletions.
-- All file types (binary and text) are supported — SFTP transfers are binary-safe when using paramiko to transfer bytes.
+Key files and folders:
+- bin/
+  - crdt_service.py — entry script for a minimal CRDT service used in examples and local testing.
+  - create_service.sh, management.sh — helper scripts to create/manage service instances (Unix shells provided).
+- config/
+  - logging_simple.conf — basic logging configuration used by the service.
+- data/
+  - data.md — notes and sample data layout for CRDTs stored by the service.
+- logs/
+  - logs.md — notes about logging and common log locations.
+- src/
+  - base_crdt.py — common base class and helpers for state-based CRDTs.
+  - crdt_types/ — implementations of CRDT types (g_counter, g_set, lww, two_phase_set).
+- sync_folder/ — example folders used to emulate the sync directories for each CRDT type.
 
-Building and packaging
-- Install dependencies: pip install -r NetGuardian/requirements.txt
-- Example PyInstaller build (single-file). Note: PyInstaller may require hooks for cryptography, paramiko and customtkinter:
-  - pyinstaller --onefile NetGuardian/main.py
-- On Windows, bundling python-magic may require native libmagic binaries; if unavailable, remove python-magic from requirements.
 
-Troubleshooting
-- SFTP timeouts (WinError 10060 / connection timed out): verify network, firewall, and that SSH daemon on the server listens on the configured port.
-- Database connection refused: check PostgreSQL's listen_addresses and pg_hba.conf to allow remote connections, and confirm port and credentials.
-- Deleted files reappearing: ensure LWW deletions are sent as tombstones and that timestamps/clock synchronization across nodes is consistent.
-- Re-uploads creating new files: verify the app uses a stable logical ID (UUID) for each file and reuses it when overwriting.
+## NetGuardian (desktop application)
 
-Recommended environment variables
-- DATABASE_URL (or DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME)
-- GROUP_CRDT_PORTS (JSON) or CRDT_SFTP_PORT_PORTO and CRDT_SFTP_PORT_LISBOA
-- LOG_LEVEL
+Path: NetGuardian/
 
-## Contributing
+Purpose: Desktop client that integrates with CRDT storage to upload, download and synchronize files across nodes. Includes authentication, DB management, GUI and file handling modules.
 
-Please follow the CONTRIBUTING.md guidelines in the NetGuardian folder for development workflows and code style.
+Key items:
+- main.py — application entry point.
+- requirements.txt — Python dependencies.
+- config/settings.py — DB connection, CRDT ports mapping.
+- src/ (api, auth, crdt, database, file_manager, gui, utils)
 
-## License
+
+## NetGuardian_APP (packaging & helpers)
+
+Path: NetGuardian_APP/
+
+Contents: Packaging helpers, installers, scripts and docs (INSTALL.md, QUICKSTART.md, README.md), plus example packaged release.
+
+
+## NetGuardian_Web (web demos)
+
+Path: NetGuardian_Web/
+
+Contents: Two Next.js demo apps (netguardian-webapp.v1 and v2). Use pnpm or npm to install and run the dev server.
+
+
+## Vulnerabilidades (security notes)
+
+Path: Vulnerabilidades/
+
+Contents: security analysis documents (e.g., netguardiancrdt.pdf) and notes describing vulnerabilities and mitigations. Review before deploying.
+
+> ⚠️ Security warning: do not deploy without addressing plaintext password storage, SFTP/DB network access, and proper tombstone handling in CRDTs.
+
+
+## Environment variables
+
+A short reference of commonly used env vars:
+
+| Variable | Purpose | Example |
+|---|---:|---|
+| DATABASE_URL | Database connection (preferred) | postgresql://user:pass@host:5432/dbname |
+| GROUP_CRDT_PORTS | JSON map of group->SFTP port | {"PORTO":51230,"LISBOA":51234} |
+| CRDT_SFTP_PORT_PORTO | Per-group SFTP port (alternative) | 51230 |
+| LOG_LEVEL | Logging verbosity | INFO, DEBUG |
+
+
+## Contributing & License
+
+Please follow CONTRIBUTING.md guidelines present in NetGuardian/ and NetGuardian_APP/ for development workflows and code style.
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+---
+
+If you want, I can:
+- add a small demo GIF or screenshots (you provide images),
+- translate the README to Portuguese, or
+- add badges for CI/coverage if you provide the service links.
