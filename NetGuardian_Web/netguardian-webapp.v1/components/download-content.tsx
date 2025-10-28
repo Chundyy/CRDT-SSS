@@ -28,10 +28,10 @@ export function DownloadContent({ user }: DownloadContentProps) {
   const handleDownload = (e: any) => {
     e.preventDefault()
     if (typeof window === "undefined") return
-    const url = "aa.txt" // public/aa.txt — replace with your installer name when ready
+    const url = "netguardian_app.exe" // public/aa.txt — replace with your installer name when ready
     const a = document.createElement("a")
     a.href = url
-    a.download = "aa.txt"
+    a.download = "netguardian_app.exe"
     document.body.appendChild(a)
     a.click()
     a.remove()
