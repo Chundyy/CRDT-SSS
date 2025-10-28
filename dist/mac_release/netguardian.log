@@ -1,7 +1,0 @@
-2025-10-27 18:14:59,116 - src.database.db_manager - INFO - PostgreSQL database connection established
-2025-10-27 18:14:59,244 - src.database.db_manager - INFO - Database tables initialized successfully (PostgreSQL)
-2025-10-27 18:14:59,680 - src.gui.main_window - INFO - Login window displayed
-2025-10-27 18:14:59,704 - src.gui.main_window - INFO - Main window initialized
-2025-10-27 18:14:59,704 - __main__ - INFO - NetGuardian application started
-2025-10-27 18:15:00,913 - src.database.db_manager - INFO - Database connection closed
-2025-10-27 18:15:00,960 - src.gui.main_window - INFO - Application closed successfully
