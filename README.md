@@ -6,7 +6,7 @@
 
 CRDT-SSS (Conflict-free Replicated Data Types - Secure Synchronization System) demonstrates distributed data synchronization using CRDTs to achieve eventual consistency and fault tolerance. The project also explores security, conflict resolution, and integration with client applications.
 
-> 🚀 Quick highlight: this repo contains state-based CRDT implementations, a desktop client (NetGuardian), packaging helpers, and demo web front-ends.
+> Quick highlight: this repo contains state-based CRDT implementations, a desktop client (NetGuardian), packaging helpers, and demo web front-ends.
 
 ---
 
