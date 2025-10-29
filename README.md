@@ -137,8 +137,3 @@ Please follow CONTRIBUTING.md guidelines present in NetGuardian/ and NetGuardian
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ---
-
-If you want, I can:
-- add a small demo GIF or screenshots (you provide images),
-- translate the README to Portuguese, or
-- add badges for CI/coverage if you provide the service links.
